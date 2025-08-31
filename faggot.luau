@@ -1192,10 +1192,6 @@ ProxySex.Lucide = {
 	["lucide-zoom-out"] = "rbxassetid://10747384679",
 };
 
-function ProxySex:_RandomString()
-    return tostring(math.random(100000, 999999)) .. tostring(math.random(100000, 999999))
-end
-
 function ProxySex:_GetIcon(name)
     return ProxySex.Lucide['lucide-'..tostring(name)] or ProxySex.Lucide[name] or ProxySex.Lucide[tostring(name)] or name
 end
@@ -5115,6 +5111,10 @@ function ProxySex.new(Config : Window)
 	UIListLayout:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
 		TabButtonScrollingFrame.CanvasSize = UDim2.fromOffset(0,UIListLayout.AbsoluteContentSize.Y)
 	end);
+
+function ProxySex:_RandomString()
+    return tostring(math.random(100000, 999999)) .. tostring(math.random(100000, 999999))
+end
 
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "u?name=ProxySex_"..ProxySex:_RandomString();
