@@ -8588,7 +8588,7 @@ end;
 
 function ProxySex:Loader(Duration: number?)
     local LoaderGui = Instance.new("ScreenGui")
-    LoaderGui.Name = "ProxyLoader"
+    LoaderGui.Name = "AuroraLoader"
     LoaderGui.Parent = game:GetService("CoreGui")
     LoaderGui.Enabled = true
     LoaderGui.ResetOnSpawn = false
@@ -8598,11 +8598,12 @@ function ProxySex:Loader(Duration: number?)
     local Loader = Instance.new("Frame")
     local Vignette = Instance.new("ImageLabel")
     local TextContainer = Instance.new("Frame")
-    local LetterP = Instance.new("TextLabel")
-    local LetterR = Instance.new("TextLabel")
+    local LetterA = Instance.new("TextLabel")
+    local LetterU = Instance.new("TextLabel")
+    local LetterR1 = Instance.new("TextLabel")
     local LetterO = Instance.new("TextLabel")
-    local LetterX = Instance.new("TextLabel")
-    local LetterY = Instance.new("TextLabel")
+    local LetterR2 = Instance.new("TextLabel")
+    local LetterA2 = Instance.new("TextLabel")
 
     Loader.Name = "Loader"
     Loader.Parent = LoaderGui
@@ -8619,22 +8620,20 @@ function ProxySex:Loader(Duration: number?)
     TextContainer.AnchorPoint = Vector2.new(0.5, 0.5)
     TextContainer.BackgroundTransparency = 1
     TextContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
-    TextContainer.Size = UDim2.new(0, 600, 0, 120) 
+    TextContainer.Size = UDim2.new(0, 800, 0, 120) 
     TextContainer.ZIndex = 100
 
-    -- Dark blue and light blue color scheme
-    local lightBlue = Color3.fromRGB(100, 180, 255)  -- Light blue
-    local darkBlue = Color3.fromRGB(0, 80, 160)      -- Dark blue
+    local textColor = Color3.fromRGB(255, 215, 0) 
 
     local function setupLetter(letter: TextLabel, text: string, position: UDim2)
         letter.Parent = TextContainer
         letter.BackgroundTransparency = 1
         letter.Text = text
-        letter.TextColor3 = lightBlue
+        letter.TextColor3 = textColor
         letter.TextSize = 96
         letter.Font = Enum.Font.GothamBold
         letter.TextStrokeTransparency = 0
-        letter.TextStrokeColor3 = darkBlue
+        letter.TextStrokeColor3 = Color3.fromRGB(150, 120, 0)
         letter.AnchorPoint = Vector2.new(0.5, 0.5)
         letter.Size = UDim2.new(0, 80, 1, 0)
         letter.Position = position
@@ -8642,12 +8641,12 @@ function ProxySex:Loader(Duration: number?)
         letter.ZIndex = 100
     end
 
-    -- Changed to spell "PROXY" instead of "AURORA"
-    setupLetter(LetterP, "P", UDim2.new(0.1, 0, 0.5, 0))
-    setupLetter(LetterR, "R", UDim2.new(0.2, 0, 0.5, 0))
-    setupLetter(LetterO, "O", UDim2.new(0.3, 0, 0.5, 0))
-    setupLetter(LetterX, "X", UDim2.new(0.4, 0, 0.5, 0))
-    setupLetter(LetterY, "Y", UDim2.new(0.5, 0, 0.5, 0))
+    setupLetter(LetterA, "A", UDim2.new(0.1, 0, 0.5, 0))
+    setupLetter(LetterU, "U", UDim2.new(0.2, 0, 0.5, 0))
+    setupLetter(LetterR1, "R", UDim2.new(0.3, 0, 0.5, 0))
+    setupLetter(LetterO, "O", UDim2.new(0.4, 0, 0.5, 0))
+    setupLetter(LetterR2, "R", UDim2.new(0.5, 0, 0.5, 0))
+    setupLetter(LetterA2, "A", UDim2.new(0.6, 0, 0.5, 0))
 
     Vignette.Name = "Vignette"
     Vignette.Parent = Loader
@@ -8656,7 +8655,7 @@ function ProxySex:Loader(Duration: number?)
     Vignette.BorderSizePixel = 0
     Vignette.Size = UDim2.new(1, 0, 1, 0)
     Vignette.Image = "rbxassetid://18720640102"
-    Vignette.ImageColor3 = lightBlue
+    Vignette.ImageColor3 = textColor
     Vignette.ImageTransparency = 1
     Vignette.AnchorPoint = Vector2.new(0.5,0.5)
     Vignette.Position = UDim2.fromScale(0.5,0.5)
@@ -8666,8 +8665,8 @@ function ProxySex:Loader(Duration: number?)
 
     TweenService:Create(Loader, TweenInfo.new(0.55, Enum.EasingStyle.Quint), { BackgroundTransparency = 0.5 }):Play()
     task.delay(0.5,function()
-        TweenService:Create(LetterP, TweenInfo.new(0.75, Enum.EasingStyle.Quint), { TextTransparency = 0 }):Play()
-        local otherLetters = {LetterR, LetterO, LetterX, LetterY}
+        TweenService:Create(LetterA, TweenInfo.new(0.75, Enum.EasingStyle.Quint), { TextTransparency = 0 }):Play()
+        local otherLetters = {LetterU, LetterR1, LetterO, LetterR2, LetterA2}
         for _, letter in pairs(otherLetters) do
             letter.Position = UDim2.new(0.1, 0, 0.5, 0)
         end
@@ -8677,10 +8676,11 @@ function ProxySex:Loader(Duration: number?)
             task.wait(4)
 
             local letterPositions = {
-                {LetterR, UDim2.new(0.2, 0, 0.5, 0)},
-                {LetterO, UDim2.new(0.3, 0, 0.5, 0)},
-                {LetterX, UDim2.new(0.4, 0, 0.5, 0)},
-                {LetterY, UDim2.new(0.5, 0, 0.5, 0)}
+                {LetterU, UDim2.new(0.2, 0, 0.5, 0)},
+                {LetterR1, UDim2.new(0.3, 0, 0.5, 0)},
+                {LetterO, UDim2.new(0.4, 0, 0.5, 0)},
+                {LetterR2, UDim2.new(0.5, 0, 0.5, 0)},
+                {LetterA2, UDim2.new(0.6, 0, 0.5, 0)}
             }
 
             for i, letterData in pairs(letterPositions) do
@@ -8696,7 +8696,7 @@ function ProxySex:Loader(Duration: number?)
 
             task.wait(Duration or 2.5)
             TweenService:Create(Vignette,TweenInfo.new(3,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{ Size = UDim2.new(2, 0, 2, 0) }):Play()
-            local allLetters = {LetterP, LetterR, LetterO, LetterX, LetterY}
+            local allLetters = {LetterA, LetterU, LetterR1, LetterO, LetterR2, LetterA2}
             for _, letter in pairs(allLetters) do
                 TweenService:Create(letter,TweenInfo.new(0.75,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{ TextTransparency = 1, }):Play()
             end
