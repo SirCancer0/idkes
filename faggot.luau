@@ -1,4 +1,3 @@
-
 export type cloneref = (target: Instance) -> Instance;
 
 export type Window = {
@@ -8630,11 +8629,11 @@ function ProxySex:Loader(Duration)
 	TextContainer.AnchorPoint = Vector2.new(0.5, 0.5)
 	TextContainer.BackgroundTransparency = 1
 	TextContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
-	TextContainer.Size = UDim2.new(0, 600, 0, 100)
+	TextContainer.Size = UDim2.new(0, 800, 0, 120) -- Increased container size for bigger letters
 	TextContainer.ZIndex = 100
 
-	-- Dark blue color (dark blue with a bit of light)
-	local textColor = Color3.fromRGB(70, 130, 180) -- Steel blue color
+	-- Dark blue color (more vibrant and less pale)
+	local textColor = Color3.fromRGB(30, 100, 200) -- More vibrant blue
 
 	-- Letter setup function
 	local function setupLetter(letter, text, position)
@@ -8642,12 +8641,12 @@ function ProxySex:Loader(Duration)
 		letter.BackgroundTransparency = 1
 		letter.Text = text
 		letter.TextColor3 = textColor
-		letter.TextSize = 72
+		letter.TextSize = 96 -- Increased from 72 to 96
 		letter.Font = Enum.Font.GothamBold
 		letter.TextStrokeTransparency = 0
-		letter.TextStrokeColor3 = Color3.fromRGB(30, 60, 100) -- Darker blue for stroke
+		letter.TextStrokeColor3 = Color3.fromRGB(10, 40, 120) -- Darker, more vibrant stroke
 		letter.AnchorPoint = Vector2.new(0.5, 0.5)
-		letter.Size = UDim2.new(0, 60, 1, 0)
+		letter.Size = UDim2.new(0, 80, 1, 0) -- Increased width from 60 to 80
 		letter.Position = position
 		letter.TextTransparency = 1
 		letter.ZIndex = 100
@@ -8671,7 +8670,7 @@ function ProxySex:Loader(Duration)
 	Vignette.BorderSizePixel = 0
 	Vignette.Size = UDim2.new(1, 0, 1, 0)
 	Vignette.Image = "rbxassetid://18720640102"
-	Vignette.ImageColor3 = ProxySex.Colors.Highlight
+	Vignette.ImageColor3 = Color3.fromRGB(30, 100, 200) -- Use same blue color as text
 	Vignette.ImageTransparency = 1
 	Vignette.AnchorPoint = Vector2.new(0.5,0.5)
 	Vignette.Position = UDim2.fromScale(0.5,0.5)
