@@ -5112,23 +5112,12 @@ function ProxySex.new(Config : Window)
 		TabButtonScrollingFrame.CanvasSize = UDim2.fromOffset(0,UIListLayout.AbsoluteContentSize.Y)
 	end);
 
--- Line 5115: Create a local function first
-local function randomString()
+ProxySex._RandomString = function()
     return tostring(math.random(100000, 999999)) .. tostring(math.random(100000, 999999))
 end
 
--- Then assign it to ProxySex if ProxySex exists
-if ProxySex then
-    ProxySex._RandomString = randomString
-else
-    -- If ProxySex doesn't exist, create it
-    ProxySex = {}
-    ProxySex._RandomString = randomString
-end
-
--- Line 5120: Use the function directly
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "u?name=ProxySex_"..randomString()
+ScreenGui.Name = "u?name=ProxySex_"..ProxySex._RandomString()  -- Use . instead of :
 ScreenGui.Parent = CoreGui;
 ScreenGui.ResetOnSpawn = false
 ScreenGui.IgnoreGuiInset = true;
