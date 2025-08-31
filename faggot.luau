@@ -8588,14 +8588,14 @@ function ProxySex:ConfigManager(ConfigManager: ConfigManager) : ConfigFunctions
 end;
 
 function ProxySex:Loader(Duration)
-	local ProxySex = Instance.new("ScreenGui")
+	local LoaderGui = Instance.new("ScreenGui")
 
-	ProxySex.Name = "Loader"
-	ProxySex.Parent = CoreGui
-	ProxySex.Enabled = true
-	ProxySex.ResetOnSpawn = false
-	ProxySex.IgnoreGuiInset = true
-	ProxySex.ZIndexBehavior = Enum.ZIndexBehavior.Global
+	LoaderGui.Name = "Loader"
+	LoaderGui.Parent = game:GetService("CoreGui")
+	LoaderGui.Enabled = true
+	LoaderGui.ResetOnSpawn = false
+	LoaderGui.IgnoreGuiInset = true
+	LoaderGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
 
 	local Loader = Instance.new("Frame")
 	local Vignette = Instance.new("ImageLabel")
@@ -8615,7 +8615,7 @@ function ProxySex:Loader(Duration)
 	local LetterB = Instance.new("TextLabel")
 
 	Loader.Name = "Loader"
-	Loader.Parent = ProxySex
+	Loader.Parent = LoaderGui
 	Loader.AnchorPoint = Vector2.new(0.5, 0.5)
 	Loader.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	Loader.BackgroundTransparency = 1
@@ -8727,7 +8727,7 @@ function ProxySex:Loader(Duration)
 				end)
 			end
 
-			task.wait(Duration or 3) -- Wait a bit to show the complete text
+			task.wait(Duration or 2.5) -- Wait a bit to show the complete text
 
 			-- Fade out animations
 			ProxySex:_Animation(Vignette,TweenInfo.new(3,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{
@@ -8735,7 +8735,7 @@ function ProxySex:Loader(Duration)
 			});
 
 			-- Fade out all letters
-			local allLetters = {LetterP, LetterR, LetterO, LetterX, LetterY}
+			local allLetters = {LetterP, LetterR, LetterO1, LetterX, LetterY, LetterH, LetterU, LetterB}
 			for _, letter in pairs(allLetters) do
 				ProxySex:_Animation(letter,TweenInfo.new(0.75,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{
 					TextTransparency = 1,
@@ -8754,7 +8754,7 @@ function ProxySex:Loader(Duration)
 				task.wait(0.2)
 
 				task.delay(3,function()
-					ProxySex:Destroy();
+					LoaderGui:Destroy();
 				end)
 			end)
 
