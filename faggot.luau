@@ -5115,24 +5115,25 @@ function ProxySex.new(Config : Window)
 		TabButtonScrollingFrame.CanvasSize = UDim2.fromOffset(0,UIListLayout.AbsoluteContentSize.Y)
 	end);
 
-	ProxySex.Name = "u?name=ProxySex_"..ProxySex:_RandomString();
-	ProxySex.Parent = CoreGui;
-	ProxySex.ResetOnSpawn = false
-	ProxySex.IgnoreGuiInset = true;
-	ProxySex.ZIndexBehavior = Enum.ZIndexBehavior.Global;
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "u?name=ProxySex_"..ProxySex:_RandomString();
+ScreenGui.Parent = CoreGui;
+ScreenGui.ResetOnSpawn = false
+ScreenGui.IgnoreGuiInset = true;
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 
-	table.insert(ProxySex.Windows , ProxySex);
+table.insert(ProxySex.Windows , ScreenGui);
 
-	MainFrame.Active = true;
-	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = ProxySex
-	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-	MainFrame.BackgroundColor3 = ProxySex.Colors.BGDBColor
+MainFrame.Active = true;
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui  -- Parent to the ScreenGui, not the ProxySex table
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = ProxySex.Colors.BGDBColor
 
-	table.insert(ProxySex.Elements.BGDBColor,{
-		Element = MainFrame,
-		Property = 'BackgroundColor3'
-	});
+table.insert(ProxySex.Elements.BGDBColor,{
+	Element = MainFrame,
+	Property = 'BackgroundColor3'
+});
 
 	MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	MainFrame.BorderSizePixel = 0
