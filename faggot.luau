@@ -5112,6 +5112,12 @@ function ProxySex.new(Config : Window)
 		TabButtonScrollingFrame.CanvasSize = UDim2.fromOffset(0,UIListLayout.AbsoluteContentSize.Y)
 	end);
 
+print("ProxySex is:", type(ProxySex))
+print("ProxySex table contents:")
+for k, v in pairs(ProxySex) do
+    print(k, type(v))
+end
+
 function ProxySex:_RandomString()
     return tostring(math.random(100000, 999999)) .. tostring(math.random(100000, 999999))
 end
