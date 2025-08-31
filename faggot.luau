@@ -1195,9 +1195,9 @@ function ProxySex:_GetIcon(name : string) : string
 	return ProxySex.Lucide['lucide-'..tostring(name)] or ProxySex.Lucide[name] or ProxySex.Lucide[tostring(name)] or name;
 end;
 
-function ProxySex:_RandomString() : string
-	return string.char(math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102));	
-end;
+function ProxySex:_RandomString()
+    return tostring(math.random(100000, 999999)) .. tostring(math.random(100000, 999999))
+end
 
 function ProxySex:_IsMouseOverFrame(Frame : Frame) : boolean
 	if not Frame then
@@ -8589,7 +8589,7 @@ end;
 function ProxySex:Loader(Duration)
     local LoaderGui = Instance.new("ScreenGui")
 
-    LoaderGui.Name = "AuroraLoader"
+    LoaderGui.Name = "ProxyLoader"
     LoaderGui.Parent = game:GetService("CoreGui")
     LoaderGui.Enabled = true
     LoaderGui.ResetOnSpawn = false
@@ -8601,12 +8601,11 @@ function ProxySex:Loader(Duration)
     
     local TextContainer = Instance.new("Frame")
     
-    local LetterA = Instance.new("TextLabel")
-    local LetterU = Instance.new("TextLabel")
-    local LetterR1 = Instance.new("TextLabel")
+    local LetterP = Instance.new("TextLabel")
+    local LetterR = Instance.new("TextLabel")
     local LetterO = Instance.new("TextLabel")
-    local LetterR2 = Instance.new("TextLabel")
-    local LetterA2 = Instance.new("TextLabel")
+    local LetterX = Instance.new("TextLabel")
+    local LetterY = Instance.new("TextLabel")
 
     Loader.Name = "Loader"
     Loader.Parent = LoaderGui
@@ -8623,20 +8622,21 @@ function ProxySex:Loader(Duration)
     TextContainer.AnchorPoint = Vector2.new(0.5, 0.5)
     TextContainer.BackgroundTransparency = 1
     TextContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
-    TextContainer.Size = UDim2.new(0, 800, 0, 120)
+    TextContainer.Size = UDim2.new(0, 600, 0, 120)
     TextContainer.ZIndex = 100
 
-    local textColor = Color3.fromRGB(255, 215, 0)
+    local lightBlue = Color3.fromRGB(0, 150, 255)
+    local darkBlue = Color3.fromRGB(0, 80, 160)
 
     local function setupLetter(letter, text, position)
         letter.Parent = TextContainer
         letter.BackgroundTransparency = 1
         letter.Text = text
-        letter.TextColor3 = textColor
+        letter.TextColor3 = lightBlue
         letter.TextSize = 96
         letter.Font = Enum.Font.GothamBold
         letter.TextStrokeTransparency = 0
-        letter.TextStrokeColor3 = Color3.fromRGB(150, 120, 0)
+        letter.TextStrokeColor3 = darkBlue
         letter.AnchorPoint = Vector2.new(0.5, 0.5)
         letter.Size = UDim2.new(0, 80, 1, 0)
         letter.Position = position
@@ -8644,12 +8644,11 @@ function ProxySex:Loader(Duration)
         letter.ZIndex = 100
     end
 
-    setupLetter(LetterA, "A", UDim2.new(0.1, 0, 0.5, 0))
-    setupLetter(LetterU, "U", UDim2.new(0.2, 0, 0.5, 0))
-    setupLetter(LetterR1, "R", UDim2.new(0.3, 0, 0.5, 0))
+    setupLetter(LetterP, "P", UDim2.new(0.2, 0, 0.5, 0))
+    setupLetter(LetterR, "R", UDim2.new(0.3, 0, 0.5, 0))
     setupLetter(LetterO, "O", UDim2.new(0.4, 0, 0.5, 0))
-    setupLetter(LetterR2, "R", UDim2.new(0.5, 0, 0.5, 0))
-    setupLetter(LetterA2, "A", UDim2.new(0.6, 0, 0.5, 0))
+    setupLetter(LetterX, "X", UDim2.new(0.5, 0, 0.5, 0))
+    setupLetter(LetterY, "Y", UDim2.new(0.6, 0, 0.5, 0))
 
     Vignette.Name = "Vignette"
     Vignette.Parent = Loader
@@ -8658,7 +8657,7 @@ function ProxySex:Loader(Duration)
     Vignette.BorderSizePixel = 0
     Vignette.Size = UDim2.new(1, 0, 1, 0)
     Vignette.Image = "rbxassetid://18720640102"
-    Vignette.ImageColor3 = textColor
+    Vignette.ImageColor3 = lightBlue
     Vignette.ImageTransparency = 1
     Vignette.AnchorPoint = Vector2.new(0.5, 0.5)
     Vignette.Position = UDim2.fromScale(0.5, 0.5)
@@ -8671,13 +8670,13 @@ function ProxySex:Loader(Duration)
     }):Play()
 
     task.delay(0.5, function()
-        TweenService:Create(LetterA, TweenInfo.new(0.75, Enum.EasingStyle.Quint), {
+        TweenService:Create(LetterP, TweenInfo.new(0.75, Enum.EasingStyle.Quint), {
             TextTransparency = 0
         }):Play()
 
-        local otherLetters = {LetterU, LetterR1, LetterO, LetterR2, LetterA2}
+        local otherLetters = {LetterR, LetterO, LetterX, LetterY}
         for _, letter in pairs(otherLetters) do
-            letter.Position = UDim2.new(0.1, 0, 0.5, 0)
+            letter.Position = UDim2.new(0.2, 0, 0.5, 0)
         end
 
         task.delay(0.25, function()
@@ -8688,11 +8687,10 @@ function ProxySex:Loader(Duration)
             task.wait(4)
 
             local letterPositions = {
-                {LetterU, UDim2.new(0.2, 0, 0.5, 0)},
-                {LetterR1, UDim2.new(0.3, 0, 0.5, 0)},
+                {LetterR, UDim2.new(0.3, 0, 0.5, 0)},
                 {LetterO, UDim2.new(0.4, 0, 0.5, 0)},
-                {LetterR2, UDim2.new(0.5, 0, 0.5, 0)},
-                {LetterA2, UDim2.new(0.6, 0, 0.5, 0)}
+                {LetterX, UDim2.new(0.5, 0, 0.5, 0)},
+                {LetterY, UDim2.new(0.6, 0, 0.5, 0)}
             }
 
             for i, letterData in ipairs(letterPositions) do
@@ -8714,7 +8712,156 @@ function ProxySex:Loader(Duration)
                 Size = UDim2.new(2, 0, 2, 0)
             }):Play()
 
-            local allLetters = {LetterA, LetterU, LetterR1, LetterO, LetterR2, LetterA2}
+            local allLetters = {LetterP, LetterR, LetterO, LetterX, LetterY}
+            for _, letter in ipairs(allLetters) do
+                TweenService:Create(letter, TweenInfo.new(0.75, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                    TextTransparency = 1,
+                }):Play()
+            end
+
+            TweenService:Create(Loader, TweenInfo.new(1.5, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                BackgroundTransparency = 1
+            }):Play()
+
+            task.delay(0.1, function()
+                TweenService:Create(Vignette, TweenInfo.new(1, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                    ImageTransparency = 1
+                }):Play()
+
+                task.wait(0.2)
+
+                task.delay(3, function()
+                    LoaderGui:Destroy()
+                end)
+            end)
+
+            task.delay(0.6, function()function ProxySex:Loader(Duration)
+    local LoaderGui = Instance.new("ScreenGui")
+
+    LoaderGui.Name = "ProxyLoader"
+    LoaderGui.Parent = game:GetService("CoreGui")
+    LoaderGui.Enabled = true
+    LoaderGui.ResetOnSpawn = false
+    LoaderGui.IgnoreGuiInset = true
+    LoaderGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+
+    local Loader = Instance.new("Frame")
+    local Vignette = Instance.new("ImageLabel")
+    
+    local TextContainer = Instance.new("Frame")
+    
+    local LetterP = Instance.new("TextLabel")
+    local LetterR = Instance.new("TextLabel")
+    local LetterO = Instance.new("TextLabel")
+    local LetterX = Instance.new("TextLabel")
+    local LetterY = Instance.new("TextLabel")
+
+    Loader.Name = "Loader"
+    Loader.Parent = LoaderGui
+    Loader.AnchorPoint = Vector2.new(0.5, 0.5)
+    Loader.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Loader.BackgroundTransparency = 1
+    Loader.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Loader.BorderSizePixel = 0
+    Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
+    Loader.Size = UDim2.new(1, 0, 1, 0)
+
+    TextContainer.Name = "TextContainer"
+    TextContainer.Parent = Loader
+    TextContainer.AnchorPoint = Vector2.new(0.5, 0.5)
+    TextContainer.BackgroundTransparency = 1
+    TextContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
+    TextContainer.Size = UDim2.new(0, 600, 0, 120)
+    TextContainer.ZIndex = 100
+
+    local lightBlue = Color3.fromRGB(0, 150, 255)
+    local darkBlue = Color3.fromRGB(0, 80, 160)
+
+    local function setupLetter(letter, text, position)
+        letter.Parent = TextContainer
+        letter.BackgroundTransparency = 1
+        letter.Text = text
+        letter.TextColor3 = lightBlue
+        letter.TextSize = 96
+        letter.Font = Enum.Font.GothamBold
+        letter.TextStrokeTransparency = 0
+        letter.TextStrokeColor3 = darkBlue
+        letter.AnchorPoint = Vector2.new(0.5, 0.5)
+        letter.Size = UDim2.new(0, 80, 1, 0)
+        letter.Position = position
+        letter.TextTransparency = 1
+        letter.ZIndex = 100
+    end
+
+    setupLetter(LetterP, "P", UDim2.new(0.2, 0, 0.5, 0))
+    setupLetter(LetterR, "R", UDim2.new(0.3, 0, 0.5, 0))
+    setupLetter(LetterO, "O", UDim2.new(0.4, 0, 0.5, 0))
+    setupLetter(LetterX, "X", UDim2.new(0.5, 0, 0.5, 0))
+    setupLetter(LetterY, "Y", UDim2.new(0.6, 0, 0.5, 0))
+
+    Vignette.Name = "Vignette"
+    Vignette.Parent = Loader
+    Vignette.BackgroundTransparency = 1
+    Vignette.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Vignette.BorderSizePixel = 0
+    Vignette.Size = UDim2.new(1, 0, 1, 0)
+    Vignette.Image = "rbxassetid://18720640102"
+    Vignette.ImageColor3 = lightBlue
+    Vignette.ImageTransparency = 1
+    Vignette.AnchorPoint = Vector2.new(0.5, 0.5)
+    Vignette.Position = UDim2.fromScale(0.5, 0.5)
+
+    local TweenService = game:GetService("TweenService")
+    local Event = Instance.new('BindableEvent')
+
+    TweenService:Create(Loader, TweenInfo.new(0.55, Enum.EasingStyle.Quint), {
+        BackgroundTransparency = 0.5
+    }):Play()
+
+    task.delay(0.5, function()
+        TweenService:Create(LetterP, TweenInfo.new(0.75, Enum.EasingStyle.Quint), {
+            TextTransparency = 0
+        }):Play()
+
+        local otherLetters = {LetterR, LetterO, LetterX, LetterY}
+        for _, letter in pairs(otherLetters) do
+            letter.Position = UDim2.new(0.2, 0, 0.5, 0)
+        end
+
+        task.delay(0.25, function()
+            TweenService:Create(Vignette, TweenInfo.new(5), {
+                ImageTransparency = 0.2
+            }):Play()
+
+            task.wait(4)
+
+            local letterPositions = {
+                {LetterR, UDim2.new(0.3, 0, 0.5, 0)},
+                {LetterO, UDim2.new(0.4, 0, 0.5, 0)},
+                {LetterX, UDim2.new(0.5, 0, 0.5, 0)},
+                {LetterY, UDim2.new(0.6, 0, 0.5, 0)}
+            }
+
+            for i, letterData in ipairs(letterPositions) do
+                local letter = letterData[1]
+                local targetPos = letterData[2]
+                
+                task.spawn(function()
+                    task.wait(i * 0.1)
+                    TweenService:Create(letter, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+                        TextTransparency = 0,
+                        Position = targetPos
+                    }):Play()
+                end)
+            end
+
+            task.wait(Duration or 2.5)
+
+            TweenService:Create(Vignette, TweenInfo.new(3, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                Size = UDim2.new(2, 0, 2, 0)
+            }):Play()
+
+            local allLetters = {LetterP, LetterR, LetterO, LetterX, LetterY}
             for _, letter in ipairs(allLetters) do
                 TweenService:Create(letter, TweenInfo.new(0.75, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
                     TextTransparency = 1,
@@ -8738,6 +8885,657 @@ function ProxySex:Loader(Duration)
             end)
 
             task.delay(0.6, function()
+                Event:Fire()
+            end)
+        end)
+    end)
+
+    return {
+        yield = function()
+            return Event.Event:Wait()
+        end
+    }
+endfunction ProxySex:Loader(Duration)
+    local LoaderGui = Instance.new("ScreenGui")
+
+    LoaderGui.Name = "ProxyLoader"
+    LoaderGui.Parent = game:GetService("CoreGui")
+    LoaderGui.Enabled = true
+    LoaderGui.ResetOnSpawn = false
+    LoaderGui.IgnoreGuiInset = true
+    LoaderGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+
+    local Loader = Instance.new("Frame")
+    local Vignette = Instance.new("ImageLabel")
+    
+    local TextContainer = Instance.new("Frame")
+    
+    local LetterP = Instance.new("TextLabel")
+    local LetterR = Instance.new("TextLabel")
+    local LetterO = Instance.new("TextLabel")
+    local LetterX = Instance.new("TextLabel")
+    local LetterY = Instance.new("TextLabel")
+
+    Loader.Name = "Loader"
+    Loader.Parent = LoaderGui
+    Loader.AnchorPoint = Vector2.new(0.5, 0.5)
+    Loader.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Loader.BackgroundTransparency = 1
+    Loader.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Loader.BorderSizePixel = 0
+    Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
+    Loader.Size = UDim2.new(1, 0, 1, 0)
+
+    TextContainer.Name = "TextContainer"
+    TextContainer.Parent = Loader
+    TextContainer.AnchorPoint = Vector2.new(0.5, 0.5)
+    TextContainer.BackgroundTransparency = 1
+    TextContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
+    TextContainer.Size = UDim2.new(0, 600, 0, 120)
+    TextContainer.ZIndex = 100
+
+    local lightBlue = Color3.fromRGB(0, 150, 255)
+    local darkBlue = Color3.fromRGB(0, 80, 160)
+
+    local function setupLetter(letter, text, position)
+        letter.Parent = TextContainer
+        letter.BackgroundTransparency = 1
+        letter.Text = text
+        letter.TextColor3 = lightBlue
+        letter.TextSize = 96
+        letter.Font = Enum.Font.GothamBold
+        letter.TextStrokeTransparency = 0
+        letter.TextStrokeColor3 = darkBlue
+        letter.AnchorPoint = Vector2.new(0.5, 0.5)
+        letter.Size = UDim2.new(0, 80, 1, 0)
+        letter.Position = position
+        letter.TextTransparency = 1
+        letter.ZIndex = 100
+    end
+
+    setupLetter(LetterP, "P", UDim2.new(0.2, 0, 0.5, 0))
+    setupLetter(LetterR, "R", UDim2.new(0.3, 0, 0.5, 0))
+    setupLetter(LetterO, "O", UDim2.new(0.4, 0, 0.5, 0))
+    setupLetter(LetterX, "X", UDim2.new(0.5, 0, 0.5, 0))
+    setupLetter(LetterY, "Y", UDim2.new(0.6, 0, 0.5, 0))
+
+    Vignette.Name = "Vignette"
+    Vignette.Parent = Loader
+    Vignette.BackgroundTransparency = 1
+    Vignette.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Vignette.BorderSizePixel = 0
+    Vignette.Size = UDim2.new(1, 0, 1, 0)
+    Vignette.Image = "rbxassetid://18720640102"
+    Vignette.ImageColor3 = lightBlue
+    Vignette.ImageTransparency = 1
+    Vignette.AnchorPoint = Vector2.new(0.5, 0.5)
+    Vignette.Position = UDim2.fromScale(0.5, 0.5)
+
+    local TweenService = game:GetService("TweenService")
+    local Event = Instance.new('BindableEvent')
+
+    TweenService:Create(Loader, TweenInfo.new(0.55, Enum.EasingStyle.Quint), {
+        BackgroundTransparency = 0.5
+    }):Play()
+
+    task.delay(0.5, function()
+        TweenService:Create(LetterP, TweenInfo.new(0.75, Enum.EasingStyle.Quint), {
+            TextTransparency = 0
+        }):Play()
+
+        local otherLetters = {LetterR, LetterO, LetterX, LetterY}
+        for _, letter in pairs(otherLetters) do
+            letter.Position = UDim2.new(0.2, 0, 0.5, 0)
+        end
+
+        task.delay(0.25, function()
+            TweenService:Create(Vignette, TweenInfo.new(5), {
+                ImageTransparency = 0.2
+            }):Play()
+
+            task.wait(4)
+
+            local letterPositions = {
+                {LetterR, UDim2.new(0.3, 0, 0.5, 0)},
+                {LetterO, UDim2.new(0.4, 0, 0.5, 0)},
+                {LetterX, UDim2.new(0.5, 0, 0.5, 0)},
+                {LetterY, UDim2.new(0.6, 0, 0.5, 0)}
+            }
+
+            for i, letterData in ipairs(letterPositions) do
+                local letter = letterData[1]
+                local targetPos = letterData[2]
+                
+                task.spawn(function()
+                    task.wait(i * 0.1)
+                    TweenService:Create(letter, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+                        TextTransparency = 0,
+                        Position = targetPos
+                    }):Play()
+                end)
+            end
+
+            task.wait(Duration or 2.5)
+
+            TweenService:Create(Vignette, TweenInfo.new(3, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                Size = UDim2.new(2, 0, 2, 0)
+            }):Play()
+
+            local allLetters = {LetterP, LetterR, LetterO, LetterX, LetterY}
+            for _, letter in ipairs(allLetters) do
+                TweenService:Create(letter, TweenInfo.new(0.75, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                    TextTransparency = 1,
+                }):Play()
+            end
+
+            TweenService:Create(Loader, TweenInfo.new(1.5, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                BackgroundTransparency = 1
+            }):Play()
+
+            task.delay(0.1, function()
+                TweenService:Create(Vignette, TweenInfo.new(1, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                    ImageTransparency = 1
+                }):Play()
+
+                task.wait(0.2)
+
+                task.delay(3, function()
+                    LoaderGui:Destroy()
+                end)
+            end)
+
+            task.delay(0.6, function()
+                Event:Fire()
+            end)
+        end)
+    end)
+
+    return {
+        yield = function()
+            return Event.Event:Wait()
+        end
+    }
+endfunction ProxySex:Loader(Duration)
+    local LoaderGui = Instance.new("ScreenGui")
+
+    LoaderGui.Name = "ProxyLoader"
+    LoaderGui.Parent = game:GetService("CoreGui")
+    LoaderGui.Enabled = true
+    LoaderGui.ResetOnSpawn = false
+    LoaderGui.IgnoreGuiInset = true
+    LoaderGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+
+    local Loader = Instance.new("Frame")
+    local Vignette = Instance.new("ImageLabel")
+    
+    local TextContainer = Instance.new("Frame")
+    
+    local LetterP = Instance.new("TextLabel")
+    local LetterR = Instance.new("TextLabel")
+    local LetterO = Instance.new("TextLabel")
+    local LetterX = Instance.new("TextLabel")
+    local LetterY = Instance.new("TextLabel")
+
+    Loader.Name = "Loader"
+    Loader.Parent = LoaderGui
+    Loader.AnchorPoint = Vector2.new(0.5, 0.5)
+    Loader.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Loader.BackgroundTransparency = 1
+    Loader.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Loader.BorderSizePixel = 0
+    Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
+    Loader.Size = UDim2.new(1, 0, 1, 0)
+
+    TextContainer.Name = "TextContainer"
+    TextContainer.Parent = Loader
+    TextContainer.AnchorPoint = Vector2.new(0.5, 0.5)
+    TextContainer.BackgroundTransparency = 1
+    TextContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
+    TextContainer.Size = UDim2.new(0, 600, 0, 120)
+    TextContainer.ZIndex = 100
+
+    local lightBlue = Color3.fromRGB(0, 150, 255)
+    local darkBlue = Color3.fromRGB(0, 80, 160)
+
+    local function setupLetter(letter, text, position)
+        letter.Parent = TextContainer
+        letter.BackgroundTransparency = 1
+        letter.Text = text
+        letter.TextColor3 = lightBlue
+        letter.TextSize = 96
+        letter.Font = Enum.Font.GothamBold
+        letter.TextStrokeTransparency = 0
+        letter.TextStrokeColor3 = darkBlue
+        letter.AnchorPoint = Vector2.new(0.5, 0.5)
+        letter.Size = UDim2.new(0, 80, 1, 0)
+        letter.Position = position
+        letter.TextTransparency = 1
+        letter.ZIndex = 100
+    end
+
+    setupLetter(LetterP, "P", UDim2.new(0.2, 0, 0.5, 0))
+    setupLetter(LetterR, "R", UDim2.new(0.3, 0, 0.5, 0))
+    setupLetter(LetterO, "O", UDim2.new(0.4, 0, 0.5, 0))
+    setupLetter(LetterX, "X", UDim2.new(0.5, 0, 0.5, 0))
+    setupLetter(LetterY, "Y", UDim2.new(0.6, 0, 0.5, 0))
+
+    Vignette.Name = "Vignette"
+    Vignette.Parent = Loader
+    Vignette.BackgroundTransparency = 1
+    Vignette.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Vignette.BorderSizePixel = 0
+    Vignette.Size = UDim2.new(1, 0, 1, 0)
+    Vignette.Image = "rbxassetid://18720640102"
+    Vignette.ImageColor3 = lightBlue
+    Vignette.ImageTransparency = 1
+    Vignette.AnchorPoint = Vector2.new(0.5, 0.5)
+    Vignette.Position = UDim2.fromScale(0.5, 0.5)
+
+    local TweenService = game:GetService("TweenService")
+    local Event = Instance.new('BindableEvent')
+
+    TweenService:Create(Loader, TweenInfo.new(0.55, Enum.EasingStyle.Quint), {
+        BackgroundTransparency = 0.5
+    }):Play()
+
+    task.delay(0.5, function()
+        TweenService:Create(LetterP, TweenInfo.new(0.75, Enum.EasingStyle.Quint), {
+            TextTransparency = 0
+        }):Play()
+
+        local otherLetters = {LetterR, LetterO, LetterX, LetterY}
+        for _, letter in pairs(otherLetters) do
+            letter.Position = UDim2.new(0.2, 0, 0.5, 0)
+        end
+
+        task.delay(0.25, function()
+            TweenService:Create(Vignette, TweenInfo.new(5), {
+                ImageTransparency = 0.2
+            }):Play()
+
+            task.wait(4)
+
+            local letterPositions = {
+                {LetterR, UDim2.new(0.3, 0, 0.5, 0)},
+                {LetterO, UDim2.new(0.4, 0, 0.5, 0)},
+                {LetterX, UDim2.new(0.5, 0, 0.5, 0)},
+                {LetterY, UDim2.new(0.6, 0, 0.5, 0)}
+            }
+
+            for i, letterData in ipairs(letterPositions) do
+                local letter = letterData[1]
+                local targetPos = letterData[2]
+                
+                task.spawn(function()
+                    task.wait(i * 0.1)
+                    TweenService:Create(letter, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+                        TextTransparency = 0,
+                        Position = targetPos
+                    }):Play()
+                end)
+            end
+
+            task.wait(Duration or 2.5)
+
+            TweenService:Create(Vignette, TweenInfo.new(3, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                Size = UDim2.new(2, 0, 2, 0)
+            }):Play()
+
+            local allLetters = {LetterP, LetterR, LetterO, LetterX, LetterY}
+            for _, letter in ipairs(allLetters) do
+                TweenService:Create(letter, TweenInfo.new(0.75, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                    TextTransparency = 1,
+                }):Play()
+            end
+
+            TweenService:Create(Loader, TweenInfo.new(1.5, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                BackgroundTransparency = 1
+            }):Play()
+
+            task.delay(0.1, function()
+                TweenService:Create(Vignette, TweenInfo.new(1, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                    ImageTransparency = 1
+                }):Play()
+
+                task.wait(0.2)
+
+                task.delay(3, function()
+                    LoaderGui:Destroy()
+                end)
+            end)
+
+            task.delay(0.6, function()
+                Event:Fire()
+            end)
+        end)
+    end)
+
+    return {
+        yield = function()
+            return Event.Event:Wait()
+        end
+    }
+endfunction ProxySex:Loader(Duration)
+    local LoaderGui = Instance.new("ScreenGui")
+
+    LoaderGui.Name = "ProxyLoader"
+    LoaderGui.Parent = game:GetService("CoreGui")
+    LoaderGui.Enabled = true
+    LoaderGui.ResetOnSpawn = false
+    LoaderGui.IgnoreGuiInset = true
+    LoaderGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+
+    local Loader = Instance.new("Frame")
+    local Vignette = Instance.new("ImageLabel")
+    
+    local TextContainer = Instance.new("Frame")
+    
+    local LetterP = Instance.new("TextLabel")
+    local LetterR = Instance.new("TextLabel")
+    local LetterO = Instance.new("TextLabel")
+    local LetterX = Instance.new("TextLabel")
+    local LetterY = Instance.new("TextLabel")
+
+    Loader.Name = "Loader"
+    Loader.Parent = LoaderGui
+    Loader.AnchorPoint = Vector2.new(0.5, 0.5)
+    Loader.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Loader.BackgroundTransparency = 1
+    Loader.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Loader.BorderSizePixel = 0
+    Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
+    Loader.Size = UDim2.new(1, 0, 1, 0)
+
+    TextContainer.Name = "TextContainer"
+    TextContainer.Parent = Loader
+    TextContainer.AnchorPoint = Vector2.new(0.5, 0.5)
+    TextContainer.BackgroundTransparency = 1
+    TextContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
+    TextContainer.Size = UDim2.new(0, 600, 0, 120)
+    TextContainer.ZIndex = 100
+
+    local lightBlue = Color3.fromRGB(0, 150, 255)
+    local darkBlue = Color3.fromRGB(0, 80, 160)
+
+    local function setupLetter(letter, text, position)
+        letter.Parent = TextContainer
+        letter.BackgroundTransparency = 1
+        letter.Text = text
+        letter.TextColor3 = lightBlue
+        letter.TextSize = 96
+        letter.Font = Enum.Font.GothamBold
+        letter.TextStrokeTransparency = 0
+        letter.TextStrokeColor3 = darkBlue
+        letter.AnchorPoint = Vector2.new(0.5, 0.5)
+        letter.Size = UDim2.new(0, 80, 1, 0)
+        letter.Position = position
+        letter.TextTransparency = 1
+        letter.ZIndex = 100
+    end
+
+    setupLetter(LetterP, "P", UDim2.new(0.2, 0, 0.5, 0))
+    setupLetter(LetterR, "R", UDim2.new(0.3, 0, 0.5, 0))
+    setupLetter(LetterO, "O", UDim2.new(0.4, 0, 0.5, 0))
+    setupLetter(LetterX, "X", UDim2.new(0.5, 0, 0.5, 0))
+    setupLetter(LetterY, "Y", UDim2.new(0.6, 0, 0.5, 0))
+
+    Vignette.Name = "Vignette"
+    Vignette.Parent = Loader
+    Vignette.BackgroundTransparency = 1
+    Vignette.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Vignette.BorderSizePixel = 0
+    Vignette.Size = UDim2.new(1, 0, 1, 0)
+    Vignette.Image = "rbxassetid://18720640102"
+    Vignette.ImageColor3 = lightBlue
+    Vignette.ImageTransparency = 1
+    Vignette.AnchorPoint = Vector2.new(0.5, 0.5)
+    Vignette.Position = UDim2.fromScale(0.5, 0.5)
+
+    local TweenService = game:GetService("TweenService")
+    local Event = Instance.new('BindableEvent')
+
+    TweenService:Create(Loader, TweenInfo.new(0.55, Enum.EasingStyle.Quint), {
+        BackgroundTransparency = 0.5
+    }):Play()
+
+    task.delay(0.5, function()
+        TweenService:Create(LetterP, TweenInfo.new(0.75, Enum.EasingStyle.Quint), {
+            TextTransparency = 0
+        }):Play()
+
+        local otherLetters = {LetterR, LetterO, LetterX, LetterY}
+        for _, letter in pairs(otherLetters) do
+            letter.Position = UDim2.new(0.2, 0, 0.5, 0)
+        end
+
+        task.delay(0.25, function()
+            TweenService:Create(Vignette, TweenInfo.new(5), {
+                ImageTransparency = 0.2
+            }):Play()
+
+            task.wait(4)
+
+            local letterPositions = {
+                {LetterR, UDim2.new(0.3, 0, 0.5, 0)},
+                {LetterO, UDim2.new(0.4, 0, 0.5, 0)},
+                {LetterX, UDim2.new(0.5, 0, 0.5, 0)},
+                {LetterY, UDim2.new(0.6, 0, 0.5, 0)}
+            }
+
+            for i, letterData in ipairs(letterPositions) do
+                local letter = letterData[1]
+                local targetPos = letterData[2]
+                
+                task.spawn(function()
+                    task.wait(i * 0.1)
+                    TweenService:Create(letter, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+                        TextTransparency = 0,
+                        Position = targetPos
+                    }):Play()
+                end)
+            end
+
+            task.wait(Duration or 2.5)
+
+            TweenService:Create(Vignette, TweenInfo.new(3, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                Size = UDim2.new(2, 0, 2, 0)
+            }):Play()
+
+            local allLetters = {LetterP, LetterR, LetterO, LetterX, LetterY}
+            for _, letter in ipairs(allLetters) do
+                TweenService:Create(letter, TweenInfo.new(0.75, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                    TextTransparency = 1,
+                }):Play()
+            end
+
+            TweenService:Create(Loader, TweenInfo.new(1.5, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                BackgroundTransparency = 1
+            }):Play()
+
+            task.delay(0.1, function()
+                TweenService:Create(Vignette, TweenInfo.new(1, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                    ImageTransparency = 1
+                }):Play()
+
+                task.wait(0.2)
+
+                task.delay(3, function()
+                    LoaderGui:Destroy()
+                end)
+            end)
+
+            task.delay(0.6, function()
+                Event:Fire()
+            end)
+        end)
+    end)
+
+    return {
+        yield = function()
+            return Event.Event:Wait()
+        end
+    }
+endfunction ProxySex:Loader(Duration)
+    local LoaderGui = Instance.new("ScreenGui")
+
+    LoaderGui.Name = "ProxyLoader"
+    LoaderGui.Parent = game:GetService("CoreGui")
+    LoaderGui.Enabled = true
+    LoaderGui.ResetOnSpawn = false
+    LoaderGui.IgnoreGuiInset = true
+    LoaderGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+
+    local Loader = Instance.new("Frame")
+    local Vignette = Instance.new("ImageLabel")
+    
+    local TextContainer = Instance.new("Frame")
+    
+    local LetterP = Instance.new("TextLabel")
+    local LetterR = Instance.new("TextLabel")
+    local LetterO = Instance.new("TextLabel")
+    local LetterX = Instance.new("TextLabel")
+    local LetterY = Instance.new("TextLabel")
+
+    Loader.Name = "Loader"
+    Loader.Parent = LoaderGui
+    Loader.AnchorPoint = Vector2.new(0.5, 0.5)
+    Loader.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Loader.BackgroundTransparency = 1
+    Loader.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Loader.BorderSizePixel = 0
+    Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
+    Loader.Size = UDim2.new(1, 0, 1, 0)
+
+    TextContainer.Name = "TextContainer"
+    TextContainer.Parent = Loader
+    TextContainer.AnchorPoint = Vector2.new(0.5, 0.5)
+    TextContainer.BackgroundTransparency = 1
+    TextContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
+    TextContainer.Size = UDim2.new(0, 600, 0, 120)
+    TextContainer.ZIndex = 100
+
+    local lightBlue = Color3.fromRGB(0, 150, 255)
+    local darkBlue = Color3.fromRGB(0, 80, 160)
+
+    local function setupLetter(letter, text, position)
+        letter.Parent = TextContainer
+        letter.BackgroundTransparency = 1
+        letter.Text = text
+        letter.TextColor3 = lightBlue
+        letter.TextSize = 96
+        letter.Font = Enum.Font.GothamBold
+        letter.TextStrokeTransparency = 0
+        letter.TextStrokeColor3 = darkBlue
+        letter.AnchorPoint = Vector2.new(0.5, 0.5)
+        letter.Size = UDim2.new(0, 80, 1, 0)
+        letter.Position = position
+        letter.TextTransparency = 1
+        letter.ZIndex = 100
+    end
+
+    setupLetter(LetterP, "P", UDim2.new(0.2, 0, 0.5, 0))
+    setupLetter(LetterR, "R", UDim2.new(0.3, 0, 0.5, 0))
+    setupLetter(LetterO, "O", UDim2.new(0.4, 0, 0.5, 0))
+    setupLetter(LetterX, "X", UDim2.new(0.5, 0, 0.5, 0))
+    setupLetter(LetterY, "Y", UDim2.new(0.6, 0, 0.5, 0))
+
+    Vignette.Name = "Vignette"
+    Vignette.Parent = Loader
+    Vignette.BackgroundTransparency = 1
+    Vignette.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Vignette.BorderSizePixel = 0
+    Vignette.Size = UDim2.new(1, 0, 1, 0)
+    Vignette.Image = "rbxassetid://18720640102"
+    Vignette.ImageColor3 = lightBlue
+    Vignette.ImageTransparency = 1
+    Vignette.AnchorPoint = Vector2.new(0.5, 0.5)
+    Vignette.Position = UDim2.fromScale(0.5, 0.5)
+
+    local TweenService = game:GetService("TweenService")
+    local Event = Instance.new('BindableEvent')
+
+    TweenService:Create(Loader, TweenInfo.new(0.55, Enum.EasingStyle.Quint), {
+        BackgroundTransparency = 0.5
+    }):Play()
+
+    task.delay(0.5, function()
+        TweenService:Create(LetterP, TweenInfo.new(0.75, Enum.EasingStyle.Quint), {
+            TextTransparency = 0
+        }):Play()
+
+        local otherLetters = {LetterR, LetterO, LetterX, LetterY}
+        for _, letter in pairs(otherLetters) do
+            letter.Position = UDim2.new(0.2, 0, 0.5, 0)
+        end
+
+        task.delay(0.25, function()
+            TweenService:Create(Vignette, TweenInfo.new(5), {
+                ImageTransparency = 0.2
+            }):Play()
+
+            task.wait(4)
+
+            local letterPositions = {
+                {LetterR, UDim2.new(0.3, 0, 0.5, 0)},
+                {LetterO, UDim2.new(0.4, 0, 0.5, 0)},
+                {LetterX, UDim2.new(0.5, 0, 0.5, 0)},
+                {LetterY, UDim2.new(0.6, 0, 0.5, 0)}
+            }
+
+            for i, letterData in ipairs(letterPositions) do
+                local letter = letterData[1]
+                local targetPos = letterData[2]
+                
+                task.spawn(function()
+                    task.wait(i * 0.1)
+                    TweenService:Create(letter, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+                        TextTransparency = 0,
+                        Position = targetPos
+                    }):Play()
+                end)
+            end
+
+            task.wait(Duration or 2.5)
+
+            TweenService:Create(Vignette, TweenInfo.new(3, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                Size = UDim2.new(2, 0, 2, 0)
+            }):Play()
+
+            local allLetters = {LetterP, LetterR, LetterO, LetterX, LetterY}
+            for _, letter in ipairs(allLetters) do
+                TweenService:Create(letter, TweenInfo.new(0.75, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                    TextTransparency = 1,
+                }):Play()
+            end
+
+            TweenService:Create(Loader, TweenInfo.new(1.5, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                BackgroundTransparency = 1
+            }):Play()
+
+            task.delay(0.1, function()
+                TweenService:Create(Vignette, TweenInfo.new(1, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
+                    ImageTransparency = 1
+                }):Play()
+
+                task.wait(0.2)
+
+                task.delay(3, function()
+                    LoaderGui:Destroy()
+                end)
+            end)
+
+            task.delay(0.6, function()
+                Event:Fire()
+            end)
+        end)
+    end)
+
+    return {
+        yield = function()
+            return Event.Event:Wait()
+        end
+    }
+end
                 Event:Fire()
             end)
         end)
