@@ -8622,33 +8622,41 @@ function ProxySex:Loader(Duration)
     TextContainer.AnchorPoint = Vector2.new(0.5, 0.5)
     TextContainer.BackgroundTransparency = 1
     TextContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
-    TextContainer.Size = UDim2.new(0, 600, 0, 120)
+    TextContainer.Size = UDim2.new(0, 300, 0, 80)
     TextContainer.ZIndex = 100
 
-    local lightBlue = Color3.fromRGB(0, 150, 255)
-    local darkBlue = Color3.fromRGB(0, 80, 160)
+    -- Yellow color scheme to match old style
+    local lightBlue = Color3.fromRGB(0, 150, 255)  -- Bright blue
+    local darkBlue = Color3.fromRGB(0, 80, 160)    -- Darker blue
 
-    local function setupLetter(letter, text, position)
+    local function setupLetter(letter, text)
         letter.Parent = TextContainer
         letter.BackgroundTransparency = 1
         letter.Text = text
-        letter.TextColor3 = lightBlue
-        letter.TextSize = 96
+        letter.TextColor3 = lightYellow
+        letter.TextSize = 72
         letter.Font = Enum.Font.GothamBold
         letter.TextStrokeTransparency = 0
-        letter.TextStrokeColor3 = darkBlue
+        letter.TextStrokeColor3 = darkYellow
         letter.AnchorPoint = Vector2.new(0.5, 0.5)
-        letter.Size = UDim2.new(0, 80, 1, 0)
-        letter.Position = position
+        letter.Size = UDim2.new(0, 60, 0, 60)
         letter.TextTransparency = 1
         letter.ZIndex = 100
     end
 
-    setupLetter(LetterP, "P", UDim2.new(0.2, 0, 0.5, 0))
-    setupLetter(LetterR, "R", UDim2.new(0.3, 0, 0.5, 0))
-    setupLetter(LetterO, "O", UDim2.new(0.4, 0, 0.5, 0))
-    setupLetter(LetterX, "X", UDim2.new(0.5, 0, 0.5, 0))
-    setupLetter(LetterY, "Y", UDim2.new(0.6, 0, 0.5, 0))
+    -- Position letters in the center with equal spacing
+    setupLetter(LetterP, "P")
+    setupLetter(LetterR, "R")
+    setupLetter(LetterO, "O")
+    setupLetter(LetterX, "X")
+    setupLetter(LetterY, "Y")
+    
+    -- Initial positions (centered)
+    LetterP.Position = UDim2.new(0.5, 0, 0.5, 0)
+    LetterR.Position = UDim2.new(0.5, 0, 0.5, 0)
+    LetterO.Position = UDim2.new(0.5, 0, 0.5, 0)
+    LetterX.Position = UDim2.new(0.5, 0, 0.5, 0)
+    LetterY.Position = UDim2.new(0.5, 0, 0.5, 0)
 
     Vignette.Name = "Vignette"
     Vignette.Parent = Loader
@@ -8657,7 +8665,7 @@ function ProxySex:Loader(Duration)
     Vignette.BorderSizePixel = 0
     Vignette.Size = UDim2.new(1, 0, 1, 0)
     Vignette.Image = "rbxassetid://18720640102"
-    Vignette.ImageColor3 = lightBlue
+    Vignette.ImageColor3 = lightYellow
     Vignette.ImageTransparency = 1
     Vignette.AnchorPoint = Vector2.new(0.5, 0.5)
     Vignette.Position = UDim2.fromScale(0.5, 0.5)
@@ -8674,23 +8682,20 @@ function ProxySex:Loader(Duration)
             TextTransparency = 0
         }):Play()
 
-        local otherLetters = {LetterR, LetterO, LetterX, LetterY}
-        for _, letter in pairs(otherLetters) do
-            letter.Position = UDim2.new(0.2, 0, 0.5, 0)
-        end
-
         task.delay(0.25, function()
             TweenService:Create(Vignette, TweenInfo.new(5), {
                 ImageTransparency = 0.2
             }):Play()
 
-            task.wait(4)
+            task.wait(0.5)
 
+            -- Animate letters to their final positions (centered with spacing)
             local letterPositions = {
-                {LetterR, UDim2.new(0.3, 0, 0.5, 0)},
-                {LetterO, UDim2.new(0.4, 0, 0.5, 0)},
-                {LetterX, UDim2.new(0.5, 0, 0.5, 0)},
-                {LetterY, UDim2.new(0.6, 0, 0.5, 0)}
+                {LetterP, UDim2.new(0.3, 0, 0.5, 0)},
+                {LetterR, UDim2.new(0.4, 0, 0.5, 0)},
+                {LetterO, UDim2.new(0.5, 0, 0.5, 0)},
+                {LetterX, UDim2.new(0.6, 0, 0.5, 0)},
+                {LetterY, UDim2.new(0.7, 0, 0.5, 0)}
             }
 
             for i, letterData in ipairs(letterPositions) do
