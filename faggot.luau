@@ -8603,7 +8603,7 @@ end;
 function ProxySex:Loader(Duration: number?)
     -- Create the main GUI screen
     local LoaderGui = Instance.new("ScreenGui")
-    LoaderGui.Name = "ProxyLoader"
+    LoaderGui.Name = "Loader"
     LoaderGui.Parent = game:GetService("CoreGui")
     LoaderGui.Enabled = true
     LoaderGui.ResetOnSpawn = false
