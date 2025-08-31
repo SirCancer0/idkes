@@ -1,3 +1,5 @@
+local ProxySex = {}
+
 export type cloneref = (target: Instance) -> Instance;
 
 export type Window = {
@@ -319,18 +321,17 @@ local CoreGui: PlayerGui = (gethui and gethui()) or cloneref(game:FindFirstChild
 local Mouse = LocalPlayer:GetMouse();
 local CurrentCamera = workspace.CurrentCamera;
 
-local ProxySex = {
-	Version = '1.6',
-	Logo = "rbxassetid://107490050204222",
-	Windows = {},
-	Scale = {
-		Window = UDim2.new(0.35, 0, 0.45, 0),
-		Mobile = UDim2.new(0.3, 0, 0.4, 0),
-		TabOpen = 160,
-		TabClose = 70,
-	},
-	ArcylicParent = workspace.CurrentCamera
+    
+ProxySex.Version = '1.6'
+ProxySex.Logo = "rbxassetid://107490050204222"
+ProxySex.Windows = {}
+ProxySex.Scale = {
+    Window = UDim2.new(0.35, 0, 0.45, 0),
+    Mobile = UDim2.new(0.3, 0, 0.4, 0),
+    TabOpen = 160,
+    TabClose = 70,
 }
+ProxySex.ArcylicParent = workspace.CurrentCamera
 
 ProxySex.Colors = {
     Highlight = Color3.fromRGB(0, 120, 215),     
@@ -1191,12 +1192,12 @@ ProxySex.Lucide = {
 	["lucide-zoom-out"] = "rbxassetid://10747384679",
 };
 
-function ProxySex:_GetIcon(name : string) : string
-	return ProxySex.Lucide['lucide-'..tostring(name)] or ProxySex.Lucide[name] or ProxySex.Lucide[tostring(name)] or name;
-end;
-
 function ProxySex:_RandomString()
     return tostring(math.random(100000, 999999)) .. tostring(math.random(100000, 999999))
+end
+
+function ProxySex:_GetIcon(name)
+    return ProxySex.Lucide['lucide-'..tostring(name)] or ProxySex.Lucide[name] or ProxySex.Lucide[tostring(name)] or name
 end
 
 function ProxySex:_IsMouseOverFrame(Frame : Frame) : boolean
@@ -5126,7 +5127,7 @@ table.insert(ProxySex.Windows , ScreenGui);
 
 MainFrame.Active = true;
 MainFrame.Name = "MainFrame"
-MainFrame.Parent = ScreenGui  -- Parent to the ScreenGui, not the ProxySex table
+MainFrame.Parent = ScreenGui
 MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 MainFrame.BackgroundColor3 = ProxySex.Colors.BGDBColor
 
