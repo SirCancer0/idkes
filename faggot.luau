@@ -1,4 +1,12 @@
-local ProxySex = {}
+--[[
+    		Fatality-Dark Interface
+
+    Author: 4lpaca
+    License: MIT
+    Github: https://github.com/4lpaca-pin/ProxyHub
+--]]
+
+--- Export Types ---
 
 export type cloneref = (target: Instance) -> Instance;
 
@@ -321,34 +329,35 @@ local CoreGui: PlayerGui = (gethui and gethui()) or cloneref(game:FindFirstChild
 local Mouse = LocalPlayer:GetMouse();
 local CurrentCamera = workspace.CurrentCamera;
 
-    
-ProxySex.Version = '1.6'
-ProxySex.Logo = "rbxassetid://107490050204222"
-ProxySex.Windows = {}
-ProxySex.Scale = {
-    Window = UDim2.new(0.35, 0, 0.45, 0),
-    Mobile = UDim2.new(0.3, 0, 0.4, 0),
-    TabOpen = 160,
-    TabClose = 70,
-}
-ProxySex.ArcylicParent = workspace.CurrentCamera
-
-ProxySex.Colors = {
-    Highlight = Color3.fromRGB(0, 120, 215),     
-    Toggle = Color3.fromRGB(0, 80, 180),          
-    Risky = Color3.fromRGB(255, 100, 100),       
-    BGDBColor = Color3.fromRGB(15, 25, 40),      
-    BlockColor = Color3.fromRGB(20, 30, 45),      
-    StrokeColor = Color3.fromRGB(30, 40, 55),     
-    SwitchColor = Color3.fromRGB(220, 220, 220),  
-    DropColor = Color3.fromRGB(25, 35, 50),      
-    MouseEnter = Color3.fromRGB(40, 60, 90),      
-    BlockBackground = Color3.fromRGB(25, 35, 50), 
-    LineColor = Color3.fromRGB(50, 65, 85),       
-    HighStrokeColor = Color3.fromRGB(35, 55, 80), 
+local ProxyHub = {
+	Version = '1.6',
+	Logo = "rbxassetid://120245531583106",
+	Windows = {},
+	Scale = {
+		Window = UDim2.new(0, 456,0, 499),
+		Mobile = UDim2.new(0, 450,0, 375),
+		TabOpen = 185,
+		TabClose = 85,
+	},
+	ArcylicParent = workspace.CurrentCamera
 };
 
-ProxySex.Elements = {
+ProxyHub.Colors = {
+	Highlight = Color3.fromRGB(17, 238, 253),
+	Toggle = Color3.fromRGB(14, 203, 213),
+	Risky = Color3.fromRGB(251, 255, 39),
+	BGDBColor = Color3.fromRGB(22, 24, 29),
+	BlockColor = Color3.fromRGB(28, 29, 34),
+	StrokeColor = Color3.fromRGB(37, 38, 43),
+	SwitchColor = Color3.fromRGB(255, 255, 255),
+	DropColor = Color3.fromRGB(33, 35, 39),
+	MouseEnter = Color3.fromRGB(55, 58, 65),
+	BlockBackground = Color3.fromRGB(39, 40, 47),
+	LineColor = Color3.fromRGB(65, 65, 65),
+	HighStrokeColor = Color3.fromRGB(55, 56, 63),
+};
+
+ProxyHub.Elements = {
 	Highlight = {},
 	DropHighlight = {},
 	Risky = {},
@@ -362,12 +371,12 @@ ProxySex.Elements = {
 	HighStrokeColor = {},
 };
 
-ProxySex.DragBlacklist = {};
-ProxySex.IaDrag = false;
-ProxySex.LastDrag = tick();
-ProxySex.Flags = {};
+ProxyHub.DragBlacklist = {};
+ProxyHub.IaDrag = false;
+ProxyHub.LastDrag = tick();
+ProxyHub.Flags = {};
 
-ProxySex.Lucide = {
+ProxyHub.Lucide = {
 	['lucide-mouse-2'] = "rbxassetid://10088146939",
 	['lucide-internet'] = "rbxassetid://12785195438",
 	['lucide-earth'] = "rbxassetid://115986292591138",
@@ -1192,11 +1201,15 @@ ProxySex.Lucide = {
 	["lucide-zoom-out"] = "rbxassetid://10747384679",
 };
 
-function ProxySex:_GetIcon(name)
-    return ProxySex.Lucide['lucide-'..tostring(name)] or ProxySex.Lucide[name] or ProxySex.Lucide[tostring(name)] or name
-end
+function ProxyHub:_GetIcon(name : string) : string
+	return ProxyHub.Lucide['lucide-'..tostring(name)] or ProxyHub.Lucide[name] or ProxyHub.Lucide[tostring(name)] or name;
+end;
 
-function ProxySex:_IsMouseOverFrame(Frame : Frame) : boolean
+function ProxyHub:_RandomString() : string
+	return string.char(math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102),math.random(64,102));	
+end;
+
+function ProxyHub:_IsMouseOverFrame(Frame : Frame) : boolean
 	if not Frame then
 		return;
 	end;
@@ -1208,12 +1221,12 @@ function ProxySex:_IsMouseOverFrame(Frame : Frame) : boolean
 	end;
 end;
 
-function ProxySex:_Rounding(num: number, numDecimalPlaces: number) : number
+function ProxyHub:_Rounding(num: number, numDecimalPlaces: number) : number
 	local mult: number = 10 ^ (numDecimalPlaces or 0);
 	return math.floor(num * mult + 0.5) / mult;
 end;
 
-function ProxySex:_Animation(Self: Instance , Info: TweenInfo , Property :{[K] : V})
+function ProxyHub:_Animation(Self: Instance , Info: TweenInfo , Property :{[K] : V})
 	local Tween = TweenService:Create(Self , Info or TweenInfo.new(0.25) , Property);
 
 	Tween:Play();
@@ -1221,7 +1234,7 @@ function ProxySex:_Animation(Self: Instance , Info: TweenInfo , Property :{[K] :
 	return Tween;
 end;
 
-function ProxySex:_Input(Frame : Frame , Callback : () -> ()) : TextButton
+function ProxyHub:_Input(Frame : Frame , Callback : () -> ()) : TextButton
 	local Button = Instance.new('TextButton',Frame);
 
 	Button.ZIndex = Frame.ZIndex + 10;
@@ -1236,7 +1249,7 @@ function ProxySex:_Input(Frame : Frame , Callback : () -> ()) : TextButton
 	return Button;
 end;
 
-function ProxySex:GetCalculatePosition(planePos: number, planeNormal: number, rayOrigin: number, rayDirection: number) : number
+function ProxyHub:GetCalculatePosition(planePos: number, planeNormal: number, rayOrigin: number, rayDirection: number) : number
 	local n = planeNormal;
 	local d = rayDirection;
 	local v = rayOrigin - planePos;
@@ -1248,8 +1261,8 @@ function ProxySex:GetCalculatePosition(planePos: number, planeNormal: number, ra
 	return rayOrigin + (a * rayDirection);
 end;
 
-function ProxySex:_Blur(element : Frame , WindowRemote) : RBXScriptSignal
-	local Part = Instance.new('Part',ProxySex.ArcylicParent);
+function ProxyHub:_Blur(element : Frame , WindowRemote) : RBXScriptSignal
+	local Part = Instance.new('Part',ProxyHub.ArcylicParent);
 	local DepthOfField = Instance.new('DepthOfFieldEffect',cloneref(game:GetService('Lighting')));
 	local BlockMesh = Instance.new("BlockMesh");
 	local userSettings = UserSettings():GetService("UserGameSettings");
@@ -1263,7 +1276,7 @@ function ProxySex:_Blur(element : Frame , WindowRemote) : RBXScriptSignal
 	Part.Anchored = true;
 	Part.CanCollide = false;
 	Part.CanQuery = false;
-	Part.CollisionGroup = ProxySex:_RandomString();
+	Part.CollisionGroup = ProxyHub:_RandomString();
 	Part.Size = Vector3.new(1, 1, 1) * 0.01;
 	Part.Color = Color3.fromRGB(0,0,0);
 
@@ -1272,29 +1285,29 @@ function ProxySex:_Blur(element : Frame , WindowRemote) : RBXScriptSignal
 	DepthOfField.FocusDistance = 0;
 	DepthOfField.InFocusRadius = 1000;
 	DepthOfField.NearIntensity = 1;
-	DepthOfField.Name = ProxySex:_RandomString();
+	DepthOfField.Name = ProxyHub:_RandomString();
 
-	Part.Name = ProxySex:_RandomString();
+	Part.Name = ProxyHub:_RandomString();
 
 	local UpdateFunction = function()
 		local IsWindowActive = WindowRemote:GetValue();
 
 		if IsWindowActive then
 
-			ProxySex:_Animation(DepthOfField,TweenInfo.new(0.1),{
+			ProxyHub:_Animation(DepthOfField,TweenInfo.new(0.1),{
 				NearIntensity = 1
 			})
 
-			ProxySex:_Animation(Part,TweenInfo.new(0.1),{
+			ProxyHub:_Animation(Part,TweenInfo.new(0.1),{
 				Transparency = 0.97,
 				Size = Vector3.new(1, 1, 1) * 0.01;
 			})
 		else
-			ProxySex:_Animation(DepthOfField,TweenInfo.new(0.1),{
+			ProxyHub:_Animation(DepthOfField,TweenInfo.new(0.1),{
 				NearIntensity = 0
 			})
 
-			ProxySex:_Animation(Part,TweenInfo.new(0.1),{
+			ProxyHub:_Animation(Part,TweenInfo.new(0.1),{
 				Size = Vector3.zero,
 				Transparency = 1.5,
 			})
@@ -1313,8 +1326,8 @@ function ProxySex:_Blur(element : Frame , WindowRemote) : RBXScriptSignal
 
 			local planeNormal = CurrentCamera.CFrame.LookVector;
 
-			local pos0 = ProxySex:GetCalculatePosition(planeOrigin, planeNormal, ray0.Origin, ray0.Direction);
-			local pos1 = ProxySex:GetCalculatePosition(planeOrigin, planeNormal, ray1.Origin, ray1.Direction);
+			local pos0 = ProxyHub:GetCalculatePosition(planeOrigin, planeNormal, ray0.Origin, ray0.Direction);
+			local pos1 = ProxyHub:GetCalculatePosition(planeOrigin, planeNormal, ray1.Origin, ray1.Direction);
 
 			pos0 = CurrentCamera.CFrame:PointToObjectSpace(pos0);
 			pos1 = CurrentCamera.CFrame:PointToObjectSpace(pos1);
@@ -1352,26 +1365,26 @@ function ProxySex:_Blur(element : Frame , WindowRemote) : RBXScriptSignal
 	return rbxsignal;
 end;
 
-function ProxySex:_AddDragBlacklist(Frame: Frame)
+function ProxyHub:_AddDragBlacklist(Frame: Frame)
 	local IsAdded = false;
 	local BASE_TIME = 0.01;
 
 	local SET_BLACKLIST = function(value)
-		local index = table.find(ProxySex.DragBlacklist , Frame);
+		local index = table.find(ProxyHub.DragBlacklist , Frame);
 
-		if value and not ProxySex.IS_DRAG_MOVE then
+		if value and not ProxyHub.IS_DRAG_MOVE then
 			if not index then
-				table.insert(ProxySex.DragBlacklist,Frame);
+				table.insert(ProxyHub.DragBlacklist,Frame);
 			end;
 		else
 			if index then
-				table.remove(ProxySex.DragBlacklist,index);
+				table.remove(ProxyHub.DragBlacklist,index);
 			end;
 		end;
 	end;
 
 	Frame.InputBegan:Connect(function(input)
-		if ProxySex:_IsMouseOverFrame(Frame) then
+		if ProxyHub:_IsMouseOverFrame(Frame) then
 			SET_BLACKLIST(true)
 		end;
 	end);
@@ -1381,21 +1394,21 @@ function ProxySex:_AddDragBlacklist(Frame: Frame)
 	end);
 
 	UserInputService.InputChanged:Connect(function()
-		if not ProxySex:_IsMouseOverFrame(Frame) then
+		if not ProxyHub:_IsMouseOverFrame(Frame) then
 			SET_BLACKLIST(false);
 		end
 	end);
 end;
 
-function ProxySex:_GetWindowFromElement(Element)
-	for i,v : ScreenGui in next , ProxySex.Windows do
+function ProxyHub:_GetWindowFromElement(Element)
+	for i,v : ScreenGui in next , ProxyHub.Windows do
 		if v and Element:IsDescendantOf(v) then
 			return v;
 		end;
 	end;
 end;
 
-function ProxySex.__SIGNAL(default)
+function ProxyHub.__SIGNAL(default)
 	local Bindable = Instance.new('BindableEvent');
 
 	Bindable.Name = string.sub(tostring({}),7);
@@ -1433,13 +1446,13 @@ function ProxySex.__SIGNAL(default)
 	return Binds;
 end;
 
-function ProxySex:_Hover(Frame: Frame , OnHover: () -> any?, Release: () -> any?)
+function ProxyHub:_Hover(Frame: Frame , OnHover: () -> any?, Release: () -> any?)
 	Frame.MouseEnter:Connect(OnHover);
 
 	Frame.MouseLeave:Connect(Release);
 end;
 
-function ProxySex.__CONFIG(config , default)
+function ProxyHub.__CONFIG(config , default)
 	config = config or {};
 
 	for i,v in next , default do
@@ -1451,7 +1464,7 @@ function ProxySex.__CONFIG(config , default)
 	return config;
 end;
 
-function ProxySex:Drag(InputFrame: Frame, MoveFrame: Frame, Speed : number)
+function ProxyHub:Drag(InputFrame: Frame, MoveFrame: Frame, Speed : number)
 	local dragToggle: boolean = false;
 	local dragStart: Vector3 = nil;
 	local startPos: UDim2 = nil;
@@ -1462,55 +1475,55 @@ function ProxySex:Drag(InputFrame: Frame, MoveFrame: Frame, Speed : number)
 		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
 			startPos.Y.Scale, startPos.Y.Offset + delta.Y);
 
-		ProxySex:_Animation(MoveFrame,Tween,{
+		ProxyHub:_Animation(MoveFrame,Tween,{
 			Position = position
 		});
 	end;
 
 	InputFrame.InputBegan:Connect(function(input)
-		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and #ProxySex.DragBlacklist <= 0 then 
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and #ProxyHub.DragBlacklist <= 0 then 
 			dragToggle = true
 			dragStart = input.Position
 			startPos = MoveFrame.Position
 			input.Changed:Connect(function()
 				if input.UserInputState == Enum.UserInputState.End then
 					dragToggle = false;
-					ProxySex.IS_DRAG_MOVE = false;
+					ProxyHub.IS_DRAG_MOVE = false;
 				end
 			end)
 		end
 
-		if not ProxySex.IsDrage and dragToggle then
-			ProxySex.LastDrag = tick();
+		if not ProxyHub.IsDrage and dragToggle then
+			ProxyHub.LastDrag = tick();
 		end;
 
-		ProxySex.IaDrag = dragToggle;
+		ProxyHub.IaDrag = dragToggle;
 	end)
 
 	UserInputService.InputChanged:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch and #ProxySex.DragBlacklist <= 0 then
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch and #ProxyHub.DragBlacklist <= 0 then
 			if dragToggle then
-				ProxySex.IS_DRAG_MOVE = true;
+				ProxyHub.IS_DRAG_MOVE = true;
 				updateInput(input)
 			else
-				ProxySex.IS_DRAG_MOVE = false;
+				ProxyHub.IS_DRAG_MOVE = false;
 			end
 		else
-			if #ProxySex.DragBlacklist > 0 then
+			if #ProxyHub.DragBlacklist > 0 then
 				dragToggle = false
-				ProxySex.IS_DRAG_MOVE = false;
+				ProxyHub.IS_DRAG_MOVE = false;
 			end
 		end
 
-		ProxySex.IaDrag = dragToggle;
+		ProxyHub.IaDrag = dragToggle;
 	end);
 end;
 
-function ProxySex:_IsMobile()
+function ProxyHub:_IsMobile()
 	return UserInputService.TouchEnabled;
 end;
 
-function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep , Signal)
+function ProxyHub:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep , Signal)
 	if Name == "Toggle" then
 		local Toggle = Instance.new("Frame")
 		local UICorner = Instance.new("UICorner")
@@ -1520,14 +1533,14 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 
 		Toggle.Name = "Toggle"
 		Toggle.Parent = LinkValues
-		Toggle.BackgroundColor3 = ProxySex.Colors.DropColor
+		Toggle.BackgroundColor3 = ProxyHub.Colors.DropColor
 		Toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Toggle.BorderSizePixel = 0
 		Toggle.Size = UDim2.new(0, 30, 0, 16)
 		Toggle.ZIndex = GlobalBlock.ZIndex + 1
 		Toggle.LayoutOrder = -#LinkValues:GetChildren();
 
-		table.insert(ProxySex.Elements.DropColor , {
+		table.insert(ProxyHub.Elements.DropColor , {
 			Element = Toggle,
 			Property = "BackgroundColor3"
 		})
@@ -1535,10 +1548,10 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 		UICorner.CornerRadius = UDim.new(1, 0)
 		UICorner.Parent = Toggle
 
-		UIStroke.Color = ProxySex.Colors.HighStrokeColor
+		UIStroke.Color = ProxyHub.Colors.HighStrokeColor
 		UIStroke.Parent = Toggle
 
-		table.insert(ProxySex.Elements.HighStrokeColor,{
+		table.insert(ProxyHub.Elements.HighStrokeColor,{
 			Element = UIStroke,
 			Property = "Color"
 		})
@@ -1546,7 +1559,7 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 		ToggleValue.Name = "ToggleValue"
 		ToggleValue.Parent = Toggle
 		ToggleValue.AnchorPoint = Vector2.new(0.5, 0.5)
-		ToggleValue.BackgroundColor3 = ProxySex.Colors.SwitchColor
+		ToggleValue.BackgroundColor3 = ProxyHub.Colors.SwitchColor
 		ToggleValue.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		ToggleValue.BorderSizePixel = 0
 		ToggleValue.Position = UDim2.new(0.25, 0, 0.5, 0)
@@ -1565,36 +1578,36 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 			if bool then
 				Toggle:SetAttribute('Enabled',true);
 
-				ProxySex:_Animation(ToggleValue,rep.Tween,{
+				ProxyHub:_Animation(ToggleValue,rep.Tween,{
 					Position = UDim2.new(0.75, 0, 0.5, 0)
 				})
 
-				ProxySex:_Animation(Toggle,rep.Tween,{
-					BackgroundColor3 = ProxySex.Colors.Toggle
+				ProxyHub:_Animation(Toggle,rep.Tween,{
+					BackgroundColor3 = ProxyHub.Colors.Toggle
 				})
 			else
 				Toggle:SetAttribute('Enabled',false);
 
-				ProxySex:_Animation(ToggleValue,rep.Tween,{
+				ProxyHub:_Animation(ToggleValue,rep.Tween,{
 					Position = UDim2.new(0.25, 0, 0.5, 0)
 				})
 
-				ProxySex:_Animation(Toggle,rep.Tween,{
-					BackgroundColor3 = ProxySex.Colors.DropColor
+				ProxyHub:_Animation(Toggle,rep.Tween,{
+					BackgroundColor3 = ProxyHub.Colors.DropColor
 				})
 			end;
 		end;
 
-		local Input = ProxySex:_Input(Toggle);
+		local Input = ProxyHub:_Input(Toggle);
 
-		ProxySex:_Hover(Input , function()
+		ProxyHub:_Hover(Input , function()
 			if not Default then
-				ProxySex:_Animation(ToggleValue,rep.Tween,{
+				ProxyHub:_Animation(ToggleValue,rep.Tween,{
 					Size = UDim2.new(0.6, 0, 0.6, 0)
 				})
 			end;
 		end , function()
-			ProxySex:_Animation(ToggleValue,rep.Tween,{
+			ProxyHub:_Animation(ToggleValue,rep.Tween,{
 				Size = UDim2.new(0.550000012, 0, 0.550000012, 0)
 			})
 		end);
@@ -1603,29 +1616,29 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 			if bool then
 				ToggleElement(Default,true);
 
-				ProxySex:_Animation(ToggleValue,rep.Tween,{
+				ProxyHub:_Animation(ToggleValue,rep.Tween,{
 					BackgroundTransparency = 0
 				})
 
-				ProxySex:_Animation(Toggle,rep.Tween,{
+				ProxyHub:_Animation(Toggle,rep.Tween,{
 					BackgroundTransparency = 0
 				})
 
-				ProxySex:_Animation(UIStroke,rep.Tween,{
+				ProxyHub:_Animation(UIStroke,rep.Tween,{
 					Transparency = 0
 				})
 			else
 				ToggleElement(false,true);
 
-				ProxySex:_Animation(ToggleValue,rep.Tween,{
+				ProxyHub:_Animation(ToggleValue,rep.Tween,{
 					BackgroundTransparency = 1
 				})
 
-				ProxySex:_Animation(Toggle,rep.Tween,{
+				ProxyHub:_Animation(Toggle,rep.Tween,{
 					BackgroundTransparency = 1
 				})
 
-				ProxySex:_Animation(UIStroke,rep.Tween,{
+				ProxyHub:_Animation(UIStroke,rep.Tween,{
 					Transparency = 1
 				})
 			end;
@@ -1669,10 +1682,10 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 
 		UIScale.Parent = ColorFrame
 
-		UIStroke.Color = ProxySex.Colors.HighStrokeColor
+		UIStroke.Color = ProxyHub.Colors.HighStrokeColor
 		UIStroke.Parent = ColorFrame
 
-		table.insert(ProxySex.Elements.HighStrokeColor,{
+		table.insert(ProxyHub.Elements.HighStrokeColor,{
 			Element = UIStroke,
 			Property = "Color"
 		})
@@ -1682,33 +1695,33 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 
 		Signal:Connect(function(bool)
 			if bool then
-				ProxySex:_Animation(ColorFrame,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(ColorFrame,TweenInfo.new(0.15),{
 					BackgroundTransparency = 0,
 				})
 
-				ProxySex:_Animation(UIStroke,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(UIStroke,TweenInfo.new(0.15),{
 					Transparency = 0,
 				})
 			else
-				ProxySex:_Animation(ColorFrame,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(ColorFrame,TweenInfo.new(0.15),{
 					BackgroundTransparency = 1,
 				})
 
-				ProxySex:_Animation(UIStroke,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(UIStroke,TweenInfo.new(0.15),{
 					Transparency = 1,
 				})
 			end;
 		end)
 
-		ProxySex:_Hover(ColorPicker, function()
+		ProxyHub:_Hover(ColorPicker, function()
 			if Signal:GetValue() then
-				ProxySex:_Animation(UIScale,TweenInfo.new(0.35),{
+				ProxyHub:_Animation(UIScale,TweenInfo.new(0.35),{
 					Scale = 1.2
 				})
 			end;
 		end , function()
 			if Signal:GetValue() then
-				ProxySex:_Animation(UIScale,TweenInfo.new(0.35),{
+				ProxyHub:_Animation(UIScale,TweenInfo.new(0.35),{
 					Scale = 1
 				})
 			end;
@@ -1770,7 +1783,7 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 
 		Keybind.Name = "Keybind"
 		Keybind.Parent = LinkValues
-		Keybind.BackgroundColor3 = ProxySex.Colors.DropColor
+		Keybind.BackgroundColor3 = ProxyHub.Colors.DropColor
 		Keybind.BackgroundTransparency = 0.8
 		Keybind.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Keybind.BorderSizePixel = 0
@@ -1780,7 +1793,7 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 		Keybind.LayoutOrder = -#LinkValues:GetChildren();
 
 
-		table.insert(ProxySex.Elements.DropColor , {
+		table.insert(ProxyHub.Elements.DropColor , {
 			Element = Keybind,
 			Property = "BackgroundColor3"
 		})
@@ -1788,10 +1801,10 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 		UICorner.CornerRadius = UDim.new(0, 3)
 		UICorner.Parent = Keybind
 
-		UIStroke.Color = ProxySex.Colors.HighStrokeColor
+		UIStroke.Color = ProxyHub.Colors.HighStrokeColor
 		UIStroke.Parent = Keybind
 
-		table.insert(ProxySex.Elements.HighStrokeColor,{
+		table.insert(ProxyHub.Elements.HighStrokeColor,{
 			Element = UIStroke,
 			Property = "Color"
 		})
@@ -1806,11 +1819,11 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 		TextLabel.ZIndex = GlobalBlock.ZIndex + 3
 		TextLabel.Font = Enum.Font.Gotham
 		TextLabel.Text = GetItem(Default or "None");
-		TextLabel.TextColor3 = ProxySex.Colors.SwitchColor
+		TextLabel.TextColor3 = ProxyHub.Colors.SwitchColor
 		TextLabel.TextSize = 12.000
 		TextLabel.TextTransparency = 0.200
 
-		table.insert(ProxySex.Elements.SwitchColor,{
+		table.insert(ProxyHub.Elements.SwitchColor,{
 			Element = TextLabel,
 			Property = "TextColor3"
 		});
@@ -1818,7 +1831,7 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 		local Update = function()
 			local size = TextService:GetTextSize(TextLabel.Text,TextLabel.TextSize,TextLabel.Font,Vector2.new(math.huge,math.huge));
 
-			ProxySex:_Animation(Keybind,TweenInfo.new(0.1),{
+			ProxyHub:_Animation(Keybind,TweenInfo.new(0.1),{
 				Size = UDim2.new(0, size.X + 5, 0, 16)
 			});
 		end;
@@ -1827,27 +1840,27 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 
 		local ToggleUI = function(bool)
 			if bool then
-				ProxySex:_Animation(Keybind,rep.Tween,{
+				ProxyHub:_Animation(Keybind,rep.Tween,{
 					BackgroundTransparency = 0.8
 				})
 
-				ProxySex:_Animation(UIStroke,rep.Tween,{
+				ProxyHub:_Animation(UIStroke,rep.Tween,{
 					Transparency = 0
 				})
 
-				ProxySex:_Animation(TextLabel,rep.Tween,{
+				ProxyHub:_Animation(TextLabel,rep.Tween,{
 					TextTransparency = 0.200
 				})
 			else
-				ProxySex:_Animation(Keybind,rep.Tween,{
+				ProxyHub:_Animation(Keybind,rep.Tween,{
 					BackgroundTransparency = 1
 				})
 
-				ProxySex:_Animation(UIStroke,rep.Tween,{
+				ProxyHub:_Animation(UIStroke,rep.Tween,{
 					Transparency = 1
 				})
 
-				ProxySex:_Animation(TextLabel,rep.Tween,{
+				ProxyHub:_Animation(TextLabel,rep.Tween,{
 					TextTransparency = 1
 				})
 			end;
@@ -1887,9 +1900,9 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 		BlockText.Name = "BlockText"
 		BlockText.Parent = InfoButton
 		BlockText.AnchorPoint = Vector2.new(0, 0)
-		BlockText.BackgroundColor3 = ProxySex.Colors.BlockColor
+		BlockText.BackgroundColor3 = ProxyHub.Colors.BlockColor
 
-		table.insert(ProxySex.Elements.BlockColor , {
+		table.insert(ProxyHub.Elements.BlockColor , {
 			Element = BlockText,
 			Property = "BackgroundColor3"
 		});
@@ -1901,21 +1914,21 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 		BlockText.ZIndex = GlobalBlock.ZIndex + 26
 		BlockText.Font = Enum.Font.GothamMedium
 		BlockText.Text = " "
-		BlockText.TextColor3 = ProxySex.Colors.SwitchColor
+		BlockText.TextColor3 = ProxyHub.Colors.SwitchColor
 		BlockText.TextSize = 13.000
 		BlockText.TextTransparency = 0.300
 		BlockText.TextXAlignment = Enum.TextXAlignment.Left
 
-		table.insert(ProxySex.Elements.SwitchColor,{
+		table.insert(ProxyHub.Elements.SwitchColor,{
 			Element = BlockText,
 			Property = "TextColor3"
 		});
 
-		UIStroke.Color = ProxySex.Colors.StrokeColor
+		UIStroke.Color = ProxyHub.Colors.StrokeColor
 		UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 		UIStroke.Parent = BlockText
 
-		table.insert(ProxySex.Elements.StrokeColor,{
+		table.insert(ProxyHub.Elements.StrokeColor,{
 			Element = UIStroke,
 			Property = "Color"
 		});
@@ -1925,25 +1938,25 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 
 		Signal:Connect(function(bool)
 			if bool then
-				ProxySex:_Animation(InfoButton,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(InfoButton,TweenInfo.new(0.15),{
 					ImageTransparency = 0.500
 				})
 			else
-				ProxySex:_Animation(InfoButton,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(InfoButton,TweenInfo.new(0.15),{
 					ImageTransparency = 1
 				})
 			end;
 		end)
 
-		ProxySex:_Hover(InfoButton, function()
+		ProxyHub:_Hover(InfoButton, function()
 			if Signal:GetValue() then
-				ProxySex:_Animation(InfoButton,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(InfoButton,TweenInfo.new(0.15),{
 					ImageTransparency = 0.1
 				})
 			end;
 		end , function()
 			if Signal:GetValue() then
-				ProxySex:_Animation(InfoButton,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(InfoButton,TweenInfo.new(0.15),{
 					ImageTransparency = 0.500
 				})
 			end;
@@ -1974,25 +1987,25 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 
 		Signal:Connect(function(bool)
 			if bool then
-				ProxySex:_Animation(OptionButton,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(OptionButton,TweenInfo.new(0.15),{
 					ImageTransparency = 0.500
 				})
 			else
-				ProxySex:_Animation(OptionButton,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(OptionButton,TweenInfo.new(0.15),{
 					ImageTransparency = 1
 				})
 			end;
 		end)
 
-		ProxySex:_Hover(OptionButton, function()
+		ProxyHub:_Hover(OptionButton, function()
 			if Signal:GetValue() then
-				ProxySex:_Animation(OptionButton,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(OptionButton,TweenInfo.new(0.15),{
 					ImageTransparency = 0.1
 				})
 			end;
 		end , function()
 			if Signal:GetValue() then
-				ProxySex:_Animation(OptionButton,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(OptionButton,TweenInfo.new(0.15),{
 					ImageTransparency = 0.500
 				})
 			end;
@@ -2002,15 +2015,15 @@ function ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep 
 	end;
 end;
 
-function ProxySex:_CreateBlock(Signal)
+function ProxyHub:_CreateBlock(Signal)
 	local GlobalBlock = Instance.new("Frame")
 	local BlockText = Instance.new("TextLabel")
 	local LinkValues = Instance.new("Frame")
 	local UIListLayout = Instance.new("UIListLayout")
 	local BlockLine = Instance.new("Frame")
 
-	if ProxySex:_IsMobile() then
-		ProxySex:_AddDragBlacklist(GlobalBlock);
+	if ProxyHub:_IsMobile() then
+		ProxyHub:_AddDragBlacklist(GlobalBlock);
 	end;
 
 	GlobalBlock.Name = "GlobalBlock"
@@ -2031,12 +2044,12 @@ function ProxySex:_CreateBlock(Signal)
 	BlockText.ZIndex = 10
 	BlockText.Font = Enum.Font.GothamMedium
 	BlockText.Text = "Block"
-	BlockText.TextColor3 = ProxySex.Colors.SwitchColor
+	BlockText.TextColor3 = ProxyHub.Colors.SwitchColor
 	BlockText.TextSize = 14.000
 	BlockText.TextTransparency = 0.300
 	BlockText.TextXAlignment = Enum.TextXAlignment.Left
 
-	table.insert(ProxySex.Elements.SwitchColor , {
+	table.insert(ProxyHub.Elements.SwitchColor , {
 		Element = BlockText,
 		Property = 'TextColor3'
 	});
@@ -2061,7 +2074,7 @@ function ProxySex:_CreateBlock(Signal)
 	BlockLine.Name = "BlockLine"
 	BlockLine.Parent = GlobalBlock
 	BlockLine.AnchorPoint = Vector2.new(0.5, 1)
-	BlockLine.BackgroundColor3 = ProxySex.Colors.LineColor
+	BlockLine.BackgroundColor3 = ProxyHub.Colors.LineColor
 	BlockLine.BackgroundTransparency = 0.500
 	BlockLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	BlockLine.BorderSizePixel = 0
@@ -2069,7 +2082,7 @@ function ProxySex:_CreateBlock(Signal)
 	BlockLine.Size = UDim2.new(1, -26, 0, 1)
 	BlockLine.ZIndex = 12
 
-	table.insert(ProxySex.Elements.LineColor,{
+	table.insert(ProxyHub.Elements.LineColor,{
 		Element = BlockLine,
 		Property = "BackgroundColor3"
 	});
@@ -2085,13 +2098,13 @@ function ProxySex:_CreateBlock(Signal)
 	end;
 
 	function rep:SetTextColor(Color)
-		local oldIndex = table.find(ProxySex.Elements.SwitchColor , BlockText);
+		local oldIndex = table.find(ProxyHub.Elements.SwitchColor , BlockText);
 
-		table.remove(ProxySex.Elements.SwitchColor , oldIndex);
+		table.remove(ProxyHub.Elements.SwitchColor , oldIndex);
 
 		BlockText.TextColor3 = Color;
 
-		table.insert(ProxySex.Elements.Risky , {
+		table.insert(ProxyHub.Elements.Risky , {
 			Element = BlockText,
 			Property = 'TextColor3'
 		});
@@ -2105,7 +2118,7 @@ function ProxySex:_CreateBlock(Signal)
 	function rep:SetTransparency(num)
 		rep.TextTransparency = num;
 
-		ProxySex:_Animation(BlockText,TweenInfo.new(0.3),{
+		ProxyHub:_Animation(BlockText,TweenInfo.new(0.3),{
 			TextTransparency = rep.TextTransparency
 		});
 	end;
@@ -2123,33 +2136,33 @@ function ProxySex:_CreateBlock(Signal)
 
 	function rep:SetVisible(bool)
 		if bool then
-			ProxySex:_Animation(BlockText,rep.Tween,{
+			ProxyHub:_Animation(BlockText,rep.Tween,{
 				TextTransparency = rep.TextTransparency
 			});
 
-			ProxySex:_Animation(BlockLine,rep.Tween,{
+			ProxyHub:_Animation(BlockLine,rep.Tween,{
 				BackgroundTransparency = 0.500
 			});
 		else
-			ProxySex:_Animation(BlockText,rep.Tween,{
+			ProxyHub:_Animation(BlockText,rep.Tween,{
 				TextTransparency = 1
 			});
 
-			ProxySex:_Animation(BlockLine,rep.Tween,{
+			ProxyHub:_Animation(BlockLine,rep.Tween,{
 				BackgroundTransparency = 1
 			});
 		end;
 	end;
 
 	function rep:AddLink(Name , Default)
-		return ProxySex:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep , Signal);
+		return ProxyHub:_AddLinkValue(Name , Default , GlobalBlock , LinkValues , rep , Signal);
 	end;
 
 	return rep;
 end;
 
-function ProxySex:_AddColorPickerPanel(Button: ImageButton , Callback: (Color: Color3) -> any?)
-	local Window = ProxySex:_GetWindowFromElement(Button);
+function ProxyHub:_AddColorPickerPanel(Button: ImageButton , Callback: (Color: Color3) -> any?)
+	local Window = ProxyHub:_GetWindowFromElement(Button);
 	local BaseZ_Index = math.random(1,15) * 100;
 
 	local ColorPickerWindow = Instance.new("Frame")
@@ -2185,7 +2198,7 @@ function ProxySex:_AddColorPickerPanel(Button: ImageButton , Callback: (Color: C
 
 	ColorPickerWindow.Name = "ColorPickerWindow"
 	ColorPickerWindow.Parent = Window
-	ColorPickerWindow.BackgroundColor3 = ProxySex.Colors.BlockBackground
+	ColorPickerWindow.BackgroundColor3 = ProxyHub.Colors.BlockBackground
 	ColorPickerWindow.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	ColorPickerWindow.BorderSizePixel = 0
 	ColorPickerWindow.Position = UDim2.new(123, 0, 123, 0)
@@ -2194,16 +2207,16 @@ function ProxySex:_AddColorPickerPanel(Button: ImageButton , Callback: (Color: C
 	ColorPickerWindow.AnchorPoint = Vector2.new(0.5,0)
 	ColorPickerWindow.Active = true;
 
-	table.insert(ProxySex.Elements.BlockBackground,{
+	table.insert(ProxyHub.Elements.BlockBackground,{
 		Element = ColorPickerWindow,
 		Property = "BackgroundColor3"
 	});
 
-	ProxySex:_AddDragBlacklist(ColorPickerWindow)
+	ProxyHub:_AddDragBlacklist(ColorPickerWindow)
 
-	UIStroke.Color = ProxySex.Colors.HighStrokeColor
+	UIStroke.Color = ProxyHub.Colors.HighStrokeColor
 	UIStroke.Parent = ColorPickerWindow
-	table.insert(ProxySex.Elements.HighStrokeColor , {
+	table.insert(ProxyHub.Elements.HighStrokeColor , {
 		Element = UIStroke,
 		Property = "Color"
 	})
@@ -2358,14 +2371,14 @@ function ProxySex:_AddColorPickerPanel(Button: ImageButton , Callback: (Color: C
 	HexFrame.Name = "HexFrame"
 	HexFrame.Parent = ColorPickerWindow
 	HexFrame.AnchorPoint = Vector2.new(0.5, 1)
-	HexFrame.BackgroundColor3 = ProxySex.Colors.BlockColor
+	HexFrame.BackgroundColor3 = ProxyHub.Colors.BlockColor
 	HexFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	HexFrame.BorderSizePixel = 0
 	HexFrame.Position = UDim2.new(0.5, 0, 1, -5)
 	HexFrame.Size = UDim2.new(1, -16, 0, 20)
 	HexFrame.ZIndex = BaseZ_Index + 205
 
-	table.insert(ProxySex.Elements.BlockColor,{
+	table.insert(ProxyHub.Elements.BlockColor,{
 		Element = HexFrame,
 		Property = "BackgroundColor3"
 	});
@@ -2373,10 +2386,10 @@ function ProxySex:_AddColorPickerPanel(Button: ImageButton , Callback: (Color: C
 	UICorner_6.CornerRadius = UDim.new(0, 4)
 	UICorner_6.Parent = HexFrame
 
-	UIStroke_8.Color = ProxySex.Colors.HighStrokeColor
+	UIStroke_8.Color = ProxyHub.Colors.HighStrokeColor
 	UIStroke_8.Parent = HexFrame
 
-	table.insert(ProxySex.Elements.HighStrokeColor,{
+	table.insert(ProxyHub.Elements.HighStrokeColor,{
 		Element = UIStroke_8,
 		Property = "Color"
 	});
@@ -2391,11 +2404,11 @@ function ProxySex:_AddColorPickerPanel(Button: ImageButton , Callback: (Color: C
 	TextLabel.ZIndex = BaseZ_Index + 206
 	TextLabel.Font = Enum.Font.Gotham
 	TextLabel.Text = "#FFFFFFF"
-	TextLabel.TextColor3 = ProxySex.Colors.SwitchColor
+	TextLabel.TextColor3 = ProxyHub.Colors.SwitchColor
 	TextLabel.TextSize = 13.000
 	TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-	table.insert(ProxySex.Elements.SwitchColor , {
+	table.insert(ProxyHub.Elements.SwitchColor , {
 		Element = TextLabel,
 		Property = 'TextColor3'
 	});
@@ -2408,7 +2421,7 @@ function ProxySex:_AddColorPickerPanel(Button: ImageButton , Callback: (Color: C
 	local Tween = TweenInfo.new(0.2 , Enum.EasingStyle.Quad);
 	local Tween2 = TweenInfo.new(0.275 , Enum.EasingStyle.Quad);
 
-	ProxySex:_AddPropertyEvent(ColorPickerWindow,function(v)
+	ProxyHub:_AddPropertyEvent(ColorPickerWindow,function(v)
 		ColorPickerWindow.Visible = v;
 	end)
 
@@ -2437,174 +2450,174 @@ function ProxySex:_AddColorPickerPanel(Button: ImageButton , Callback: (Color: C
 				ColorPickerWindow.Position = DropPosition
 			end;
 
-			ProxySex:_Animation(ColorPickerWindow,Tween2,{
+			ProxyHub:_Animation(ColorPickerWindow,Tween2,{
 				BackgroundTransparency = 0,
 				Size = UDim2.new(0, 175, 0, 200)
 			});
 
-			ProxySex:_Animation(ColorPickerWindow,Tween,{
+			ProxyHub:_Animation(ColorPickerWindow,Tween,{
 				Position = MainPosition,
 			});
 
-			ProxySex:_Animation(UIStroke_8,Tween,{
+			ProxyHub:_Animation(UIStroke_8,Tween,{
 				Transparency = 0
 			});
 
-			ProxySex:_Animation(UIStroke_7,Tween,{
+			ProxyHub:_Animation(UIStroke_7,Tween,{
 				Transparency = 0.5
 			});
 
-			ProxySex:_Animation(UIStroke_6,Tween,{
+			ProxyHub:_Animation(UIStroke_6,Tween,{
 				Transparency = 0
 			});
 
-			ProxySex:_Animation(UIStroke_5,Tween,{
+			ProxyHub:_Animation(UIStroke_5,Tween,{
 				Transparency = 0
 			});
 
-			ProxySex:_Animation(UIStroke_4,Tween,{
+			ProxyHub:_Animation(UIStroke_4,Tween,{
 				Transparency = 0
 			});
 
-			ProxySex:_Animation(UIStroke_3,Tween,{
+			ProxyHub:_Animation(UIStroke_3,Tween,{
 				Transparency = 0
 			});
 
-			ProxySex:_Animation(UIStroke_2,Tween,{
+			ProxyHub:_Animation(UIStroke_2,Tween,{
 				Transparency = 0
 			});
 
-			ProxySex:_Animation(UIStroke,Tween,{
+			ProxyHub:_Animation(UIStroke,Tween,{
 				Transparency = 0
 			});
 
-			ProxySex:_Animation(ColorPickBox,Tween,{
+			ProxyHub:_Animation(ColorPickBox,Tween,{
 				BackgroundTransparency = 0,
 				ImageTransparency = 0
 			});
 
-			ProxySex:_Animation(MouseMovement,Tween,{
+			ProxyHub:_Animation(MouseMovement,Tween,{
 				ImageTransparency = 0
 			});
 
-			ProxySex:_Animation(ColorOpc,Tween,{
+			ProxyHub:_Animation(ColorOpc,Tween,{
 				BackgroundTransparency = 0
 			});
 
-			ProxySex:_Animation(TransparentImage,Tween,{
+			ProxyHub:_Animation(TransparentImage,Tween,{
 				ImageTransparency = 0
 			});
 
-			ProxySex:_Animation(Left,Tween,{
+			ProxyHub:_Animation(Left,Tween,{
 				BackgroundTransparency = 0
 			});
 
-			ProxySex:_Animation(Left_2,Tween,{
+			ProxyHub:_Animation(Left_2,Tween,{
 				BackgroundTransparency = 0
 			});
 
-			ProxySex:_Animation(Right,Tween,{
+			ProxyHub:_Animation(Right,Tween,{
 				BackgroundTransparency = 0
 			});
 
-			ProxySex:_Animation(Right_2,Tween,{
+			ProxyHub:_Animation(Right_2,Tween,{
 				BackgroundTransparency = 0
 			});
 
-			ProxySex:_Animation(ColorRedGreenBlue,Tween,{
+			ProxyHub:_Animation(ColorRedGreenBlue,Tween,{
 				BackgroundTransparency = 0
 			});
 
-			ProxySex:_Animation(HexFrame,Tween,{
+			ProxyHub:_Animation(HexFrame,Tween,{
 				BackgroundTransparency = 0
 			});
 
-			ProxySex:_Animation(TextLabel,Tween,{
+			ProxyHub:_Animation(TextLabel,Tween,{
 				TextTransparency = 0
 			});
 		else
-			ProxySex:_Animation(UIStroke_8,Tween,{
+			ProxyHub:_Animation(UIStroke_8,Tween,{
 				Transparency = 1
 			});
 
-			ProxySex:_Animation(UIStroke_7,Tween,{
+			ProxyHub:_Animation(UIStroke_7,Tween,{
 				Transparency = 1
 			});
 
-			ProxySex:_Animation(UIStroke_6,Tween,{
+			ProxyHub:_Animation(UIStroke_6,Tween,{
 				Transparency = 1
 			});
 
-			ProxySex:_Animation(UIStroke_5,Tween,{
+			ProxyHub:_Animation(UIStroke_5,Tween,{
 				Transparency = 1
 			});
 
-			ProxySex:_Animation(UIStroke_4,Tween,{
+			ProxyHub:_Animation(UIStroke_4,Tween,{
 				Transparency = 1
 			});
 
-			ProxySex:_Animation(UIStroke_3,Tween,{
+			ProxyHub:_Animation(UIStroke_3,Tween,{
 				Transparency = 1
 			});
 
-			ProxySex:_Animation(UIStroke_2,Tween,{
+			ProxyHub:_Animation(UIStroke_2,Tween,{
 				Transparency = 1
 			});
 
-			ProxySex:_Animation(UIStroke,Tween,{
+			ProxyHub:_Animation(UIStroke,Tween,{
 				Transparency = 1
 			});
 
-			ProxySex:_Animation(ColorPickerWindow,Tween2,{
+			ProxyHub:_Animation(ColorPickerWindow,Tween2,{
 				BackgroundTransparency = 1,
 			});
 
-			ProxySex:_Animation(ColorPickerWindow,Tween,{
+			ProxyHub:_Animation(ColorPickerWindow,Tween,{
 				Position = DropPosition,
 			});
 
-			ProxySex:_Animation(ColorPickBox,Tween,{
+			ProxyHub:_Animation(ColorPickBox,Tween,{
 				BackgroundTransparency = 1,
 				ImageTransparency = 1
 			});
 
-			ProxySex:_Animation(MouseMovement,Tween,{
+			ProxyHub:_Animation(MouseMovement,Tween,{
 				ImageTransparency = 1
 			});
 
-			ProxySex:_Animation(ColorOpc,Tween,{
+			ProxyHub:_Animation(ColorOpc,Tween,{
 				BackgroundTransparency = 1
 			});
 
-			ProxySex:_Animation(TransparentImage,Tween,{
+			ProxyHub:_Animation(TransparentImage,Tween,{
 				ImageTransparency = 1
 			});
 
-			ProxySex:_Animation(Left,Tween,{
+			ProxyHub:_Animation(Left,Tween,{
 				BackgroundTransparency = 1
 			});
 
-			ProxySex:_Animation(Left_2,Tween,{
+			ProxyHub:_Animation(Left_2,Tween,{
 				BackgroundTransparency = 1
 			});
 
-			ProxySex:_Animation(Right,Tween,{
+			ProxyHub:_Animation(Right,Tween,{
 				BackgroundTransparency = 1
 			});
 
-			ProxySex:_Animation(Right_2,Tween,{
+			ProxyHub:_Animation(Right_2,Tween,{
 				BackgroundTransparency = 1
 			});
 
-			ProxySex:_Animation(ColorRedGreenBlue,Tween,{
+			ProxyHub:_Animation(ColorRedGreenBlue,Tween,{
 				BackgroundTransparency = 1
 			});
 
-			ProxySex:_Animation(HexFrame,Tween,{
+			ProxyHub:_Animation(HexFrame,Tween,{
 				BackgroundTransparency = 1
 			});
 
-			ProxySex:_Animation(TextLabel,Tween,{
+			ProxyHub:_Animation(TextLabel,Tween,{
 				TextTransparency = 1
 			});
 		end;
@@ -2626,23 +2639,23 @@ function ProxySex:_AddColorPickerPanel(Button: ImageButton , Callback: (Color: C
 		local MainColor = Color3.fromHSV(H , S , 1);
 		local RealColor = Color3.fromHSV(H , S , V);
 
-		ProxySex:_Animation(ColorPickBox,TweenInfo.new(0.2),{
+		ProxyHub:_Animation(ColorPickBox,TweenInfo.new(0.2),{
 			BackgroundColor3 = Color3.fromHSV(H , 1 , 1)
 		});
 
-		ProxySex:_Animation(ColorOpc,TweenInfo.new(0.2),{
+		ProxyHub:_Animation(ColorOpc,TweenInfo.new(0.2),{
 			BackgroundColor3 = RealColor
 		});
 
-		ProxySex:_Animation(MouseMovement,TweenInfo.new(0.2),{
+		ProxyHub:_Animation(MouseMovement,TweenInfo.new(0.2),{
 			Position = UDim2.fromScale(S , 1 - V)
 		});
 
-		ProxySex:_Animation(ColorOptSlide,TweenInfo.new(0.2),{
+		ProxyHub:_Animation(ColorOptSlide,TweenInfo.new(0.2),{
 			Position = UDim2.new(Transparency ,0 , 0.5 ,0)
 		});
 
-		ProxySex:_Animation(ColorRGBSlide,TweenInfo.new(0.2),{
+		ProxyHub:_Animation(ColorRGBSlide,TweenInfo.new(0.2),{
 			Position = UDim2.new(0.5 ,0 , H ,0)
 		});
 
@@ -2687,7 +2700,7 @@ function ProxySex:_AddColorPickerPanel(Button: ImageButton , Callback: (Color: C
 
 	UserInputService.InputBegan:Connect(function(Input)
 		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-			if not ProxySex:_IsMouseOverFrame(ColorPickerWindow) then
+			if not ProxyHub:_IsMouseOverFrame(ColorPickerWindow) then
 				ToggleUI(false);
 			end;
 		end;
@@ -2752,19 +2765,19 @@ function ProxySex:_AddColorPickerPanel(Button: ImageButton , Callback: (Color: C
 	return Args;
 end;
 
-function ProxySex:_AddPropertyEvent(Target: Frame , Callback: (boolean) -> any)
+function ProxyHub:_AddPropertyEvent(Target: Frame , Callback: (boolean) -> any)
 	Target:GetPropertyChangedSignal('BackgroundTransparency'):Connect(function()
 		Callback(Target.BackgroundTransparency <= 0.9)
 	end)
 end;
 
-function ProxySex:_LoadOption(Value , TabSignal)
+function ProxyHub:_LoadOption(Value , TabSignal)
 	local Args = {};
-	local Window = ProxySex:_GetWindowFromElement(Value.Root);
+	local Window = ProxyHub:_GetWindowFromElement(Value.Root);
 	local Tween = TweenInfo.new(0.3,Enum.EasingStyle.Quint);
 
 	function Args:AddKeybind(Config: MiniKeybind)
-		Config = ProxySex.__CONFIG(Config,{
+		Config = ProxyHub.__CONFIG(Config,{
 			Name = "Keybind",
 			Default = nil,
 			Flag = nil,
@@ -2780,7 +2793,7 @@ function ProxySex:_LoadOption(Value , TabSignal)
 			return Config.Blacklist and (Config.Blacklist[v] or table.find(Config.Blacklist,v))
 		end;
 
-		ProxySex:_Input(Keybind.Root,function()
+		ProxyHub:_Input(Keybind.Root,function()
 			if IsBinding then
 				return;
 			end;
@@ -2831,14 +2844,14 @@ function ProxySex:_LoadOption(Value , TabSignal)
 		end;
 
 		if Config.Flag then
-			ProxySex.Flags[Config.Flag] = Args;
+			ProxyHub.Flags[Config.Flag] = Args;
 		end;
 
 		return Args;
 	end;
 
 	function Args:AddHelper(Config: Helper)
-		Config = ProxySex.__CONFIG(Config,{
+		Config = ProxyHub.__CONFIG(Config,{
 			Text = "Information."
 		});
 
@@ -2864,7 +2877,7 @@ function ProxySex:_LoadOption(Value , TabSignal)
 
 			local scale = TextService:GetTextSize(Helper.Text.Text,Helper.Text.TextSize,Helper.Text.Font,Vector2.new(math.huge,math.huge));
 
-			ProxySex:_Animation(Helper.Text , TweenInfo.new(0.15), {
+			ProxyHub:_Animation(Helper.Text , TweenInfo.new(0.15), {
 				Size = UDim2.fromOffset(scale.X + 50, scale.Y + 5)
 			})
 
@@ -2874,13 +2887,13 @@ function ProxySex:_LoadOption(Value , TabSignal)
 		local Release = function()
 			local scale = Update()
 
-			ProxySex:_Animation(Helper.Text,TweenInfo.new(0.15),{
+			ProxyHub:_Animation(Helper.Text,TweenInfo.new(0.15),{
 				TextTransparency = 1,
 				BackgroundTransparency = 1,
 				Position = UDim2.fromOffset(Button.AbsolutePosition.X,Button.AbsolutePosition.Y + (45))
 			});
 
-			ProxySex:_Animation(Helper.UIStroke,TweenInfo.new(0.15),{
+			ProxyHub:_Animation(Helper.UIStroke,TweenInfo.new(0.15),{
 				Transparency = 1
 			});
 		end;
@@ -2892,19 +2905,19 @@ function ProxySex:_LoadOption(Value , TabSignal)
 				Helper.Text.Position = UDim2.fromOffset(Button.AbsolutePosition.X,Button.AbsolutePosition.Y + (45))
 			end;
 
-			ProxySex:_Animation(Helper.Text,TweenInfo.new(0.15),{
+			ProxyHub:_Animation(Helper.Text,TweenInfo.new(0.15),{
 				TextTransparency = 0.35,
 				BackgroundTransparency = 0,
 				Position = UDim2.fromOffset(Button.AbsolutePosition.X,Button.AbsolutePosition.Y + (40 - (scale.Y / 2)))
 			});
 
-			ProxySex:_Animation(Helper.UIStroke,TweenInfo.new(0.15),{
+			ProxyHub:_Animation(Helper.UIStroke,TweenInfo.new(0.15),{
 				Transparency = 0
 			});
 
 		end;
 
-		ProxySex:_Hover(Button,  Hold, Release);
+		ProxyHub:_Hover(Button,  Hold, Release);
 
 		Release();
 
@@ -2918,7 +2931,7 @@ function ProxySex:_LoadOption(Value , TabSignal)
 	end;
 
 	function Args:AddColorPicker(Config: MiniColorPicker)
-		Config = ProxySex.__CONFIG(Config,{
+		Config = ProxyHub.__CONFIG(Config,{
 			Default = Color3.fromRGB(255,255,255),
 			Transparency = 0,
 			Callback = function() end
@@ -2926,9 +2939,9 @@ function ProxySex:_LoadOption(Value , TabSignal)
 
 		local ColorPicker:Frame , ColorFrame: Frame = Value:AddLink('ColorPicker' , Config.Default);
 
-		local Button = ProxySex:_Input(ColorPicker);
+		local Button = ProxyHub:_Input(ColorPicker);
 
-		local ColorPicker = ProxySex:_AddColorPickerPanel(Button,function(color,opc)
+		local ColorPicker = ProxyHub:_AddColorPickerPanel(Button,function(color,opc)
 			Config.Default = color;
 			Config.Transparency = opc;
 
@@ -2966,14 +2979,14 @@ function ProxySex:_LoadOption(Value , TabSignal)
 		end;
 
 		if Config.Flag then
-			ProxySex.Flags[Config.Flag] = Args;
+			ProxyHub.Flags[Config.Flag] = Args;
 		end;
 
 		return Args;
 	end;
 
 	function Args:AddToggle(Config : MiniToggle)
-		Config = ProxySex.__CONFIG(Config,{
+		Config = ProxyHub.__CONFIG(Config,{
 			Flag = nil,
 			Default = false,
 			Callback = function() end;
@@ -3006,7 +3019,7 @@ function ProxySex:_LoadOption(Value , TabSignal)
 		end;
 
 		if Config.Flag then
-			ProxySex.Flags[Config.Flag] = Args;
+			ProxyHub.Flags[Config.Flag] = Args;
 		end;
 
 		return Args;
@@ -3016,7 +3029,7 @@ function ProxySex:_LoadOption(Value , TabSignal)
 		local Element: ImageButton = Value:AddLink("Option");
 		local BaseZ_Index = math.random(1,15) * 100;
 
-		local Signal = ProxySex.__SIGNAL(false);
+		local Signal = ProxyHub.__SIGNAL(false);
 
 		local ExtractElement = Instance.new("Frame")
 		local UIStroke = Instance.new("UIStroke")
@@ -3049,40 +3062,40 @@ function ProxySex:_LoadOption(Value , TabSignal)
 					ExtractElement.Position = DropPosition
 				end;
 
-				ProxySex:_Animation(ExtractElement , Tween , {
+				ProxyHub:_Animation(ExtractElement , Tween , {
 					Position = MainPosition,
 					BackgroundTransparency = 0,
 					Size = UDim2.new(0, 225, 0, UIListLayout.AbsoluteContentSize.Y)
 				});
 
-				ProxySex:_Animation(UIStroke , Tween , {
+				ProxyHub:_Animation(UIStroke , Tween , {
 					Transparency = 0
 				});
 
 			else
 				Signal:Fire(false);
 
-				ProxySex:_Animation(ExtractElement , Tween , {
+				ProxyHub:_Animation(ExtractElement , Tween , {
 					Position = DropPosition,
 					BackgroundTransparency = 1,
 					Size = UDim2.new(0, 225, 0, UIListLayout.AbsoluteContentSize.Y - 10)
 				});
 
-				ProxySex:_Animation(UIStroke , Tween , {
+				ProxyHub:_Animation(UIStroke , Tween , {
 					Transparency = 1
 				});
 			end;
 		end;
 
-		ProxySex:_AddPropertyEvent(ExtractElement,function(bool)
+		ProxyHub:_AddPropertyEvent(ExtractElement,function(bool)
 			ExtractElement.Visible = bool;
 		end);
 
-		ProxySex:_AddDragBlacklist(ExtractElement);
+		ProxyHub:_AddDragBlacklist(ExtractElement);
 
 		ExtractElement.Name = "ExtractElement"
 		ExtractElement.Parent = Window
-		ExtractElement.BackgroundColor3 = ProxySex.Colors.BlockBackground
+		ExtractElement.BackgroundColor3 = ProxyHub.Colors.BlockBackground
 		ExtractElement.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		ExtractElement.BorderSizePixel = 0
 		ExtractElement.ClipsDescendants = true
@@ -3092,15 +3105,15 @@ function ProxySex:_LoadOption(Value , TabSignal)
 		ExtractElement.Visible = false
 		ExtractElement.ClipsDescendants = true
 
-		table.insert(ProxySex.Elements.BlockBackground,{
+		table.insert(ProxyHub.Elements.BlockBackground,{
 			Element = ExtractElement,
 			Property = "BackgroundColor3"
 		});
 
-		UIStroke.Color = ProxySex.Colors.HighStrokeColor
+		UIStroke.Color = ProxyHub.Colors.HighStrokeColor
 		UIStroke.Parent = ExtractElement
 
-		table.insert(ProxySex.Elements.HighStrokeColor,{
+		table.insert(ProxyHub.Elements.HighStrokeColor,{
 			Element = UIStroke,
 			Property = "Color"
 		});
@@ -3131,20 +3144,20 @@ function ProxySex:_LoadOption(Value , TabSignal)
 
 		UserInputService.InputBegan:Connect(function(Input)
 			if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-				if Toggl and not ProxySex:_IsMouseOverFrame(ExtractElement) and not ProxySex:_IsMouseOverFrame(Element) then
+				if Toggl and not ProxyHub:_IsMouseOverFrame(ExtractElement) and not ProxyHub:_IsMouseOverFrame(Element) then
 					ToggleUI(false);
 				end;
 			end
 		end)		
 
-		return ProxySex:_LoadElement(Elements , true , Signal)
+		return ProxyHub:_LoadElement(Elements , true , Signal)
 	end;
 
 	return Args;
 end;
 
-function ProxySex:_LoadDropdown(BaseParent: TextButton , Callback: () -> any)
-	local Window = ProxySex:_GetWindowFromElement(BaseParent);
+function ProxyHub:_LoadDropdown(BaseParent: TextButton , Callback: () -> any)
+	local Window = ProxyHub:_GetWindowFromElement(BaseParent);
 	local BaseZ_Index = BaseParent.ZIndex + (math.random(1,15) * 100);
 
 	local DropdownWindow = Instance.new("Frame")
@@ -3152,32 +3165,32 @@ function ProxySex:_LoadDropdown(BaseParent: TextButton , Callback: () -> any)
 	local UICorner = Instance.new("UICorner")
 	local ScrollingFrame = Instance.new("ScrollingFrame")
 	local UIListLayout = Instance.new("UIListLayout")
-	local ToggleDb = ProxySex.__SIGNAL(false);
-	local EventOut = ProxySex.__SIGNAL(0);
+	local ToggleDb = ProxyHub.__SIGNAL(false);
+	local EventOut = ProxyHub.__SIGNAL(0);
 
 	DropdownWindow.Name = "DropdownWindow"
 	DropdownWindow.Parent = Window
-	DropdownWindow.BackgroundColor3 = ProxySex.Colors.BlockBackground
+	DropdownWindow.BackgroundColor3 = ProxyHub.Colors.BlockBackground
 	DropdownWindow.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	DropdownWindow.BorderSizePixel = 0
 	DropdownWindow.Position = UDim2.new(123, 0, 123, 0)
 	DropdownWindow.Size = UDim2.new(0, 190, 0, 200)
 	DropdownWindow.ZIndex = BaseZ_Index
 
-	table.insert(ProxySex.Elements.BlockBackground,{
+	table.insert(ProxyHub.Elements.BlockBackground,{
 		Element = DropdownWindow,
 		Property = "BackgroundColor3"
 	});
 
-	ProxySex:_AddDragBlacklist(DropdownWindow);
-	ProxySex:_AddPropertyEvent(DropdownWindow,function(v)
+	ProxyHub:_AddDragBlacklist(DropdownWindow);
+	ProxyHub:_AddPropertyEvent(DropdownWindow,function(v)
 		DropdownWindow.Visible = v;
 	end)
 
-	UIStroke.Color = ProxySex.Colors.HighStrokeColor
+	UIStroke.Color = ProxyHub.Colors.HighStrokeColor
 	UIStroke.Parent = DropdownWindow
 
-	table.insert(ProxySex.Elements.HighStrokeColor , {
+	table.insert(ProxyHub.Elements.HighStrokeColor , {
 		Element = UIStroke,
 		Property = "Color"
 	})
@@ -3232,23 +3245,23 @@ function ProxySex:_LoadDropdown(BaseParent: TextButton , Callback: () -> any)
 				DropdownWindow.Position = DropPosition;
 			end;
 
-			ProxySex:_Animation(DropdownWindow,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(DropdownWindow,TweenInfo.new(0.2),{
 				BackgroundTransparency = 0,
 				Position = MainPosition,
 				Size = UDim2.new(0, BaseParent.AbsoluteSize.X - 1, 0, math.clamp(UIListLayout.AbsoluteContentSize.Y + 10,10 , 200))
 			})
 
-			ProxySex:_Animation(UIStroke,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(UIStroke,TweenInfo.new(0.2),{
 				Transparency = 0
 			})
 		else
-			ProxySex:_Animation(DropdownWindow,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(DropdownWindow,TweenInfo.new(0.2),{
 				BackgroundTransparency = 1,
 				Position = DropPosition,
 				Size = UDim2.new(0, BaseParent.AbsoluteSize.X - 1, 0, math.clamp(UIListLayout.AbsoluteContentSize.Y / 1.5, 10 , 200))
 			})
 
-			ProxySex:_Animation(UIStroke,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(UIStroke,TweenInfo.new(0.2),{
 				Transparency = 1
 			})
 		end;
@@ -3285,12 +3298,12 @@ function ProxySex:_LoadDropdown(BaseParent: TextButton , Callback: () -> any)
 		BlockText.ZIndex = BaseZ_Index + 6
 		BlockText.Font = Enum.Font.GothamMedium
 		BlockText.Text = ""
-		BlockText.TextColor3 = ProxySex.Colors.SwitchColor
+		BlockText.TextColor3 = ProxyHub.Colors.SwitchColor
 		BlockText.TextSize = 13.000
 		BlockText.TextTransparency = 0.500
 		BlockText.TextXAlignment = Enum.TextXAlignment.Left
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = BlockText,
 			Property = 'TextColor3'
 		});
@@ -3298,7 +3311,7 @@ function ProxySex:_LoadDropdown(BaseParent: TextButton , Callback: () -> any)
 		BlockLine.Name = "BlockLine"
 		BlockLine.Parent = DropdownItem
 		BlockLine.AnchorPoint = Vector2.new(0.5, 1)
-		BlockLine.BackgroundColor3 = ProxySex.Colors.LineColor
+		BlockLine.BackgroundColor3 = ProxyHub.Colors.LineColor
 		BlockLine.BackgroundTransparency = 0.500
 		BlockLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		BlockLine.BorderSizePixel = 0
@@ -3306,7 +3319,7 @@ function ProxySex:_LoadDropdown(BaseParent: TextButton , Callback: () -> any)
 		BlockLine.Size = UDim2.new(1, -6, 0, 1)
 		BlockLine.ZIndex = BaseZ_Index + 7
 
-		table.insert(ProxySex.Elements.LineColor,{
+		table.insert(ProxyHub.Elements.LineColor,{
 			Element = BlockLine,
 			Property = "BackgroundColor3"
 		});
@@ -3356,26 +3369,26 @@ function ProxySex:_LoadDropdown(BaseParent: TextButton , Callback: () -> any)
 
 			table.insert(__signals , ToggleDb:Connect(function(bool)
 				if bool then
-					ProxySex:_Animation(bth.BlockText,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(bth.BlockText,TweenInfo.new(0.2),{
 						TextTransparency = ((IsDefault(v) or MatchDefault(v,DataFrame)) and 0) or 0.5
 					});
 
-					ProxySex:_Animation(bth.BlockLine,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(bth.BlockLine,TweenInfo.new(0.2),{
 						BackgroundTransparency = 0
 					});
 				else
-					ProxySex:_Animation(bth.BlockText,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(bth.BlockText,TweenInfo.new(0.2),{
 						TextTransparency = 1
 					});
 
-					ProxySex:_Animation(bth.BlockLine,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(bth.BlockLine,TweenInfo.new(0.2),{
 						BackgroundTransparency = 1
 					});
 				end;
 			end));
 
 			if ToggleDb:GetValue() then
-				ProxySex:_Animation(bth.BlockText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(bth.BlockText,TweenInfo.new(0.2),{
 					TextTransparency = ((IsDefault(v) or MatchDefault(v,DataFrame)) and 0) or 0.5
 				});
 			end;
@@ -3391,23 +3404,23 @@ function ProxySex:_LoadDropdown(BaseParent: TextButton , Callback: () -> any)
 					DataFrame[v] = false;
 				end;
 				
-				ProxySex:_Animation(bth.BlockText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(bth.BlockText,TweenInfo.new(0.2),{
 					TextTransparency = ((MatchDefault(v,DataFrame)) and 0) or 0.5
 				});
 				
-				ProxySex:_Input(bth.DropdownItem,function()
+				ProxyHub:_Input(bth.DropdownItem,function()
 					DataFrame[v] = not DataFrame[v];
 
-					ProxySex:_Animation(bth.BlockText,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(bth.BlockText,TweenInfo.new(0.2),{
 						TextTransparency = ((MatchDefault(v,DataFrame)) and 0) or 0.5
 					});
 
 					Callback(DataFrame)
 				end);
 			else
-				ProxySex:_Input(bth.DropdownItem,function()
+				ProxyHub:_Input(bth.DropdownItem,function()
 					if DataFrame then
-						ProxySex:_Animation(DataFrame.BlockText,TweenInfo.new(0.2),{
+						ProxyHub:_Animation(DataFrame.BlockText,TweenInfo.new(0.2),{
 							TextTransparency = ((IsDefault(v) or MatchDefault(v,DataFrame)) and 0) or 0.5
 						});
 					end;
@@ -3416,7 +3429,7 @@ function ProxySex:_LoadDropdown(BaseParent: TextButton , Callback: () -> any)
 
 					DataFrame = bth;
 
-					ProxySex:_Animation(bth.BlockText,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(bth.BlockText,TweenInfo.new(0.2),{
 						TextTransparency = ((IsDefault(v) or MatchDefault(v,DataFrame)) and 0) or 0.5
 					});
 
@@ -3441,7 +3454,7 @@ function ProxySex:_LoadDropdown(BaseParent: TextButton , Callback: () -> any)
 
 	UserInputService.InputBegan:Connect(function(Input)
 		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-			if not ProxySex:_IsMouseOverFrame(DropdownWindow) then
+			if not ProxyHub:_IsMouseOverFrame(DropdownWindow) then
 				ToggleUI(false);
 			end;
 		end;
@@ -3481,14 +3494,14 @@ function ProxySex:_LoadDropdown(BaseParent: TextButton , Callback: () -> any)
 	return Args;
 end;
 
-function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
+function ProxyHub:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 	local Zindex = Parent.ZIndex + 1;
 	local Tween = TweenInfo.new(0.25,Enum.EasingStyle.Quint);
 
 	local Args = {};
 
 	function Args:AddToggle(Config : Toggle)
-		Config = ProxySex.__CONFIG(Config,{
+		Config = ProxyHub.__CONFIG(Config,{
 			Name = "Toggle",
 			Default = false,
 			Flag = nil,
@@ -3496,14 +3509,14 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 			Callback = function() end;
 		});
 
-		local Block = ProxySex:_CreateBlock(Signal);
+		local Block = ProxyHub:_CreateBlock(Signal);
 
 		Block:SetParent(Parent);
 
 		Block:SetText(Config.Name);
 
 		if Config.Risky then
-			Block:SetTextColor(ProxySex.Colors.Risky);
+			Block:SetTextColor(ProxyHub.Colors.Risky);
 		end;
 
 		Block:SetLine(EnabledLine);
@@ -3541,21 +3554,21 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 
 		end);
 
-		Args.Link = ProxySex:_LoadOption(Block);
+		Args.Link = ProxyHub:_LoadOption(Block);
 
 		function Args:GetValue()
 			return Config.Default;
 		end;
 
 		if Config.Flag then
-			ProxySex.Flags[Config.Flag] = Args;
+			ProxyHub.Flags[Config.Flag] = Args;
 		end;
 
 		return Args;
 	end;
 
 	function Args:AddKeybind(Config : Keybind)
-		Config = ProxySex.__CONFIG(Config,{
+		Config = ProxyHub.__CONFIG(Config,{
 			Name = "Keybind",
 			Default = nil,
 			Flag = nil,
@@ -3563,7 +3576,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 			Blacklist = {}
 		});
 
-		local Block = ProxySex:_CreateBlock(Signal);
+		local Block = ProxyHub:_CreateBlock(Signal);
 
 		Block:SetParent(Parent);
 
@@ -3581,7 +3594,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 			return Config.Blacklist and (Config.Blacklist[v] or table.find(Config.Blacklist,v))
 		end;
 
-		ProxySex:_Input(Keybind.Root,function()
+		ProxyHub:_Input(Keybind.Root,function()
 			if IsBinding then
 				return;
 			end;
@@ -3631,21 +3644,21 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 			Block:SetVisible(bool);
 		end);
 
-		Args.Link = ProxySex:_LoadOption(Block);
+		Args.Link = ProxyHub:_LoadOption(Block);
 
 		function Args:GetValue()
 			return (typeof(Config.Default) == "string" and Config.Default) or Config.Default.Name;
 		end;
 
 		if Config.Flag then
-			ProxySex.Flags[Config.Flag] = Args;
+			ProxyHub.Flags[Config.Flag] = Args;
 		end;
 
 		return Args;
 	end;
 
 	function Args:AddColorPicker(Config: ColorPicker)
-		Config = ProxySex.__CONFIG(Config,{
+		Config = ProxyHub.__CONFIG(Config,{
 			Name = "ColorPicker",
 			Default = Color3.fromRGB(255,255,255),
 			Flag = nil,
@@ -3653,7 +3666,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 			Callback = function() end;
 		});
 
-		local Block = ProxySex:_CreateBlock(Signal);
+		local Block = ProxyHub:_CreateBlock(Signal);
 
 		Block:SetParent(Parent);
 
@@ -3665,9 +3678,9 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 
 		local ColorPicker:Frame , ColorFrame: Frame = Block:AddLink('ColorPicker' , Config.Default);
 
-		local Button = ProxySex:_Input(ColorPicker);
+		local Button = ProxyHub:_Input(ColorPicker);
 
-		local ColorPicker = ProxySex:_AddColorPickerPanel(Button,function(color,opc)
+		local ColorPicker = ProxyHub:_AddColorPickerPanel(Button,function(color,opc)
 			Config.Default = color;
 			Config.Transparency = opc;
 
@@ -3698,7 +3711,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 			Block:SetVisible(bool);
 		end);
 
-		Args.Link = ProxySex:_LoadOption(Block);
+		Args.Link = ProxyHub:_LoadOption(Block);
 
 		function Args:GetValue()
 			return {
@@ -3710,14 +3723,14 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		end;
 
 		if Config.Flag then
-			ProxySex.Flags[Config.Flag] = Args;
+			ProxyHub.Flags[Config.Flag] = Args;
 		end;
 
 		return Args;
 	end;
 
 	function Args:AddButton(Config: Button)
-		Config = ProxySex.__CONFIG(Config , {
+		Config = ProxyHub.__CONFIG(Config , {
 			Name = 'Button',
 			Callback = function() end
 		});
@@ -3729,8 +3742,8 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		local UICorner = Instance.new("UICorner")
 		local TextLabel = Instance.new("TextLabel")
 
-		if ProxySex:_IsMobile() then
-			ProxySex:_AddDragBlacklist(Button);
+		if ProxyHub:_IsMobile() then
+			ProxyHub:_AddDragBlacklist(Button);
 		end;
 
 		Button.Name = "Button"
@@ -3744,7 +3757,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockLine.Name = "BlockLine"
 		BlockLine.Parent = Button
 		BlockLine.AnchorPoint = Vector2.new(0.5, 1)
-		BlockLine.BackgroundColor3 = ProxySex.Colors.LineColor
+		BlockLine.BackgroundColor3 = ProxyHub.Colors.LineColor
 		BlockLine.BackgroundTransparency = 0.500
 		BlockLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		BlockLine.BorderSizePixel = 0
@@ -3752,14 +3765,14 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockLine.Size = UDim2.new(1, -26, 0, 1)
 		BlockLine.ZIndex = Zindex + 6
 
-		table.insert(ProxySex.Elements.LineColor,{
+		table.insert(ProxyHub.Elements.LineColor,{
 			Element = BlockLine,
 			Property = "BackgroundColor3"
 		});
 
 		Frame.Parent = Button
 		Frame.AnchorPoint = Vector2.new(0.5, 0.5)
-		Frame.BackgroundColor3 = ProxySex.Colors.Highlight
+		Frame.BackgroundColor3 = ProxyHub.Colors.Highlight
 		Frame.BackgroundTransparency = 0.100
 		Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Frame.BorderSizePixel = 0
@@ -3767,15 +3780,15 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		Frame.Size = UDim2.new(1, -15, 1, -5)
 		Frame.ZIndex = Zindex + 7;
 
-		table.insert(ProxySex.Elements.Highlight,{
+		table.insert(ProxyHub.Elements.Highlight,{
 			Element = Frame,
 			Property = "BackgroundColor3"
 		});
 
-		UIStroke.Color = ProxySex.Colors.StrokeColor
+		UIStroke.Color = ProxyHub.Colors.StrokeColor
 		UIStroke.Parent = Frame
 
-		table.insert(ProxySex.Elements.StrokeColor,{
+		table.insert(ProxyHub.Elements.StrokeColor,{
 			Element = UIStroke,
 			Property = "Color"
 		});
@@ -3793,30 +3806,30 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		TextLabel.ZIndex = Zindex + 8
 		TextLabel.Font = Enum.Font.GothamMedium
 		TextLabel.Text = Config.Name;
-		TextLabel.TextColor3 = ProxySex.Colors.SwitchColor
+		TextLabel.TextColor3 = ProxyHub.Colors.SwitchColor
 		TextLabel.TextSize = 12.000
 		TextLabel.TextStrokeTransparency = 0.900
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = TextLabel,
 			Property = 'TextColor3'
 		});
 
-		ProxySex:_Hover(Frame,function()
+		ProxyHub:_Hover(Frame,function()
 			if Signal:GetValue() then
-				ProxySex:_Animation(Frame,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(Frame,TweenInfo.new(0.2),{
 					BackgroundTransparency = 0
 				})
 			end;
 		end,function()
 			if Signal:GetValue() then
-				ProxySex:_Animation(Frame,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(Frame,TweenInfo.new(0.2),{
 					BackgroundTransparency = 0.1
 				})
 			end;
 		end);
 
-		ProxySex:_Input(Frame,function()
+		ProxyHub:_Input(Frame,function()
 			Config.Callback();
 		end);
 
@@ -3824,37 +3837,37 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 
 		Args.Signal = Signal:Connect(function(bool)
 			if bool then
-				ProxySex:_Animation(BlockLine, TweenInfo.new(0.35),{
+				ProxyHub:_Animation(BlockLine, TweenInfo.new(0.35),{
 					BackgroundTransparency = 0.500
 				});
 
-				ProxySex:_Animation(Frame, TweenInfo.new(0.35),{
+				ProxyHub:_Animation(Frame, TweenInfo.new(0.35),{
 					BackgroundTransparency = 0.1
 				});
 
-				ProxySex:_Animation(UIStroke, TweenInfo.new(0.35),{
+				ProxyHub:_Animation(UIStroke, TweenInfo.new(0.35),{
 					Transparency = 0
 				});
 
-				ProxySex:_Animation(TextLabel, TweenInfo.new(0.35),{
+				ProxyHub:_Animation(TextLabel, TweenInfo.new(0.35),{
 					TextStrokeTransparency = 0.900,
 					TextTransparency = 0
 				});
 
 			else
-				ProxySex:_Animation(BlockLine, TweenInfo.new(0.35),{
+				ProxyHub:_Animation(BlockLine, TweenInfo.new(0.35),{
 					BackgroundTransparency = 1
 				});
 
-				ProxySex:_Animation(Frame, TweenInfo.new(0.35),{
+				ProxyHub:_Animation(Frame, TweenInfo.new(0.35),{
 					BackgroundTransparency = 1
 				});
 
-				ProxySex:_Animation(UIStroke, TweenInfo.new(0.35),{
+				ProxyHub:_Animation(UIStroke, TweenInfo.new(0.35),{
 					Transparency = 1
 				});
 
-				ProxySex:_Animation(TextLabel, TweenInfo.new(0.35),{
+				ProxyHub:_Animation(TextLabel, TweenInfo.new(0.35),{
 					TextStrokeTransparency = 1,
 					TextTransparency = 1
 				});
@@ -3870,7 +3883,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 	end;
 
 	function Args:AddSlider(Config: Slider)
-		Config = ProxySex.__CONFIG(Config , {
+		Config = ProxyHub.__CONFIG(Config , {
 			Name = 'Slider',
 			Default = 50,
 			Min = 0,
@@ -3893,7 +3906,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		local UIScale = Instance.new("UIScale")
 		local ValueText = Instance.new("TextLabel")
 
-		ProxySex:_AddDragBlacklist(Slider);
+		ProxyHub:_AddDragBlacklist(Slider);
 
 		Slider.Name = "Slider"
 		Slider.Parent = Parent
@@ -3913,12 +3926,12 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockText.ZIndex = Zindex + 2
 		BlockText.Font = Enum.Font.GothamMedium
 		BlockText.Text = Config.Name
-		BlockText.TextColor3 = ProxySex.Colors.SwitchColor
+		BlockText.TextColor3 = ProxyHub.Colors.SwitchColor
 		BlockText.TextSize = 14.000
 		BlockText.TextTransparency = 0.100
 		BlockText.TextXAlignment = Enum.TextXAlignment.Left
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = BlockText,
 			Property = 'TextColor3'
 		});
@@ -3926,7 +3939,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockLine.Name = "BlockLine"
 		BlockLine.Parent = Slider
 		BlockLine.AnchorPoint = Vector2.new(0.5, 1)
-		BlockLine.BackgroundColor3 = ProxySex.Colors.LineColor
+		BlockLine.BackgroundColor3 = ProxyHub.Colors.LineColor
 		BlockLine.BackgroundTransparency = 0.500
 		BlockLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		BlockLine.BorderSizePixel = 0
@@ -3935,7 +3948,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockLine.ZIndex = Zindex + 2
 		BlockLine.Visible = EnabledLine or false;
 
-		table.insert(ProxySex.Elements.LineColor,{
+		table.insert(ProxyHub.Elements.LineColor,{
 			Element = BlockLine,
 			Property = "BackgroundColor3"
 		});
@@ -3943,7 +3956,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		SliderBar.Name = "SliderBar"
 		SliderBar.Parent = Slider
 		SliderBar.AnchorPoint = Vector2.new(0.5, 1)
-		SliderBar.BackgroundColor3 = ProxySex.Colors.DropColor
+		SliderBar.BackgroundColor3 = ProxyHub.Colors.DropColor
 		SliderBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		SliderBar.BorderSizePixel = 0
 		SliderBar.ClipsDescendants = true
@@ -3951,15 +3964,15 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		SliderBar.Size = UDim2.new(1, -25, 0, 10)
 		SliderBar.ZIndex = Zindex + 3
 
-		table.insert(ProxySex.Elements.DropColor , {
+		table.insert(ProxyHub.Elements.DropColor , {
 			Element = SliderBar,
 			Property = "BackgroundColor3"
 		})
 
-		UIStroke.Color = ProxySex.Colors.StrokeColor
+		UIStroke.Color = ProxyHub.Colors.StrokeColor
 		UIStroke.Parent = SliderBar
 
-		table.insert(ProxySex.Elements.StrokeColor,{
+		table.insert(ProxyHub.Elements.StrokeColor,{
 			Element = UIStroke,
 			Property = "Color"
 		});
@@ -3970,14 +3983,14 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		SliderInput.Name = "SliderInput"
 		SliderInput.Parent = SliderBar
 		SliderInput.AnchorPoint = Vector2.new(0, 0.5)
-		SliderInput.BackgroundColor3 = ProxySex.Colors.Highlight
+		SliderInput.BackgroundColor3 = ProxyHub.Colors.Highlight
 		SliderInput.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		SliderInput.BorderSizePixel = 0
 		SliderInput.Position = UDim2.new(0, 0, 0.5, 0)
 		SliderInput.Size = UDim2.new((Config.Default - Config.Min) / (Config.Max - Config.Min), 0, 1, 0)
 		SliderInput.ZIndex = Zindex + 4
 
-		table.insert(ProxySex.Elements.Highlight,{
+		table.insert(ProxyHub.Elements.Highlight,{
 			Element = SliderInput,
 			Property = "BackgroundColor3"
 		});
@@ -3987,7 +4000,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 
 		Frame.Parent = SliderInput
 		Frame.AnchorPoint = Vector2.new(1, 0.5)
-		Frame.BackgroundColor3 = ProxySex.Colors.SwitchColor
+		Frame.BackgroundColor3 = ProxyHub.Colors.SwitchColor
 		Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Frame.BorderSizePixel = 0
 		Frame.Position = UDim2.new(1, 5, 0.5, 0)
@@ -3996,7 +4009,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		Frame.SizeConstraint = Enum.SizeConstraint.RelativeYY
 		Frame.ZIndex = Zindex + 6
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = Frame,
 			Property = 'BackgroundColor3'
 		});
@@ -4017,25 +4030,25 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		ValueText.ZIndex = Zindex + 4
 		ValueText.Font = Enum.Font.GothamMedium
 		ValueText.Text = tostring(Config.Default)..tostring(Config.Type)
-		ValueText.TextColor3 = ProxySex.Colors.SwitchColor
+		ValueText.TextColor3 = ProxyHub.Colors.SwitchColor
 		ValueText.TextSize = 12.000
 		ValueText.TextTransparency = 0.750
 		ValueText.TextXAlignment = Enum.TextXAlignment.Right
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = ValueText,
 			Property = 'TextColor3'
 		});
 
-		ProxySex:_Hover(SliderBar,function()
+		ProxyHub:_Hover(SliderBar,function()
 			if Signal:GetValue() then
-				ProxySex:_Animation(ValueText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(ValueText,TweenInfo.new(0.2),{
 					TextTransparency = 0.2
 				})
 			end;
 		end,function()
 			if Signal:GetValue() then
-				ProxySex:_Animation(ValueText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(ValueText,TweenInfo.new(0.2),{
 					TextTransparency = 0.750
 				})
 			end;
@@ -4048,7 +4061,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 
 			local Main = ((Config.Max - Config.Min) * SizeScale) + Config.Min;
 
-			local Value = ProxySex:_Rounding(Main,Config.Round);
+			local Value = ProxyHub:_Rounding(Main,Config.Round);
 
 			local PositionX = UDim2.fromScale(SizeScale, 1);
 
@@ -4076,7 +4089,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 			SliderBar.InputEnded:Connect(function(Input)
 				if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 					if UserInputService.TouchEnabled then
-						if not ProxySex:_IsMouseOverFrame(SliderBar) then
+						if not ProxyHub:_IsMouseOverFrame(SliderBar) then
 							IsHold = false
 						end;
 					else
@@ -4089,7 +4102,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 				if IsHold then
 					if (Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch)  then
 						if UserInputService.TouchEnabled then
-							if not ProxySex:_IsMouseOverFrame(SliderBar) then
+							if not ProxyHub:_IsMouseOverFrame(SliderBar) then
 								IsHold = false
 							else
 								Update(Input)
@@ -4111,7 +4124,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 
 			ValueText.Text = tostring(Config.Default)..tostring(Config.Type)
 
-			ProxySex:_Animation(SliderInput, TweenInfo.new(0.35),{
+			ProxyHub:_Animation(SliderInput, TweenInfo.new(0.35),{
 				Size = UDim2.new((Config.Default - Config.Min) / (Config.Max - Config.Min), 0, 1, 0)
 			});
 
@@ -4120,67 +4133,67 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 
 		Args.Signal = Signal:Connect(function(bool)
 			if bool then
-				ProxySex:_Animation(SliderInput, TweenInfo.new(0.35),{
+				ProxyHub:_Animation(SliderInput, TweenInfo.new(0.35),{
 					Size = UDim2.new((Config.Default - Config.Min) / (Config.Max - Config.Min), 0, 1, 0)
 				});
 
-				ProxySex:_Animation(ValueText,Tween,{
+				ProxyHub:_Animation(ValueText,Tween,{
 					TextTransparency = 0.750
 				})
 
-				ProxySex:_Animation(Frame,Tween,{
+				ProxyHub:_Animation(Frame,Tween,{
 					BackgroundTransparency = 0
 				})
 
-				ProxySex:_Animation(SliderInput,Tween,{
+				ProxyHub:_Animation(SliderInput,Tween,{
 					BackgroundTransparency = 0
 				})
 
-				ProxySex:_Animation(UIStroke,Tween,{
+				ProxyHub:_Animation(UIStroke,Tween,{
 					Transparency = 0
 				})
 
-				ProxySex:_Animation(SliderBar,Tween,{
+				ProxyHub:_Animation(SliderBar,Tween,{
 					BackgroundTransparency = 0
 				})
 
-				ProxySex:_Animation(BlockLine,Tween,{
+				ProxyHub:_Animation(BlockLine,Tween,{
 					BackgroundTransparency = 0.5
 				})
 
-				ProxySex:_Animation(BlockText,Tween,{
+				ProxyHub:_Animation(BlockText,Tween,{
 					TextTransparency = 0.1
 				})
 			else
-				ProxySex:_Animation(SliderInput, TweenInfo.new(0.35),{
+				ProxyHub:_Animation(SliderInput, TweenInfo.new(0.35),{
 					Size = UDim2.new(0, 0, 1, 0)
 				});
 
-				ProxySex:_Animation(ValueText,Tween,{
+				ProxyHub:_Animation(ValueText,Tween,{
 					TextTransparency = 1
 				})
 
-				ProxySex:_Animation(Frame,Tween,{
+				ProxyHub:_Animation(Frame,Tween,{
 					BackgroundTransparency = 1
 				})
 
-				ProxySex:_Animation(SliderInput,Tween,{
+				ProxyHub:_Animation(SliderInput,Tween,{
 					BackgroundTransparency = 1
 				})
 
-				ProxySex:_Animation(UIStroke,Tween,{
+				ProxyHub:_Animation(UIStroke,Tween,{
 					Transparency = 1
 				})
 
-				ProxySex:_Animation(SliderBar,Tween,{
+				ProxyHub:_Animation(SliderBar,Tween,{
 					BackgroundTransparency = 1
 				})
 
-				ProxySex:_Animation(BlockLine,Tween,{
+				ProxyHub:_Animation(BlockLine,Tween,{
 					BackgroundTransparency = 1
 				})
 
-				ProxySex:_Animation(BlockText,Tween,{
+				ProxyHub:_Animation(BlockText,Tween,{
 					TextTransparency = 1
 				})
 			end;
@@ -4191,14 +4204,14 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		end;
 
 		if Config.Flag then
-			ProxySex.Flags[Config.Flag] = Args;
+			ProxyHub.Flags[Config.Flag] = Args;
 		end;
 
 		return Args;
 	end;
 
 	function Args:AddParagraph(Config: Paragraph) -- request by Neptune
-		Config = ProxySex.__CONFIG(Config, {
+		Config = ProxyHub.__CONFIG(Config, {
 			Title = "Paragraph",
 			Content = ""
 		});
@@ -4208,8 +4221,8 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		local BlockLine = Instance.new("Frame")
 		local DescriptionText = Instance.new("TextLabel")
 
-		if ProxySex:_IsMobile() then
-			ProxySex:_AddDragBlacklist(Paragraph);
+		if ProxyHub:_IsMobile() then
+			ProxyHub:_AddDragBlacklist(Paragraph);
 		end;
 
 		Paragraph.Name = "Paragraph"
@@ -4232,13 +4245,13 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockText.ZIndex = Zindex + 3
 		BlockText.Font = Enum.Font.GothamMedium
 		BlockText.Text = Config.Title
-		BlockText.TextColor3 = ProxySex.Colors.SwitchColor
+		BlockText.TextColor3 = ProxyHub.Colors.SwitchColor
 		BlockText.TextSize = 14.000
 		BlockText.TextTransparency = 0.300
 		BlockText.TextXAlignment = Enum.TextXAlignment.Left
 		BlockText.RichText = true
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = BlockText,
 			Property = 'TextColor3'
 		});
@@ -4246,7 +4259,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockLine.Name = "BlockLine"
 		BlockLine.Parent = Paragraph
 		BlockLine.AnchorPoint = Vector2.new(0.5, 1)
-		BlockLine.BackgroundColor3 = ProxySex.Colors.LineColor
+		BlockLine.BackgroundColor3 = ProxyHub.Colors.LineColor
 		BlockLine.BackgroundTransparency = 0.500
 		BlockLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		BlockLine.BorderSizePixel = 0
@@ -4254,7 +4267,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockLine.Size = UDim2.new(1, -26, 0, 1)
 		BlockLine.ZIndex = Zindex + 4
 
-		table.insert(ProxySex.Elements.LineColor,{
+		table.insert(ProxyHub.Elements.LineColor,{
 			Element = BlockLine,
 			Property = "BackgroundColor3"
 		});
@@ -4270,13 +4283,13 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		DescriptionText.ZIndex = Zindex + 5
 		DescriptionText.Font = Enum.Font.GothamMedium
 		DescriptionText.Text = Config.Content
-		DescriptionText.TextColor3 = ProxySex.Colors.SwitchColor
+		DescriptionText.TextColor3 = ProxyHub.Colors.SwitchColor
 		DescriptionText.TextSize = 13.000
 		DescriptionText.TextTransparency = 0.500
 		DescriptionText.TextXAlignment = Enum.TextXAlignment.Left
 		DescriptionText.TextYAlignment = Enum.TextYAlignment.Top
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = DescriptionText,
 			Property = 'TextColor3'
 		});
@@ -4288,14 +4301,14 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 			if not DescriptionText.Text:byte() then
 				local TitleScale = TextService:GetTextSize(BlockText.Text,BlockText.TextSize,BlockText.Font,Vector2.new(math.huge,math.huge));
 
-				ProxySex:_Animation(Paragraph,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(Paragraph,TweenInfo.new(0.15),{
 					Size = UDim2.new(1, -1, 0, TitleScale.Y + Base)
 				});
 			else
 				local TitleScale = TextService:GetTextSize(BlockText.Text,BlockText.TextSize,BlockText.Font,Vector2.new(math.huge,math.huge));
 				local ContentScale = TextService:GetTextSize(DescriptionText.Text,DescriptionText.TextSize,DescriptionText.Font,Vector2.new(math.huge,math.huge));
 
-				ProxySex:_Animation(Paragraph,TweenInfo.new(0.15),{
+				ProxyHub:_Animation(Paragraph,TweenInfo.new(0.15),{
 					Size = UDim2.new(1, -1, 0, (TitleScale.Y + ContentScale.Y) + Base)
 				});
 			end;
@@ -4317,27 +4330,27 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 
 		Args.Signal = Signal:Connect(function(bool)
 			if bool then
-				ProxySex:_Animation(BlockText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(BlockText,TweenInfo.new(0.2),{
 					TextTransparency = 0.300
 				});
 
-				ProxySex:_Animation(DescriptionText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(DescriptionText,TweenInfo.new(0.2),{
 					TextTransparency = 0.500
 				});
 
-				ProxySex:_Animation(BlockLine,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(BlockLine,TweenInfo.new(0.2),{
 					BackgroundTransparency = 0.500
 				});
 			else
-				ProxySex:_Animation(BlockText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(BlockText,TweenInfo.new(0.2),{
 					TextTransparency = 1
 				});
 
-				ProxySex:_Animation(DescriptionText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(DescriptionText,TweenInfo.new(0.2),{
 					TextTransparency = 1
 				});
 
-				ProxySex:_Animation(BlockLine,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(BlockLine,TweenInfo.new(0.2),{
 					BackgroundTransparency = 1
 				});
 			end;
@@ -4347,7 +4360,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 	end;
 
 	function Args:AddTextBox(Config: TextBoxConfig)
-		Config = ProxySex.__CONFIG(Config , {
+		Config = ProxyHub.__CONFIG(Config , {
 			Name = "TextBox",
 			Default = "",
 			Placeholder = "Placeholder",
@@ -4363,8 +4376,8 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		local TextBox_2 = Instance.new("TextBox")
 		local BlockLine = Instance.new("Frame")
 
-		if ProxySex:_IsMobile() then
-			ProxySex:_AddDragBlacklist(TextBox);
+		if ProxyHub:_IsMobile() then
+			ProxyHub:_AddDragBlacklist(TextBox);
 		end;
 
 		TextBox.Name = "TextBox"
@@ -4386,12 +4399,12 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockText.ZIndex = Zindex + 2
 		BlockText.Font = Enum.Font.GothamMedium
 		BlockText.Text = Config.Name
-		BlockText.TextColor3 = ProxySex.Colors.SwitchColor
+		BlockText.TextColor3 = ProxyHub.Colors.SwitchColor
 		BlockText.TextSize = 14.000
 		BlockText.TextTransparency = 0.300
 		BlockText.TextXAlignment = Enum.TextXAlignment.Left
 
-		table.insert(ProxySex.Elements.SwitchColor,{
+		table.insert(ProxyHub.Elements.SwitchColor,{
 			Element = BlockText,
 			Property = "TextColor3"
 		})
@@ -4399,22 +4412,22 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		LinkValues.Name = "LinkValues"
 		LinkValues.Parent = TextBox
 		LinkValues.AnchorPoint = Vector2.new(1, 0.540000021)
-		LinkValues.BackgroundColor3 = ProxySex.Colors.DropColor
+		LinkValues.BackgroundColor3 = ProxyHub.Colors.DropColor
 		LinkValues.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		LinkValues.BorderSizePixel = 0
 		LinkValues.Position = UDim2.new(1, -12, 0.5, 0)
 		LinkValues.Size = UDim2.new(0, 95, 0, 16)
 		LinkValues.ZIndex = Zindex + 3
 
-		table.insert(ProxySex.Elements.DropColor,{
+		table.insert(ProxyHub.Elements.DropColor,{
 			Element = LinkValues,
 			Property = "BackgroundColor3"
 		})
 
-		UIStroke.Color = ProxySex.Colors.StrokeColor
+		UIStroke.Color = ProxyHub.Colors.StrokeColor
 		UIStroke.Parent = LinkValues
 
-		table.insert(ProxySex.Elements.StrokeColor,{
+		table.insert(ProxyHub.Elements.StrokeColor,{
 			Element = UIStroke,
 			Property = "Color"
 		})
@@ -4436,10 +4449,10 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		TextBox_2.Font = Enum.Font.GothamMedium
 		TextBox_2.PlaceholderText = Config.Placeholder
 		TextBox_2.Text = Config.Default
-		TextBox_2.TextColor3 = ProxySex.Colors.SwitchColor
+		TextBox_2.TextColor3 = ProxyHub.Colors.SwitchColor
 		TextBox_2.TextSize = 11.000
 
-		table.insert(ProxySex.Elements.SwitchColor,{
+		table.insert(ProxyHub.Elements.SwitchColor,{
 			Element = TextBox_2,
 			Property = "TextColor3"
 		})
@@ -4447,7 +4460,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockLine.Name = "BlockLine"
 		BlockLine.Parent = TextBox
 		BlockLine.AnchorPoint = Vector2.new(0.5, 1)
-		BlockLine.BackgroundColor3 = ProxySex.Colors.LineColor
+		BlockLine.BackgroundColor3 = ProxyHub.Colors.LineColor
 		BlockLine.BackgroundTransparency = 0.500
 		BlockLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		BlockLine.BorderSizePixel = 0
@@ -4455,7 +4468,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockLine.Size = UDim2.new(1, -26, 0, 1)
 		BlockLine.ZIndex = Zindex + 3;
 
-		table.insert(ProxySex.Elements.LineColor,{
+		table.insert(ProxyHub.Elements.LineColor,{
 			Element = BlockLine,
 			Property = "BackgroundColor3"
 		})
@@ -4466,7 +4479,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 
 			local MainScale = ((scale.X > Base.X) and scale.X) or Base.X;
 
-			ProxySex:_Animation(LinkValues,TweenInfo.new(0.25),{
+			ProxyHub:_Animation(LinkValues,TweenInfo.new(0.25),{
 				Size = UDim2.fromOffset(math.clamp(MainScale + 7 , Base.X , TextBox.AbsoluteSize.X / 2) , 16)
 			})
 		end;
@@ -4524,36 +4537,36 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 
 		Args.Signal = Signal:Connect(function(bool)
 			if bool then
-				ProxySex:_Animation(BlockText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(BlockText,TweenInfo.new(0.2),{
 					TextTransparency = 0.3
 				});
 
-				ProxySex:_Animation(BlockLine,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(BlockLine,TweenInfo.new(0.2),{
 					BackgroundTransparency = 0.5
 				});
 
-				ProxySex:_Animation(UIStroke,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(UIStroke,TweenInfo.new(0.2),{
 					Transparency = 0
 				});
 
-				ProxySex:_Animation(LinkValues,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(LinkValues,TweenInfo.new(0.2),{
 					BackgroundTransparency = 0
 				});
 
 			else
-				ProxySex:_Animation(BlockText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(BlockText,TweenInfo.new(0.2),{
 					TextTransparency = 1
 				});
 
-				ProxySex:_Animation(BlockLine,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(BlockLine,TweenInfo.new(0.2),{
 					BackgroundTransparency = 1
 				});
 
-				ProxySex:_Animation(UIStroke,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(UIStroke,TweenInfo.new(0.2),{
 					Transparency = 1
 				});
 
-				ProxySex:_Animation(LinkValues,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(LinkValues,TweenInfo.new(0.2),{
 					BackgroundTransparency = 1
 				});
 
@@ -4565,14 +4578,14 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		end;
 
 		if Config.Flag then
-			ProxySex.Flags[Config.Flag] = Args;
+			ProxyHub.Flags[Config.Flag] = Args;
 		end;
 
 		return Args;
 	end;
 
 	function Args:AddDropdown(Config : Dropdown)
-		Config = ProxySex.__CONFIG(Config,{
+		Config = ProxyHub.__CONFIG(Config,{
 			Name = "Dropdown",
 			Default = nil,
 			Values = {"Item 1","Item 2","Item 3"},
@@ -4641,7 +4654,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockText.ZIndex = Zindex + 3
 		BlockText.Font = Enum.Font.GothamMedium
 		BlockText.Text = Config.Name
-		BlockText.TextColor3 = ProxySex.Colors.SwitchColor
+		BlockText.TextColor3 = ProxyHub.Colors.SwitchColor
 		BlockText.TextSize = 14.000
 		BlockText.TextTransparency = 0.100
 		BlockText.TextXAlignment = Enum.TextXAlignment.Left
@@ -4650,7 +4663,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 			Dropdown.Size = UDim2.new(1, -1, 0, 25)
 		end;
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = BlockText,
 			Property = 'TextColor3'
 		});
@@ -4658,7 +4671,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockLine.Name = "BlockLine"
 		BlockLine.Parent = Dropdown
 		BlockLine.AnchorPoint = Vector2.new(0.5, 1)
-		BlockLine.BackgroundColor3 = ProxySex.Colors.LineColor
+		BlockLine.BackgroundColor3 = ProxyHub.Colors.LineColor
 		BlockLine.BackgroundTransparency = 0.500
 		BlockLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		BlockLine.BorderSizePixel = 0
@@ -4666,7 +4679,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		BlockLine.Size = UDim2.new(1, -26, 0, 1)
 		BlockLine.ZIndex = Zindex + 3
 
-		table.insert(ProxySex.Elements.LineColor,{
+		table.insert(ProxyHub.Elements.LineColor,{
 			Element = BlockLine,
 			Property = "BackgroundColor3"
 		});
@@ -4691,7 +4704,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		ValueItems.Name = "ValueItems"
 		ValueItems.Parent = Dropdown
 		ValueItems.AnchorPoint = Vector2.new(0.5, 1)
-		ValueItems.BackgroundColor3 = ProxySex.Colors.DropColor
+		ValueItems.BackgroundColor3 = ProxyHub.Colors.DropColor
 		ValueItems.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		ValueItems.BorderSizePixel = 0
 		ValueItems.ClipsDescendants = true
@@ -4699,15 +4712,15 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		ValueItems.Size = UDim2.new(1, -25, 0, 18)
 		ValueItems.ZIndex = Zindex + 5
 
-		table.insert(ProxySex.Elements.DropColor , {
+		table.insert(ProxyHub.Elements.DropColor , {
 			Element = ValueItems,
 			Property = "BackgroundColor3"
 		})
 
-		UIStroke.Color = ProxySex.Colors.StrokeColor
+		UIStroke.Color = ProxyHub.Colors.StrokeColor
 		UIStroke.Parent = ValueItems
 
-		table.insert(ProxySex.Elements.StrokeColor,{
+		table.insert(ProxyHub.Elements.StrokeColor,{
 			Element = UIStroke,
 			Property = "Color"
 		});
@@ -4726,11 +4739,11 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		ValueText.ZIndex = Zindex + 8
 		ValueText.Font = Enum.Font.Gotham
 		ValueText.Text = DaTabarser(Config.Default)
-		ValueText.TextColor3 = ProxySex.Colors.SwitchColor
+		ValueText.TextColor3 = ProxyHub.Colors.SwitchColor
 		ValueText.TextSize = 11.000
 		ValueText.TextXAlignment = Enum.TextXAlignment.Left
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = ValueText,
 			Property = 'TextColor3'
 		});
@@ -4746,20 +4759,20 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		MainButton.ZIndex = Zindex + 5
 		MainButton.Image = "rbxassetid://10709790948"
 
-		ProxySex:_Hover(ValueItems,function()
-			ProxySex:_Animation(ValueItems,TweenInfo.new(0.3),{
-				BackgroundColor3 = ProxySex.Colors.MouseEnter
+		ProxyHub:_Hover(ValueItems,function()
+			ProxyHub:_Animation(ValueItems,TweenInfo.new(0.3),{
+				BackgroundColor3 = ProxyHub.Colors.MouseEnter
 			});
 		end,function()
-			ProxySex:_Animation(ValueItems,TweenInfo.new(0.3),{
-				BackgroundColor3 = ProxySex.Colors.DropColor
+			ProxyHub:_Animation(ValueItems,TweenInfo.new(0.3),{
+				BackgroundColor3 = ProxyHub.Colors.DropColor
 			});
 		end);
 
 		local repi;
-		local Button = ProxySex:_Input(ValueItems);
+		local Button = ProxyHub:_Input(ValueItems);
 
-		repi = ProxySex:_LoadDropdown(Button,function(value)
+		repi = ProxyHub:_LoadDropdown(Button,function(value)
 			Config.Default = value;
 
 			repi:SetData(Config.Default,Config.Values,Config.Multi,false);
@@ -4772,11 +4785,11 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 
 		repi.EventOut:Connect(function(v)
 			if v then
-				ProxySex:_Animation(MainButton,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(MainButton,TweenInfo.new(0.2),{
 					Rotation = -180
 				})
 			else
-				ProxySex:_Animation(MainButton,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(MainButton,TweenInfo.new(0.2),{
 					Rotation = 0
 				})
 			end;
@@ -4807,59 +4820,59 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 
 		Args.Signal = Signal:Connect(function(bool)
 			if bool then
-				ProxySex:_Animation(BlockText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(BlockText,TweenInfo.new(0.2),{
 					TextTransparency = 0.100
 				});
 
-				ProxySex:_Animation(BlockLine,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(BlockLine,TweenInfo.new(0.2),{
 					BackgroundTransparency = 0.100
 				});
 
-				ProxySex:_Animation(ValueItems,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(ValueItems,TweenInfo.new(0.2),{
 					BackgroundTransparency = 0
 				});
 
-				ProxySex:_Animation(UIStroke,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(UIStroke,TweenInfo.new(0.2),{
 					Transparency = 0
 				});
 
-				ProxySex:_Animation(ValueText,TweenInfo.new(0.32),{
+				ProxyHub:_Animation(ValueText,TweenInfo.new(0.32),{
 					TextTransparency = 0
 				});
 
-				ProxySex:_Animation(MainButton,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(MainButton,TweenInfo.new(0.2),{
 					ImageTransparency = 0
 				});
 			else
-				ProxySex:_Animation(BlockText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(BlockText,TweenInfo.new(0.2),{
 					TextTransparency = 1
 				});
 
-				ProxySex:_Animation(BlockLine,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(BlockLine,TweenInfo.new(0.2),{
 					BackgroundTransparency = 1 
 				});
 
-				ProxySex:_Animation(ValueItems,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(ValueItems,TweenInfo.new(0.2),{
 					BackgroundTransparency = 1
 				});
 
-				ProxySex:_Animation(UIStroke,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(UIStroke,TweenInfo.new(0.2),{
 					Transparency = 1
 				});
 
-				ProxySex:_Animation(ValueText,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(ValueText,TweenInfo.new(0.2),{
 					TextTransparency = 1
 				});
 
-				ProxySex:_Animation(MainButton,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(MainButton,TweenInfo.new(0.2),{
 					ImageTransparency = 1
 				});
 			end;
 		end);
 
-		Args.Link = ProxySex:_LoadOption({
+		Args.Link = ProxyHub:_LoadOption({
 			AddLink = function(self ,Name , Default)
-				return ProxySex:_AddLinkValue(Name , Default , LinkValues , LinkValues , {
+				return ProxyHub:_AddLinkValue(Name , Default , LinkValues , LinkValues , {
 					Tween = TweenInfo.new(0.2)	
 				} , Signal);
 			end,
@@ -4871,7 +4884,7 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 		end;
 
 		if Config.Flag then
-			ProxySex.Flags[Config.Flag] = Args;
+			ProxyHub.Flags[Config.Flag] = Args;
 		end;
 
 		return Args;
@@ -4880,13 +4893,13 @@ function ProxySex:_LoadElement(Parent: Frame , EnabledLine: boolean , Signal)
 	return Args;
 end;
 
-function ProxySex:GetTheme()
-	return ProxySex.Colors;
+function ProxyHub:GetTheme()
+	return ProxyHub.Colors;
 end;
 
-function ProxySex:SetTheme(name)
+function ProxyHub:SetTheme(name)
 	if name == "Dark Green" then
-		ProxySex.Colors = {
+		ProxyHub.Colors = {
 			["BGDBColor"] = Color3.new(0.0429964, 0.110345, 0.0727226),
 			["BlockBackground"] = Color3.new(0.159287, 0.234483, 0.201811),
 			["BlockColor"] = Color3.new(0, 0.137931, 0.0951249),
@@ -4901,7 +4914,7 @@ function ProxySex:SetTheme(name)
 			HighStrokeColor = Color3.new(0, 0.241379, 0.186445),
 		};
 	elseif name == "Default" then
-		ProxySex.Colors = {
+		ProxyHub.Colors = {
 			Highlight = Color3.fromRGB(17, 238, 253),
 			Toggle = Color3.fromRGB(14, 203, 213),
 			Risky = Color3.fromRGB(251, 255, 39),
@@ -4916,7 +4929,7 @@ function ProxySex:SetTheme(name)
 			HighStrokeColor = Color3.fromRGB(55, 56, 63),
 		};
 	elseif name == "Dark Blue" then
-		ProxySex.Colors = {
+		ProxyHub.Colors = {
 			["BGDBColor"] = Color3.new(0.0393817, 0.0754204, 0.165517),
 			["BlockBackground"] = Color3.new(0, 0.0618311, 0.172414),
 			["BlockColor"] = Color3.new(0, 0.0172414, 0.103448),
@@ -4931,7 +4944,7 @@ function ProxySex:SetTheme(name)
 			["Toggle"] = Color3.new(0.054902, 0.463935, 0.835294)
 		}
 	elseif name == "Purple Rose" then
-		ProxySex.Colors = {
+		ProxyHub.Colors = {
 			["BGDBColor"] = Color3.new(0.0459068, 0.030321, 0.117241),
 			["BlockBackground"] = Color3.new(0.156272, 0.119596, 0.324138),
 			["BlockColor"] = Color3.new(0.0948428, 0.0576457, 0.165517),
@@ -4946,7 +4959,7 @@ function ProxySex:SetTheme(name)
 			["Toggle"] = Color3.new(0.835294, 0.054902, 0.248654)
 		}
 	elseif name == "Skeet" then		
-		ProxySex.Colors = {
+		ProxyHub.Colors = {
 			["BGDBColor"] = Color3.new(0.114578, 0.125191, 0.151724),
 			["BlockBackground"] = Color3.new(0.128181, 0.131124, 0.151724),
 			["BlockColor"] = Color3.new(0.0732699, 0.0760008, 0.0896552),
@@ -4962,116 +4975,116 @@ function ProxySex:SetTheme(name)
 		}
 	end;
 
-	ProxySex:RefreshCurrentColor()
+	ProxyHub:RefreshCurrentColor()
 end;
 
-function ProxySex:RefreshCurrentColor()
-	for i,v in next , ProxySex.Elements.Highlight do
+function ProxyHub:RefreshCurrentColor()
+	for i,v in next , ProxyHub.Elements.Highlight do
 		if v.Element and v.Property then
-			v.Element[v.Property] = ProxySex.Colors.Highlight;
+			v.Element[v.Property] = ProxyHub.Colors.Highlight;
 		end;
 	end;
 
-	for i,v in next , ProxySex.Elements do
+	for i,v in next , ProxyHub.Elements do
 		if v.Element and v.Property and v.Element:GetAttribute('Enabled') then
-			v.Element[v.Property] = ProxySex.Colors.Highlight;
+			v.Element[v.Property] = ProxyHub.Colors.Highlight;
 		end;
 	end;
 
-	for i,v in next , ProxySex.Elements.Risky do
+	for i,v in next , ProxyHub.Elements.Risky do
 		if v.Element and v.Property then
-			v.Element[v.Property] = ProxySex.Colors.Risky;
+			v.Element[v.Property] = ProxyHub.Colors.Risky;
 		end;
 	end;
 
-	for i,v in next , ProxySex.Elements.BlockColor do
+	for i,v in next , ProxyHub.Elements.BlockColor do
 		if v.Element and v.Property then
-			v.Element[v.Property] = ProxySex.Colors.BlockColor;
+			v.Element[v.Property] = ProxyHub.Colors.BlockColor;
 		end;
 	end;
 
-	for i,v in next , ProxySex.Elements.BGDBColor do
+	for i,v in next , ProxyHub.Elements.BGDBColor do
 		if v.Element and v.Property then
-			v.Element[v.Property] = ProxySex.Colors.BGDBColor;
+			v.Element[v.Property] = ProxyHub.Colors.BGDBColor;
 		end;
 	end;
 
-	for i,v in next , ProxySex.Elements.StrokeColor do
+	for i,v in next , ProxyHub.Elements.StrokeColor do
 		if v.Element and v.Property then
-			v.Element[v.Property] = ProxySex.Colors.StrokeColor;
+			v.Element[v.Property] = ProxyHub.Colors.StrokeColor;
 		end;
 	end;
 
-	for i,v in next , ProxySex.Elements.SwitchColor do
-		if v.Element and v.Property and v.Element[v.Property] ~= ProxySex.Colors.MouseEnter then
-			v.Element[v.Property] = ProxySex.Colors.SwitchColor;
+	for i,v in next , ProxyHub.Elements.SwitchColor do
+		if v.Element and v.Property and v.Element[v.Property] ~= ProxyHub.Colors.MouseEnter then
+			v.Element[v.Property] = ProxyHub.Colors.SwitchColor;
 		end;
 	end;
 
-	for i,v in next , ProxySex.Elements.BlockBackground do
+	for i,v in next , ProxyHub.Elements.BlockBackground do
 		if v.Element and v.Property and v.Element[v.Property] then
-			v.Element[v.Property] = ProxySex.Colors.BlockBackground;
+			v.Element[v.Property] = ProxyHub.Colors.BlockBackground;
 		end;
 	end;
 
-	for i,v in next , ProxySex.Elements.DropColor do
+	for i,v in next , ProxyHub.Elements.DropColor do
 		if v.Element and v.Property then
-			v.Element[v.Property] = ProxySex.Colors.DropColor;
+			v.Element[v.Property] = ProxyHub.Colors.DropColor;
 		end;
 	end;
 
-	for i,v in next , ProxySex.Elements.LineColor do
+	for i,v in next , ProxyHub.Elements.LineColor do
 		if v.Element and v.Property then
-			v.Element[v.Property] = ProxySex.Colors.LineColor;
+			v.Element[v.Property] = ProxyHub.Colors.LineColor;
 		end;
 	end;
 
-	for i,v in next , ProxySex.Elements.HighStrokeColor do
+	for i,v in next , ProxyHub.Elements.HighStrokeColor do
 		if v.Element and v.Property then
-			v.Element[v.Property] = ProxySex.Colors.HighStrokeColor;
+			v.Element[v.Property] = ProxyHub.Colors.HighStrokeColor;
 		end;
 	end;
 end;
 
-function ProxySex:ChangeHighlightColor(NewColor: Color3)
+function ProxyHub:ChangeHighlightColor(NewColor: Color3)
 	local H,S,V = NewColor:ToHSV();
 
-	ProxySex.Colors.Highlight = NewColor;
-	ProxySex.Colors.Toggle = Color3.fromHSV(H,S,V - 0.2);
+	ProxyHub.Colors.Highlight = NewColor;
+	ProxyHub.Colors.Toggle = Color3.fromHSV(H,S,V - 0.2);
 
-	for i,v in next , ProxySex.Elements.Highlight do
+	for i,v in next , ProxyHub.Elements.Highlight do
 		if v.Element and v.Property then
 			v.Element[v.Property] = NewColor;
 		end;
 	end;
 
-	for i,v in next , ProxySex.Elements do
+	for i,v in next , ProxyHub.Elements do
 		if v.Element and v.Property and v.Element:GetAttribute('Enabled') then
 			v.Element[v.Property] = NewColor;
 		end;
 	end;
 end;
 
-function ProxySex.new(Config : Window)
+function ProxyHub.new(Config : Window)
 
 	if not Config.Scale then
-		if ProxySex:_IsMobile() then
-			Config.Scale = ProxySex.Scale.Mobile;
+		if ProxyHub:_IsMobile() then
+			Config.Scale = ProxyHub.Scale.Mobile;
 		else
-			Config.Scale = ProxySex.Scale.Window;
+			Config.Scale = ProxyHub.Scale.Window;
 		end;
 	end;
 
-	Config = ProxySex.__CONFIG(Config , {
-		Name = "ProxySex",
+	Config = ProxyHub.__CONFIG(Config , {
+		Name = "ProxyHub",
 		Keybind = "Insert",
-		Logo = ProxySex.Logo;
-		Scale = ProxySex.Scale.Window,
+		Logo = ProxyHub.Logo;
+		Scale = ProxyHub.Scale.Window,
 		TextSize = 15
 	});
 
-	local TabHover = ProxySex.__SIGNAL(false);
-	local WindowOpen = ProxySex.__SIGNAL(true);
+	local TabHover = ProxyHub.__SIGNAL(false);
+	local WindowOpen = ProxyHub.__SIGNAL(true);
 	local WindowArgs = {
 		SelectedTab = nil,
 		Tabs = {},
@@ -5084,17 +5097,17 @@ function ProxySex.new(Config : Window)
 
 	WindowArgs.Username = LocalPlayer.Name;
 
-	if ProxySex:_IsMobile() then
+	if ProxyHub:_IsMobile() then
 		WindowArgs.AlwayShowTab = true;
 	end;
 
-	local ProxySex = Instance.new("ScreenGui")
+	local ProxyHub = Instance.new("ScreenGui")
 	local MainFrame = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
 	local TabFrame = Instance.new("Frame")
 	local UICorner_2 = Instance.new("UICorner")
 	local LineFrame1 = Instance.new("Frame")
-	local ProxySex = Instance.new("ImageLabel")
+	local CompLogo = Instance.new("ImageLabel")
 	local WindowLabel = Instance.new("TextLabel")
 	local TabButtons = Instance.new("Frame")
 	local SelectionFrame = Instance.new("Frame")
@@ -5112,34 +5125,29 @@ function ProxySex.new(Config : Window)
 		TabButtonScrollingFrame.CanvasSize = UDim2.fromOffset(0,UIListLayout.AbsoluteContentSize.Y)
 	end);
 
-ProxySex._RandomString = function()
-    return tostring(math.random(100000, 999999)) .. tostring(math.random(100000, 999999))
-end
+	ProxyHub.Name = "u?name=ProxyHub_"..ProxyHub:_RandomString();
+	ProxyHub.Parent = CoreGui;
+	ProxyHub.ResetOnSpawn = false
+	ProxyHub.IgnoreGuiInset = true;
+	ProxyHub.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "u?name=ProxySex_"..ProxySex._RandomString()  -- Use . instead of :
-ScreenGui.Parent = CoreGui;
-ScreenGui.ResetOnSpawn = false
-ScreenGui.IgnoreGuiInset = true;
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
+	table.insert(ProxyHub.Windows , ProxyHub);
 
-table.insert(ProxySex.Windows , ScreenGui);
+	MainFrame.Active = true;
+	MainFrame.Name = "MainFrame"
+	MainFrame.Parent = ProxyHub
+	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+	MainFrame.BackgroundColor3 = ProxyHub.Colors.BGDBColor
 
-MainFrame.Active = true;
-MainFrame.Name = "MainFrame"
-MainFrame.Parent = ScreenGui
-MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-MainFrame.BackgroundColor3 = ProxySex.Colors.BGDBColor
-
-table.insert(ProxySex.Elements.BGDBColor,{
-	Element = MainFrame,
-	Property = 'BackgroundColor3'
-});
+	table.insert(ProxyHub.Elements.BGDBColor,{
+		Element = MainFrame,
+		Property = 'BackgroundColor3'
+	});
 
 	MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	MainFrame.BorderSizePixel = 0
 	MainFrame.Position = UDim2.fromScale(0.5,0.5);
-	MainFrame.Size = ProxySex.Scale.Window
+	MainFrame.Size = ProxyHub.Scale.Window
 	MainFrame.ZIndex = 4
 
 	MainFrame:GetPropertyChangedSignal('BackgroundTransparency'):Connect(function()
@@ -5150,7 +5158,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		end;
 	end)
 
-	ProxySex:_Animation(MainFrame,TweenInfo.new(1,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{
+	ProxyHub:_Animation(MainFrame,TweenInfo.new(1,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{
 		Size = Config.Scale
 	});
 
@@ -5162,9 +5170,9 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	TabFrame.Name = "TabFrame"
 	TabFrame.Parent = MainFrame
 	TabFrame.AnchorPoint = Vector2.new(1, 0)
-	TabFrame.BackgroundColor3 = ProxySex.Colors.BGDBColor
+	TabFrame.BackgroundColor3 = ProxyHub.Colors.BGDBColor
 
-	table.insert(ProxySex.Elements.BGDBColor,{
+	table.insert(ProxyHub.Elements.BGDBColor,{
 		Element = TabFrame,
 		Property = 'BackgroundColor3'
 	});
@@ -5181,9 +5189,9 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	LineFrame1.Name = "LineFrame1"
 	LineFrame1.Parent = TabFrame
 	LineFrame1.AnchorPoint = Vector2.new(1, 0)
-	LineFrame1.BackgroundColor3 = ProxySex.Colors.BGDBColor
+	LineFrame1.BackgroundColor3 = ProxyHub.Colors.BGDBColor
 
-	table.insert(ProxySex.Elements.BGDBColor,{
+	table.insert(ProxyHub.Elements.BGDBColor,{
 		Element = LineFrame1,
 		Property = 'BackgroundColor3'
 	});
@@ -5193,14 +5201,14 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	LineFrame1.Position = UDim2.new(1, -5, 0, 0)
 	LineFrame1.Size = UDim2.new(0, 20, 1, 0)
 
-	ProxySex.Name = "ProxySex"
-	ProxySex.Parent = TabFrame
-	ProxySex.BackgroundTransparency = 1.000
-	ProxySex.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	ProxySex.BorderSizePixel = 0
-	ProxySex.Position = UDim2.new(0, 9, 0, 7)
-	ProxySex.Size = UDim2.new(0, 45, 0, 45)
-	ProxySex.Image = Config.Logo
+	CompLogo.Name = "CompLogo"
+	CompLogo.Parent = TabFrame
+	CompLogo.BackgroundTransparency = 1.000
+	CompLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	CompLogo.BorderSizePixel = 0
+	CompLogo.Position = UDim2.new(0, 9, 0, 7)
+	CompLogo.Size = UDim2.new(0, 45, 0, 45)
+	CompLogo.Image = Config.Logo
 
 	WindowLabel.Name = "WindowLabel"
 	WindowLabel.Parent = TabFrame
@@ -5211,11 +5219,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	WindowLabel.Size = UDim2.new(0, 200, 0, 25)
 	WindowLabel.Font = Enum.Font.GothamBold
 	WindowLabel.Text = Config.Name
-	WindowLabel.TextColor3 = ProxySex.Colors.SwitchColor
+	WindowLabel.TextColor3 = ProxyHub.Colors.SwitchColor
 	WindowLabel.TextSize = Config.TextSize
 	WindowLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-	table.insert(ProxySex.Elements.SwitchColor , {
+	table.insert(ProxyHub.Elements.SwitchColor , {
 		Element = WindowLabel,
 		Property = 'TextColor3'
 	});
@@ -5231,13 +5239,13 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	SelectionFrame.Name = "SelectionFrame"
 	SelectionFrame.Parent = TabButtons
 	SelectionFrame.AnchorPoint = Vector2.new(1, 0)
-	SelectionFrame.BackgroundColor3 = ProxySex.Colors.Highlight
+	SelectionFrame.BackgroundColor3 = ProxyHub.Colors.Highlight
 	SelectionFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	SelectionFrame.BorderSizePixel = 0
 	SelectionFrame.Position = UDim2.new(1, 5, 0, 28)
 	SelectionFrame.Size = UDim2.new(0, 8, 0, 32)
 
-	table.insert(ProxySex.Elements.Highlight,{
+	table.insert(ProxyHub.Elements.Highlight,{
 		Element = SelectionFrame,
 		Property = "BackgroundColor3"
 	});
@@ -5295,11 +5303,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	UserText.ZIndex = 2
 	UserText.Font = Enum.Font.GothamMedium
 	UserText.Text = "Username"
-	UserText.TextColor3 = ProxySex.Colors.SwitchColor
+	UserText.TextColor3 = ProxyHub.Colors.SwitchColor
 	UserText.TextSize = 13.000
 	UserText.TextXAlignment = Enum.TextXAlignment.Left
 
-	table.insert(ProxySex.Elements.SwitchColor , {
+	table.insert(ProxyHub.Elements.SwitchColor , {
 		Element = UserText,
 		Property = 'TextColor3'
 	});
@@ -5314,12 +5322,12 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	ExpireText.ZIndex = 2
 	ExpireText.Font = Enum.Font.GothamMedium
 	ExpireText.Text = "0/0/0"
-	ExpireText.TextColor3 = ProxySex.Colors.SwitchColor
+	ExpireText.TextColor3 = ProxyHub.Colors.SwitchColor
 	ExpireText.TextSize = 13.000
 	ExpireText.TextTransparency = 0.500
 	ExpireText.TextXAlignment = Enum.TextXAlignment.Left
 
-	table.insert(ProxySex.Elements.SwitchColor , {
+	table.insert(ProxyHub.Elements.SwitchColor , {
 		Element = ExpireText,
 		Property = 'TextColor3'
 	});
@@ -5335,8 +5343,8 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	TabMainFrame.Size = UDim2.new(1, 0, 1, 0)
 	TabMainFrame.ZIndex = 5
 
-	if ProxySex:_IsMobile() then
-		ProxySex:_AddDragBlacklist(TabButtons);
+	if ProxyHub:_IsMobile() then
+		ProxyHub:_AddDragBlacklist(TabButtons);
 	end;
 
 	WindowOpen:Connect(function(v)
@@ -5346,85 +5354,85 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		end;
 
 		if v then
-			ProxySex:_Animation(MainFrame,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(MainFrame,TweenInfo.new(0.2),{
 				Size = Config.Scale
 			})
 
-			ProxySex:_Animation(TabButtonScrollingFrame,TweenInfo.new(0.35),{
+			ProxyHub:_Animation(TabButtonScrollingFrame,TweenInfo.new(0.35),{
 				Position = UDim2.new(0.5, 0, 0.5, 0)
 			})
 
-			ProxySex:_Animation(ProxySex,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(CompLogo,TweenInfo.new(0.2),{
 				ImageTransparency = 0
 			})
 
-			ProxySex:_Animation(WindowLabel,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(WindowLabel,TweenInfo.new(0.2),{
 				TextTransparency = 0
 			})
 
-			ProxySex:_Animation(UserProfile,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(UserProfile,TweenInfo.new(0.2),{
 				ImageTransparency = 0
 			})
 
-			ProxySex:_Animation(UserText,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(UserText,TweenInfo.new(0.2),{
 				TextTransparency = 0
 			})
 
-			ProxySex:_Animation(ExpireText,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(ExpireText,TweenInfo.new(0.2),{
 				TextTransparency = 0.5
 			})
 
-			ProxySex:_Animation(MainFrame,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(MainFrame,TweenInfo.new(0.2),{
 				BackgroundTransparency = 0
 			})
 
-			ProxySex:_Animation(LineFrame1,TweenInfo.new(0.3),{
+			ProxyHub:_Animation(LineFrame1,TweenInfo.new(0.3),{
 				BackgroundTransparency = 0,
 				Size = UDim2.new(0, 20, 1, 0)
 			})
 
-			ProxySex:_Animation(TabFrame,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(TabFrame,TweenInfo.new(0.2),{
 				BackgroundTransparency = TabFrameBaseTrans
 			})
 		else
-			ProxySex:_Animation(MainFrame,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(MainFrame,TweenInfo.new(0.2),{
 				Size = UDim2.new(math.max(Config.Scale.X.Scale - 0.05,0) , Config.Scale.X.Offset - 10 , math.max(Config.Scale.Y.Scale - 0.05,0) , Config.Scale.Y.Offset - 10)
 			})
 
-			ProxySex:_Animation(TabButtonScrollingFrame,TweenInfo.new(0.35),{
+			ProxyHub:_Animation(TabButtonScrollingFrame,TweenInfo.new(0.35),{
 				Position = UDim2.new(1.5, 100, 0.5, 0)
 			})
 
-			ProxySex:_Animation(LineFrame1,TweenInfo.new(0.1),{
+			ProxyHub:_Animation(LineFrame1,TweenInfo.new(0.1),{
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, 1, 1, 0)
 			})
 
-			ProxySex:_Animation(ProxySex,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(CompLogo,TweenInfo.new(0.2),{
 				ImageTransparency = 1
 			})
 
-			ProxySex:_Animation(WindowLabel,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(WindowLabel,TweenInfo.new(0.2),{
 				TextTransparency = 1
 			})
 
-			ProxySex:_Animation(UserProfile,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(UserProfile,TweenInfo.new(0.2),{
 				ImageTransparency = 1
 			})
 
-			ProxySex:_Animation(UserText,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(UserText,TweenInfo.new(0.2),{
 				TextTransparency = 1
 			})
 
-			ProxySex:_Animation(ExpireText,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(ExpireText,TweenInfo.new(0.2),{
 				TextTransparency = 1
 			})
 
-			ProxySex:_Animation(MainFrame,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(MainFrame,TweenInfo.new(0.2),{
 				BackgroundTransparency = 1
 			})
 
-			ProxySex:_Animation(TabFrame,TweenInfo.new(0.1),{
+			ProxyHub:_Animation(TabFrame,TweenInfo.new(0.1),{
 				BackgroundTransparency = 1
 			})
 		end;
@@ -5434,40 +5442,40 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		local Style = TweenInfo.new(0.45,Enum.EasingStyle.Quint);
 
 		if value then
-			ProxySex:_Animation(TabFrame , Style , {
+			ProxyHub:_Animation(TabFrame , Style , {
 				Size = UDim2.new(0, 185,1, 0)
 			});
 
-			ProxySex:_Animation(WindowLabel , Style , {
+			ProxyHub:_Animation(WindowLabel , Style , {
 				Position = UDim2.new(0, 60,0, 17),
 				TextTransparency = 0
 			});
 
-			ProxySex:_Animation(UserText , Style , {
+			ProxyHub:_Animation(UserText , Style , {
 				Position = UDim2.new(0, 55,0, 8),
 				TextTransparency = 0.1
 			});
 
-			ProxySex:_Animation(ExpireText , Style , {
+			ProxyHub:_Animation(ExpireText , Style , {
 				Position = UDim2.new(0, 55,0, 25),
 				TextTransparency = 0.5
 			});
 		else
-			ProxySex:_Animation(TabFrame , Style , {
+			ProxyHub:_Animation(TabFrame , Style , {
 				Size = UDim2.new(0, 85,1, 0)
 			});
 
-			ProxySex:_Animation(WindowLabel , Style , {
+			ProxyHub:_Animation(WindowLabel , Style , {
 				Position = UDim2.new(0, 60 + 25,0, 17),
 				TextTransparency = 1
 			});
 
-			ProxySex:_Animation(UserText , Style , {
+			ProxyHub:_Animation(UserText , Style , {
 				Position = UDim2.new(0, 55 + 25,0, 8),
 				TextTransparency = 1
 			});
 
-			ProxySex:_Animation(ExpireText , Style , {
+			ProxyHub:_Animation(ExpireText , Style , {
 				Position = UDim2.new(0, 55 + 25,0, 25),
 				TextTransparency = 1
 			});
@@ -5491,8 +5499,8 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		Category.ClipsDescendants = true
 		Category.Size = UDim2.new(1, -10, 0, 22)
 		
-		if ProxySex:_IsMobile() then
-			ProxySex:_AddDragBlacklist(Category);
+		if ProxyHub:_IsMobile() then
+			ProxyHub:_AddDragBlacklist(Category);
 		end;
 		
 		CategoryText.Name = "CategoryText"
@@ -5504,26 +5512,26 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		CategoryText.Size = UDim2.new(1, 200, 0, 10)
 		CategoryText.Font = Enum.Font.Gotham
 		CategoryText.Text = config.Name
-		CategoryText.TextColor3 = ProxySex.Colors.SwitchColor
+		CategoryText.TextColor3 = ProxyHub.Colors.SwitchColor
 		CategoryText.TextSize = 16.000
 		CategoryText.TextTransparency = 0.500
 		CategoryText.TextXAlignment = Enum.TextXAlignment.Left
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = CategoryText,
 			Property = 'TextColor3'
 		});
 
 		Frame.Parent = Category
 		Frame.AnchorPoint = Vector2.new(0.5, 1)
-		Frame.BackgroundColor3 = ProxySex.Colors.Highlight
+		Frame.BackgroundColor3 = ProxyHub.Colors.Highlight
 		Frame.BackgroundTransparency = 0.750
 		Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Frame.BorderSizePixel = 0
 		Frame.Position = UDim2.new(0.5, 0, 1, 0)
 		Frame.Size = UDim2.new(1, 0, 0, 1)
 
-		table.insert(ProxySex.Elements.Highlight,{
+		table.insert(ProxyHub.Elements.Highlight,{
 			Element = Frame,
 			Property = "BackgroundColor3"
 		});
@@ -5535,19 +5543,19 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 		TabHover:Connect(function(bool)
 			if bool then
-				ProxySex:_Animation(CategoryText,Tween,{
+				ProxyHub:_Animation(CategoryText,Tween,{
 					TextTransparency = 0.500
 				});
 
-				ProxySex:_Animation(Frame,Tween,{
+				ProxyHub:_Animation(Frame,Tween,{
 					BackgroundTransparency = 0.750
 				});
 			else
-				ProxySex:_Animation(CategoryText,Tween,{
+				ProxyHub:_Animation(CategoryText,Tween,{
 					TextTransparency = 1
 				});
 
-				ProxySex:_Animation(Frame,Tween,{
+				ProxyHub:_Animation(Frame,Tween,{
 					BackgroundTransparency = 1
 				});
 			end;
@@ -5555,13 +5563,13 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	end;
 
 	function WindowArgs:DrawContainerTab(TabConfig : ContainerTab)
-		TabConfig = ProxySex.__CONFIG(TabConfig,{
+		TabConfig = ProxyHub.__CONFIG(TabConfig,{
 			Name = "Tab",
 			Icon = "eye",
 		});
 
 		local Tween = TweenInfo.new(0.35,Enum.EasingStyle.Quint);
-		local TabOpenSignal = ProxySex.__SIGNAL(false);
+		local TabOpenSignal = ProxyHub.__SIGNAL(false);
 
 		local TabArgs = {
 			__Current = nil,
@@ -5585,24 +5593,24 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		TabButton.Size = UDim2.new(1, -10, 0, 32)
 		TabButton.ZIndex = 3
 
-		if ProxySex:_IsMobile() then
-			ProxySex:_AddDragBlacklist(TabButton);
+		if ProxyHub:_IsMobile() then
+			ProxyHub:_AddDragBlacklist(TabButton);
 		end;
 
 		Icon.Name = "Icon"
 		Icon.Parent = TabButton
 		Icon.AnchorPoint = Vector2.new(0, 0.5)
-		Icon.BackgroundColor3 = ProxySex.Colors.Highlight
+		Icon.BackgroundColor3 = ProxyHub.Colors.Highlight
 		Icon.BackgroundTransparency = 1.000
 		Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Icon.BorderSizePixel = 0
 		Icon.Position = UDim2.new(0, 15, 0.5, 0)
 		Icon.Size = UDim2.new(0, 22, 0, 22)
 		Icon.ZIndex = 3
-		Icon.Image = ProxySex:_GetIcon(TabConfig.Icon);
-		Icon.ImageColor3 = ProxySex.Colors.Highlight
+		Icon.Image = ProxyHub:_GetIcon(TabConfig.Icon);
+		Icon.ImageColor3 = ProxyHub.Colors.Highlight
 
-		table.insert(ProxySex.Elements.Highlight,{
+		table.insert(ProxyHub.Elements.Highlight,{
 			Element = Icon,
 			Property = "ImageColor3"
 		});
@@ -5618,11 +5626,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		TabNameLabel.ZIndex = 3
 		TabNameLabel.Font = Enum.Font.GothamMedium
 		TabNameLabel.Text = TabConfig.Name;
-		TabNameLabel.TextColor3 = ProxySex.Colors.SwitchColor
+		TabNameLabel.TextColor3 = ProxyHub.Colors.SwitchColor
 		TabNameLabel.TextSize = 15.000
 		TabNameLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = TabNameLabel,
 			Property = 'TextColor3'
 		});
@@ -5696,15 +5704,15 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			if bool then
 				WindowArgs.SelectedTab = TabButton;
 
-				ProxySex:_Animation(Icon,Tween,{
+				ProxyHub:_Animation(Icon,Tween,{
 					ImageTransparency = 0,
 				});
 
-				ProxySex:_Animation(TabNameLabel,Tween,{
+				ProxyHub:_Animation(TabNameLabel,Tween,{
 					TextTransparency = 0
 				});
 
-				ProxySex:_Animation(Highlight,Tween,{
+				ProxyHub:_Animation(Highlight,Tween,{
 					BackgroundTransparency = 0.925
 				});
 
@@ -5714,15 +5722,15 @@ table.insert(ProxySex.Elements.BGDBColor,{
 					end;
 				end;
 			else
-				ProxySex:_Animation(Icon,Tween,{
+				ProxyHub:_Animation(Icon,Tween,{
 					ImageTransparency = 0.5
 				});
 
-				ProxySex:_Animation(TabNameLabel,Tween,{
+				ProxyHub:_Animation(TabNameLabel,Tween,{
 					TextTransparency = 0.5
 				});
 
-				ProxySex:_Animation(Highlight,Tween,{
+				ProxyHub:_Animation(Highlight,Tween,{
 					BackgroundTransparency = 1
 				});
 
@@ -5744,23 +5752,23 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			Remote = TabOpenSignal
 		});
 
-		ProxySex:_Hover(TabButton,function()
+		ProxyHub:_Hover(TabButton,function()
 			if WindowArgs.SelectedTab ~= TabButton then
-				ProxySex:_Animation(Icon,Tween,{
+				ProxyHub:_Animation(Icon,Tween,{
 					ImageTransparency = 0.1
 				});
 
-				ProxySex:_Animation(TabNameLabel,Tween,{
+				ProxyHub:_Animation(TabNameLabel,Tween,{
 					TextTransparency = 0.1
 				});
 			end;
 		end , function()
 			if WindowArgs.SelectedTab ~= TabButton then
-				ProxySex:_Animation(Icon,Tween,{
+				ProxyHub:_Animation(Icon,Tween,{
 					ImageTransparency = 0.5
 				});
 
-				ProxySex:_Animation(TabNameLabel,Tween,{
+				ProxyHub:_Animation(TabNameLabel,Tween,{
 					TextTransparency = 0.5
 				});
 			end;
@@ -5770,55 +5778,55 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 		TabHover:Connect(function(bool)
 			if bool then
-				ProxySex:_Animation(TabButton,Tween,{
+				ProxyHub:_Animation(TabButton,Tween,{
 					Size = UDim2.new(1, -10, 0, 32)
 				});
 
-				ProxySex:_Animation(Icon,Tween,{
+				ProxyHub:_Animation(Icon,Tween,{
 					Position = UDim2.new(0, 15, 0.5, 0),
 					Size = UDim2.new(0, 22, 0, 22),
 				});
 
-				ProxySex:_Animation(TabNameLabel,Tween,{
+				ProxyHub:_Animation(TabNameLabel,Tween,{
 					Size = UDim2.new(0, 200, 0, 25),
 					Position = UDim2.new(0, 43, 0.5, 0)
 				});
 
-				ProxySex:_Animation(UICorner,Tween,{
+				ProxyHub:_Animation(UICorner,Tween,{
 					CornerRadius = UDim.new(0, 4)
 				});
 
-				ProxySex:_Animation(Highlight,Tween,{
+				ProxyHub:_Animation(Highlight,Tween,{
 					Size = UDim2.new(1, -17, 1, 0),
 					Position = UDim2.new(0.5, 0, 0.5, 0)
 				});
 			else
-				ProxySex:_Animation(UICorner,Tween,{
+				ProxyHub:_Animation(UICorner,Tween,{
 					CornerRadius = UDim.new(0, 10)
 				});
 
-				ProxySex:_Animation(TabButton,Tween,{
+				ProxyHub:_Animation(TabButton,Tween,{
 					Size = UDim2.new(1, -10, 0, 32)
 				});
 
-				ProxySex:_Animation(Icon,Tween,{
+				ProxyHub:_Animation(Icon,Tween,{
 					Position = UDim2.new(0, 12, 0.5, 0),
 					Size = UDim2.new(0, 20, 0, 20),
 				});
 
-				ProxySex:_Animation(TabNameLabel,Tween,{
+				ProxyHub:_Animation(TabNameLabel,Tween,{
 					Size = UDim2.new(0, 200, 0, 25),
 					Position = UDim2.new(0, 80, 0.5, 0)
 				});
 
-				ProxySex:_Animation(Highlight,Tween,{
+				ProxyHub:_Animation(Highlight,Tween,{
 					Size = UDim2.new(1, -10,1, 5),
 					Position = UDim2.new(0.5, 0, 0.5, 0)
 				});
 			end;
 		end);
 
-		ProxySex:_Input(TabButton,function()
+		ProxyHub:_Input(TabButton,function()
 			for i,v in next, WindowArgs.Tabs do
 				if v.Root == TabButton then
 					v.Remote:Fire(true);
@@ -5829,13 +5837,13 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		end);
 
 		function TabArgs:DrawTab(TabConfig : TabConfig) -- Internal Tab
-			TabConfig = ProxySex.__CONFIG(TabConfig,{
+			TabConfig = ProxyHub.__CONFIG(TabConfig,{
 				Name = "Tab",
 				Type = "Double",
 				EnableScrolling = false,
 			});
 
-			local InternalSignal = ProxySex.__SIGNAL(false);
+			local InternalSignal = ProxyHub.__SIGNAL(false);
 			local Frame = Instance.new("Frame")
 			local UICorner = Instance.new("UICorner")
 			local UIStroke = Instance.new("UIStroke")
@@ -5844,9 +5852,9 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			local TextLabel = Instance.new("TextLabel")
 
 			Frame.Parent = Top
-			Frame.BackgroundColor3 = ProxySex.Colors.BlockColor
+			Frame.BackgroundColor3 = ProxyHub.Colors.BlockColor
 
-			table.insert(ProxySex.Elements.BlockColor , {
+			table.insert(ProxyHub.Elements.BlockColor , {
 				Element = Frame,
 				Property = "BackgroundColor3"
 			});
@@ -5862,10 +5870,10 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			UICorner.Parent = Frame
 
 			UIStroke.Transparency = 1.000
-			UIStroke.Color = ProxySex.Colors.StrokeColor
+			UIStroke.Color = ProxyHub.Colors.StrokeColor
 			UIStroke.Parent = Frame
 
-			table.insert(ProxySex.Elements.StrokeColor,{
+			table.insert(ProxyHub.Elements.StrokeColor,{
 				Element = UIStroke,
 				Property = "Color"
 			});
@@ -5873,7 +5881,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			Highlight.Name = "Highlight"
 			Highlight.Parent = Frame
 			Highlight.AnchorPoint = Vector2.new(1, 0.5)
-			Highlight.BackgroundColor3 = ProxySex.Colors.Highlight
+			Highlight.BackgroundColor3 = ProxyHub.Colors.Highlight
 			Highlight.BackgroundTransparency = 1.000
 			Highlight.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Highlight.BorderSizePixel = 0
@@ -5881,7 +5889,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			Highlight.Size = UDim2.new(0, 5, 0, 10)
 			Highlight.ZIndex = 11
 
-			table.insert(ProxySex.Elements.Highlight,{
+			table.insert(ProxyHub.Elements.Highlight,{
 				Element = Highlight,
 				Property = "BackgroundColor3"
 			});
@@ -5899,11 +5907,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			TextLabel.ZIndex = 12
 			TextLabel.Font = Enum.Font.GothamMedium
 			TextLabel.Text = TabConfig.Name
-			TextLabel.TextColor3 = ProxySex.Colors.SwitchColor
+			TextLabel.TextColor3 = ProxyHub.Colors.SwitchColor
 			TextLabel.TextSize = 13.000
 			TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-			table.insert(ProxySex.Elements.SwitchColor , {
+			table.insert(ProxyHub.Elements.SwitchColor , {
 				Element = TextLabel,
 				Property = 'TextColor3'
 			});
@@ -5922,38 +5930,38 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 				if bool then
 
-					ProxySex:_Animation(Highlight,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(Highlight,TweenInfo.new(0.2),{
 						BackgroundTransparency = 0,
 						Size = UDim2.new(0, 5, 0, 10)
 					})
 
-					ProxySex:_Animation(Frame,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(Frame,TweenInfo.new(0.2),{
 						BackgroundTransparency = 0
 					})
 
-					ProxySex:_Animation(UIStroke,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(UIStroke,TweenInfo.new(0.2),{
 						Transparency = 0
 					})
 
-					ProxySex:_Animation(TextLabel,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(TextLabel,TweenInfo.new(0.2),{
 						TextTransparency = 0
 					})
 				else
 
-					ProxySex:_Animation(Highlight,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(Highlight,TweenInfo.new(0.2),{
 						BackgroundTransparency = 1,
 						Size = UDim2.new(0, 5, 0, 2)
 					})
 
-					ProxySex:_Animation(Frame,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(Frame,TweenInfo.new(0.2),{
 						BackgroundTransparency = 1
 					})
 
-					ProxySex:_Animation(UIStroke,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(UIStroke,TweenInfo.new(0.2),{
 						Transparency = 1
 					})
 
-					ProxySex:_Animation(TextLabel,TweenInfo.new(0.2),{
+					ProxyHub:_Animation(TextLabel,TweenInfo.new(0.2),{
 						TextTransparency = 0.5
 					})
 				end;
@@ -5976,7 +5984,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 			table.insert(TabArgs.Tabs,Id)
 
-			ProxySex:_Input(Frame,function()
+			ProxyHub:_Input(Frame,function()
 				for i,v in next , TabArgs.Tabs do
 					if v.Root == Frame then
 						TabArgs.__Current = v;
@@ -6038,13 +6046,13 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	end;
 
 	function WindowArgs:DrawConfig(Configuration : TabConfigManager , Internal)
-		Configuration = ProxySex.__CONFIG(Configuration,{
+		Configuration = ProxyHub.__CONFIG(Configuration,{
 			Name = "Config",
 			Icon = "folder",
 			Config = nil
 		});
 
-		local TabOpenSignal = ProxySex.__SIGNAL(false);
+		local TabOpenSignal = ProxyHub.__SIGNAL(false);
 		local TabArgs = {};
 
 		-- Button --
@@ -6054,8 +6062,8 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		local Highlight = Instance.new("Frame")
 		local UICorner = Instance.new("UICorner")
 
-		if ProxySex:_IsMobile() then
-			ProxySex:_AddDragBlacklist(TabButton);
+		if ProxyHub:_IsMobile() then
+			ProxyHub:_AddDragBlacklist(TabButton);
 		end;
 
 		TabButton.Name = "TabButton"
@@ -6070,17 +6078,17 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		Icon.Name = "Icon"
 		Icon.Parent = TabButton
 		Icon.AnchorPoint = Vector2.new(0, 0.5)
-		Icon.BackgroundColor3 = ProxySex.Colors.Highlight
+		Icon.BackgroundColor3 = ProxyHub.Colors.Highlight
 		Icon.BackgroundTransparency = 1.000
 		Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Icon.BorderSizePixel = 0
 		Icon.Position = UDim2.new(0, 15, 0.5, 0)
 		Icon.Size = UDim2.new(0, 22, 0, 22)
 		Icon.ZIndex = 3
-		Icon.Image = ProxySex:_GetIcon(Configuration.Icon);
-		Icon.ImageColor3 = ProxySex.Colors.Highlight
+		Icon.Image = ProxyHub:_GetIcon(Configuration.Icon);
+		Icon.ImageColor3 = ProxyHub.Colors.Highlight
 
-		table.insert(ProxySex.Elements.Highlight,{
+		table.insert(ProxyHub.Elements.Highlight,{
 			Element = Icon,
 			Property = "ImageColor3"
 		});
@@ -6096,11 +6104,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		TabNameLabel.ZIndex = 3
 		TabNameLabel.Font = Enum.Font.GothamMedium
 		TabNameLabel.Text = Configuration.Name;
-		TabNameLabel.TextColor3 = ProxySex.Colors.SwitchColor
+		TabNameLabel.TextColor3 = ProxyHub.Colors.SwitchColor
 		TabNameLabel.TextSize = 15.000
 		TabNameLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = TabNameLabel,
 			Property = 'TextColor3'
 		});
@@ -6159,9 +6167,9 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		ConfigList.Name = "ConfigList"
 		ConfigList.Parent = TabConfig
 		ConfigList.AnchorPoint = Vector2.new(0.5, 0)
-		ConfigList.BackgroundColor3 = ProxySex.Colors.BlockColor
+		ConfigList.BackgroundColor3 = ProxyHub.Colors.BlockColor
 
-		table.insert(ProxySex.Elements.BlockColor , {
+		table.insert(ProxyHub.Elements.BlockColor , {
 			Element = ConfigList,
 			Property = "BackgroundColor3"
 		});
@@ -6175,10 +6183,10 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		UICorner.CornerRadius = UDim.new(0, 6)
 		UICorner.Parent = ConfigList
 
-		UIStroke.Color = ProxySex.Colors.StrokeColor
+		UIStroke.Color = ProxyHub.Colors.StrokeColor
 		UIStroke.Parent = ConfigList
 
-		table.insert(ProxySex.Elements.StrokeColor,{
+		table.insert(ProxyHub.Elements.StrokeColor,{
 			Element = UIStroke,
 			Property = "Color"
 		});
@@ -6202,12 +6210,12 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		SectionText.ZIndex = 10
 		SectionText.Font = Enum.Font.GothamMedium
 		SectionText.Text = "Config List"
-		SectionText.TextColor3 = ProxySex.Colors.SwitchColor
+		SectionText.TextColor3 = ProxyHub.Colors.SwitchColor
 		SectionText.TextSize = 14.000
 		SectionText.TextTransparency = 0.500
 		SectionText.TextXAlignment = Enum.TextXAlignment.Left
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = SectionText,
 			Property = 'TextColor3'
 		});
@@ -6249,9 +6257,9 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		AddConfig.Name = "AddConfig"
 		AddConfig.Parent = TabConfig
 		AddConfig.AnchorPoint = Vector2.new(0.5, 1)
-		AddConfig.BackgroundColor3 = ProxySex.Colors.BlockColor
+		AddConfig.BackgroundColor3 = ProxyHub.Colors.BlockColor
 
-		table.insert(ProxySex.Elements.BlockColor , {
+		table.insert(ProxyHub.Elements.BlockColor , {
 			Element = AddConfig,
 			Property = "BackgroundColor3"
 		});
@@ -6265,10 +6273,10 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		UICorner_2.CornerRadius = UDim.new(0, 6)
 		UICorner_2.Parent = AddConfig
 
-		UIStroke_2.Color = ProxySex.Colors.StrokeColor
+		UIStroke_2.Color = ProxyHub.Colors.StrokeColor
 		UIStroke_2.Parent = AddConfig
 
-		table.insert(ProxySex.Elements.StrokeColor,{
+		table.insert(ProxyHub.Elements.StrokeColor,{
 			Element = UIStroke_2,
 			Property = "Color"
 		});
@@ -6292,12 +6300,12 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		SectionText_2.ZIndex = 10
 		SectionText_2.Font = Enum.Font.GothamMedium
 		SectionText_2.Text = "Add Config"
-		SectionText_2.TextColor3 = ProxySex.Colors.SwitchColor
+		SectionText_2.TextColor3 = ProxyHub.Colors.SwitchColor
 		SectionText_2.TextSize = 14.000
 		SectionText_2.TextTransparency = 0.500
 		SectionText_2.TextXAlignment = Enum.TextXAlignment.Left
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = SectionText_2,
 			Property = 'TextColor3'
 		});
@@ -6316,9 +6324,9 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 		Frame.Parent = AddConfig
 		Frame.AnchorPoint = Vector2.new(0.5, 0)
-		Frame.BackgroundColor3 = ProxySex.Colors.BlockColor
+		Frame.BackgroundColor3 = ProxyHub.Colors.BlockColor
 
-		table.insert(ProxySex.Elements.BlockColor , {
+		table.insert(ProxyHub.Elements.BlockColor , {
 			Element = Frame,
 			Property = "BackgroundColor3"
 		});
@@ -6329,10 +6337,10 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		Frame.Size = UDim2.new(1, -20, 0, 20)
 		Frame.ZIndex = 15
 
-		UIStroke_3.Color = ProxySex.Colors.StrokeColor
+		UIStroke_3.Color = ProxyHub.Colors.StrokeColor
 		UIStroke_3.Parent = Frame
 
-		table.insert(ProxySex.Elements.StrokeColor,{
+		table.insert(ProxyHub.Elements.StrokeColor,{
 			Element = UIStroke_3,
 			Property = "Color"
 		});
@@ -6353,11 +6361,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		TextBox.PlaceholderColor3 = Color3.fromRGB(150, 150, 150)
 		TextBox.PlaceholderText = "Config Name..."
 		TextBox.Text = ""
-		TextBox.TextColor3 = ProxySex.Colors.SwitchColor
+		TextBox.TextColor3 = ProxyHub.Colors.SwitchColor
 		TextBox.TextSize = 12.000
 		TextBox.TextXAlignment = Enum.TextXAlignment.Left
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = TextBox,
 			Property = 'TextColor3'
 		});
@@ -6365,7 +6373,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		Button.Name = "Button"
 		Button.Parent = AddConfig
 		Button.AnchorPoint = Vector2.new(0.5, 1)
-		Button.BackgroundColor3 = ProxySex.Colors.SwitchColor
+		Button.BackgroundColor3 = ProxyHub.Colors.SwitchColor
 		Button.BackgroundTransparency = 1.000
 		Button.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Button.BorderSizePixel = 0
@@ -6376,7 +6384,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		BlockLine.Name = "BlockLine"
 		BlockLine.Parent = AddConfig
 		BlockLine.AnchorPoint = Vector2.new(0.5, 1)
-		BlockLine.BackgroundColor3 = ProxySex.Colors.LineColor
+		BlockLine.BackgroundColor3 = ProxyHub.Colors.LineColor
 		BlockLine.BackgroundTransparency = 0.500
 		BlockLine.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		BlockLine.BorderSizePixel = 0
@@ -6384,14 +6392,14 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		BlockLine.Size = UDim2.new(1, -26, 0, 1)
 		BlockLine.ZIndex = 12
 
-		table.insert(ProxySex.Elements.LineColor,{
+		table.insert(ProxyHub.Elements.LineColor,{
 			Element = BlockLine,
 			Property = "BackgroundColor3"
 		});
 
 		Frame_2.Parent = Button
 		Frame_2.AnchorPoint = Vector2.new(0.5, 0.5)
-		Frame_2.BackgroundColor3 = ProxySex.Colors.Highlight
+		Frame_2.BackgroundColor3 = ProxyHub.Colors.Highlight
 		Frame_2.BackgroundTransparency = 0.100
 		Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 		Frame_2.BorderSizePixel = 0
@@ -6399,15 +6407,15 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		Frame_2.Size = UDim2.new(1, -15, 1, -5)
 		Frame_2.ZIndex = 9
 
-		table.insert(ProxySex.Elements.Highlight,{
+		table.insert(ProxyHub.Elements.Highlight,{
 			Element = Frame_2,
 			Property = "BackgroundColor3"
 		});
 
-		UIStroke_4.Color = ProxySex.Colors.StrokeColor
+		UIStroke_4.Color = ProxyHub.Colors.StrokeColor
 		UIStroke_4.Parent = Frame_2
 
-		table.insert(ProxySex.Elements.StrokeColor,{
+		table.insert(ProxyHub.Elements.StrokeColor,{
 			Element = UIStroke_4,
 			Property = "Color"
 		});
@@ -6425,11 +6433,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		TextLabel.ZIndex = 10
 		TextLabel.Font = Enum.Font.GothamMedium
 		TextLabel.Text = "Add Config"
-		TextLabel.TextColor3 = ProxySex.Colors.SwitchColor
+		TextLabel.TextColor3 = ProxyHub.Colors.SwitchColor
 		TextLabel.TextSize = 12.000
 		TextLabel.TextStrokeTransparency = 0.900
 
-		table.insert(ProxySex.Elements.SwitchColor , {
+		table.insert(ProxyHub.Elements.SwitchColor , {
 			Element = TextLabel,
 			Property = 'TextColor3'
 		});
@@ -6449,152 +6457,152 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 				WindowArgs.SelectedTab = TabButton;
 
-				ProxySex:_Animation(Icon,Tween,{
+				ProxyHub:_Animation(Icon,Tween,{
 					ImageTransparency = 0,
 				});
 
-				ProxySex:_Animation(TabNameLabel,Tween,{
+				ProxyHub:_Animation(TabNameLabel,Tween,{
 					TextTransparency = 0
 				});
 
-				ProxySex:_Animation(Highlight,Tween,{
+				ProxyHub:_Animation(Highlight,Tween,{
 					BackgroundTransparency = 0.925
 				});
 
 				--
 
-				ProxySex:_Animation(ConfigList,Tween,{
+				ProxyHub:_Animation(ConfigList,Tween,{
 					BackgroundTransparency = 0,
 				});
 
-				ProxySex:_Animation(AddConfig,Tween,{
+				ProxyHub:_Animation(AddConfig,Tween,{
 					BackgroundTransparency = 0,
 				});
 
-				ProxySex:_Animation(UIStroke_4,Tween,{
+				ProxyHub:_Animation(UIStroke_4,Tween,{
 					Transparency = 0,
 				});
 
-				ProxySex:_Animation(UIStroke_3,Tween,{
+				ProxyHub:_Animation(UIStroke_3,Tween,{
 					Transparency = 0,
 				});
 
-				ProxySex:_Animation(UIStroke_2,Tween,{
+				ProxyHub:_Animation(UIStroke_2,Tween,{
 					Transparency = 0,
 				});
 
-				ProxySex:_Animation(UIStroke,Tween,{
+				ProxyHub:_Animation(UIStroke,Tween,{
 					Transparency = 0,
 				});
 
-				ProxySex:_Animation(SectionText,Tween,{
+				ProxyHub:_Animation(SectionText,Tween,{
 					TextTransparency = 0.5
 				});
 
-				ProxySex:_Animation(TextLabel,Tween,{
+				ProxyHub:_Animation(TextLabel,Tween,{
 					TextTransparency = 0,
 					TextStrokeTransparency = 0.9
 				});
 
-				ProxySex:_Animation(Frame_2,Tween,{
+				ProxyHub:_Animation(Frame_2,Tween,{
 					BackgroundTransparency = 0.1,
 				});
 
-				ProxySex:_Animation(BlockLine,Tween,{
+				ProxyHub:_Animation(BlockLine,Tween,{
 					BackgroundTransparency = 0.5,
 				});
 
-				ProxySex:_Animation(Frame,Tween,{
+				ProxyHub:_Animation(Frame,Tween,{
 					BackgroundTransparency = 0,
 				});
 
-				ProxySex:_Animation(SectionText_2,Tween,{
+				ProxyHub:_Animation(SectionText_2,Tween,{
 					TextTransparency = 0.5
 				});
 
-				ProxySex:_Animation(TextBox,Tween,{
+				ProxyHub:_Animation(TextBox,Tween,{
 					TextTransparency = 0
 				});
 
-				ProxySex:_Animation(SectionClose,Tween,{
+				ProxyHub:_Animation(SectionClose,Tween,{
 					ImageTransparency = 0.5,
 				});
 
-				ProxySex:_Animation(SectionClose_2,Tween,{
+				ProxyHub:_Animation(SectionClose_2,Tween,{
 					ImageTransparency = 0.5,
 				});
 			else
 
-				ProxySex:_Animation(Icon,Tween,{
+				ProxyHub:_Animation(Icon,Tween,{
 					ImageTransparency = 0.5
 				});
 
-				ProxySex:_Animation(TabNameLabel,Tween,{
+				ProxyHub:_Animation(TabNameLabel,Tween,{
 					TextTransparency = 0.5
 				});
 
-				ProxySex:_Animation(Highlight,Tween,{
+				ProxyHub:_Animation(Highlight,Tween,{
 					BackgroundTransparency = 1
 				});
 
-				ProxySex:_Animation(ConfigList,Tween,{
+				ProxyHub:_Animation(ConfigList,Tween,{
 					BackgroundTransparency = 1,
 				});
 
-				ProxySex:_Animation(AddConfig,Tween,{
+				ProxyHub:_Animation(AddConfig,Tween,{
 					BackgroundTransparency = 1,
 				});
 
-				ProxySex:_Animation(UIStroke_4,Tween,{
+				ProxyHub:_Animation(UIStroke_4,Tween,{
 					Transparency = 1,
 				});
 
-				ProxySex:_Animation(UIStroke_3,Tween,{
+				ProxyHub:_Animation(UIStroke_3,Tween,{
 					Transparency = 1,
 				});
 
-				ProxySex:_Animation(UIStroke_2,Tween,{
+				ProxyHub:_Animation(UIStroke_2,Tween,{
 					Transparency = 1,
 				});
 
-				ProxySex:_Animation(UIStroke,Tween,{
+				ProxyHub:_Animation(UIStroke,Tween,{
 					Transparency = 1,
 				});
 
-				ProxySex:_Animation(SectionText,Tween,{
+				ProxyHub:_Animation(SectionText,Tween,{
 					TextTransparency = 1
 				});
 
-				ProxySex:_Animation(TextLabel,Tween,{
+				ProxyHub:_Animation(TextLabel,Tween,{
 					TextTransparency = 1,
 					TextStrokeTransparency = 1
 				});
 
-				ProxySex:_Animation(Frame_2,Tween,{
+				ProxyHub:_Animation(Frame_2,Tween,{
 					BackgroundTransparency = 1,
 				});
 
-				ProxySex:_Animation(BlockLine,Tween,{
+				ProxyHub:_Animation(BlockLine,Tween,{
 					BackgroundTransparency = 1,
 				});
 
-				ProxySex:_Animation(Frame,Tween,{
+				ProxyHub:_Animation(Frame,Tween,{
 					BackgroundTransparency = 1,
 				});
 
-				ProxySex:_Animation(SectionText_2,Tween,{
+				ProxyHub:_Animation(SectionText_2,Tween,{
 					TextTransparency = 1
 				});
 
-				ProxySex:_Animation(TextBox,Tween,{
+				ProxyHub:_Animation(TextBox,Tween,{
 					TextTransparency = 1
 				});
 
-				ProxySex:_Animation(SectionClose,Tween,{
+				ProxyHub:_Animation(SectionClose,Tween,{
 					ImageTransparency = 1,
 				});
 
-				ProxySex:_Animation(SectionClose_2,Tween,{
+				ProxyHub:_Animation(SectionClose_2,Tween,{
 					ImageTransparency = 1,
 				});
 			end;
@@ -6612,23 +6620,23 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			Remote = TabOpenSignal
 		});
 
-		ProxySex:_Hover(TabButton,function()
+		ProxyHub:_Hover(TabButton,function()
 			if WindowArgs.SelectedTab ~= TabButton then
-				ProxySex:_Animation(Icon,Tween,{
+				ProxyHub:_Animation(Icon,Tween,{
 					ImageTransparency = 0.1
 				});
 
-				ProxySex:_Animation(TabNameLabel,Tween,{
+				ProxyHub:_Animation(TabNameLabel,Tween,{
 					TextTransparency = 0.1
 				});
 			end;
 		end , function()
 			if WindowArgs.SelectedTab ~= TabButton then
-				ProxySex:_Animation(Icon,Tween,{
+				ProxyHub:_Animation(Icon,Tween,{
 					ImageTransparency = 0.5
 				});
 
-				ProxySex:_Animation(TabNameLabel,Tween,{
+				ProxyHub:_Animation(TabNameLabel,Tween,{
 					TextTransparency = 0.5
 				});
 			end;
@@ -6638,55 +6646,55 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 		TabHover:Connect(function(bool)
 			if bool then
-				ProxySex:_Animation(TabButton,Tween,{
+				ProxyHub:_Animation(TabButton,Tween,{
 					Size = UDim2.new(1, -10, 0, 32)
 				});
 
-				ProxySex:_Animation(Icon,Tween,{
+				ProxyHub:_Animation(Icon,Tween,{
 					Position = UDim2.new(0, 15, 0.5, 0),
 					Size = UDim2.new(0, 22, 0, 22),
 				});
 
-				ProxySex:_Animation(TabNameLabel,Tween,{
+				ProxyHub:_Animation(TabNameLabel,Tween,{
 					Size = UDim2.new(0, 200, 0, 25),
 					Position = UDim2.new(0, 43, 0.5, 0)
 				});
 
-				ProxySex:_Animation(UICorner,Tween,{
+				ProxyHub:_Animation(UICorner,Tween,{
 					CornerRadius = UDim.new(0, 4)
 				});
 
-				ProxySex:_Animation(Highlight,Tween,{
+				ProxyHub:_Animation(Highlight,Tween,{
 					Size = UDim2.new(1, -17, 1, 0),
 					Position = UDim2.new(0.5, 0, 0.5, 0)
 				});
 			else
-				ProxySex:_Animation(UICorner,Tween,{
+				ProxyHub:_Animation(UICorner,Tween,{
 					CornerRadius = UDim.new(0, 10)
 				});
 
-				ProxySex:_Animation(TabButton,Tween,{
+				ProxyHub:_Animation(TabButton,Tween,{
 					Size = UDim2.new(1, -10, 0, 32)
 				});
 
-				ProxySex:_Animation(Icon,Tween,{
+				ProxyHub:_Animation(Icon,Tween,{
 					Position = UDim2.new(0, 12, 0.5, 0),
 					Size = UDim2.new(0, 20, 0, 20),
 				});
 
-				ProxySex:_Animation(TabNameLabel,Tween,{
+				ProxyHub:_Animation(TabNameLabel,Tween,{
 					Size = UDim2.new(0, 200, 0, 25),
 					Position = UDim2.new(0, 80, 0.5, 0)
 				});
 
-				ProxySex:_Animation(Highlight,Tween,{
+				ProxyHub:_Animation(Highlight,Tween,{
 					Size = UDim2.new(1, -10,1, 5),
 					Position = UDim2.new(0.5, 0, 0.5, 0)
 				});
 			end;
 		end);
 
-		ProxySex:_Input(TabButton,function()
+		ProxyHub:_Input(TabButton,function()
 			for i,v in next, WindowArgs.Tabs do
 				if v.Root == TabButton then
 					v.Remote:Fire(true);
@@ -6746,8 +6754,8 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			ConfigBlock.Size = UDim2.new(1, -1, 0, 40)
 			ConfigBlock.ZIndex = 10
 
-			if ProxySex:_IsMobile() then
-				ProxySex:_AddDragBlacklist(ConfigBlock);
+			if ProxyHub:_IsMobile() then
+				ProxyHub:_AddDragBlacklist(ConfigBlock);
 			end;
 
 			ConfigText.Name = "ConfigText"
@@ -6762,12 +6770,12 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			ConfigText.Font = Enum.Font.GothamMedium
 			ConfigText.RichText = true;
 			ConfigText.Text = "Config"
-			ConfigText.TextColor3 = ProxySex.Colors.SwitchColor
+			ConfigText.TextColor3 = ProxyHub.Colors.SwitchColor
 			ConfigText.TextSize = 13.000
 			ConfigText.TextTransparency = 1
 			ConfigText.TextXAlignment = Enum.TextXAlignment.Left
 
-			table.insert(ProxySex.Elements.SwitchColor , {
+			table.insert(ProxyHub.Elements.SwitchColor , {
 				Element = ConfigText,
 				Property = 'TextColor3'
 			});
@@ -6802,7 +6810,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 			Frame.Parent = SaveButton
 			Frame.AnchorPoint = Vector2.new(0.5, 0.5)
-			Frame.BackgroundColor3 = ProxySex.Colors.Highlight
+			Frame.BackgroundColor3 = ProxyHub.Colors.Highlight
 			Frame.BackgroundTransparency = 1
 			Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Frame.BorderSizePixel = 0
@@ -6810,16 +6818,16 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			Frame.Size = UDim2.new(1, -15, 1, -5)
 			Frame.ZIndex = 14
 
-			table.insert(ProxySex.Elements.Highlight,{
+			table.insert(ProxyHub.Elements.Highlight,{
 				Element = Frame,
 				Property = "BackgroundColor3"
 			});
 
 			UIStroke.Transparency = 1
-			UIStroke.Color = ProxySex.Colors.StrokeColor
+			UIStroke.Color = ProxyHub.Colors.StrokeColor
 			UIStroke.Parent = Frame
 
-			table.insert(ProxySex.Elements.StrokeColor,{
+			table.insert(ProxyHub.Elements.StrokeColor,{
 				Element = UIStroke,
 				Property = "Color"
 			});
@@ -6837,13 +6845,13 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			TextLabel.ZIndex = 14
 			TextLabel.Font = Enum.Font.GothamMedium
 			TextLabel.Text = "Save"
-			TextLabel.TextColor3 = ProxySex.Colors.SwitchColor
+			TextLabel.TextColor3 = ProxyHub.Colors.SwitchColor
 			TextLabel.TextSize = 12.000
 			TextLabel.TextStrokeTransparency = 1
 			TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 			TextLabel.TextTransparency = 1
 
-			table.insert(ProxySex.Elements.SwitchColor , {
+			table.insert(ProxyHub.Elements.SwitchColor , {
 				Element = TextLabel,
 				Property = 'TextColor3'
 			});
@@ -6871,7 +6879,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 			Frame_2.Parent = LoadButton
 			Frame_2.AnchorPoint = Vector2.new(0.5, 0.5)
-			Frame_2.BackgroundColor3 = ProxySex.Colors.Highlight
+			Frame_2.BackgroundColor3 = ProxyHub.Colors.Highlight
 			Frame_2.BackgroundTransparency = 1
 			Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Frame_2.BorderSizePixel = 0
@@ -6879,16 +6887,16 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			Frame_2.Size = UDim2.new(1, -15, 1, -5)
 			Frame_2.ZIndex = 14
 
-			table.insert(ProxySex.Elements.Highlight,{
+			table.insert(ProxyHub.Elements.Highlight,{
 				Element = Frame_2,
 				Property = "BackgroundColor3"
 			});
 
 			UIStroke_2.Transparency = 1
-			UIStroke_2.Color = ProxySex.Colors.StrokeColor
+			UIStroke_2.Color = ProxyHub.Colors.StrokeColor
 			UIStroke_2.Parent = Frame_2
 
-			table.insert(ProxySex.Elements.StrokeColor,{
+			table.insert(ProxyHub.Elements.StrokeColor,{
 				Element = UIStroke_2,
 				Property = "Color"
 			});
@@ -6906,13 +6914,13 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			TextLabel_2.ZIndex = 14
 			TextLabel_2.Font = Enum.Font.GothamMedium
 			TextLabel_2.Text = "Load"
-			TextLabel_2.TextColor3 = ProxySex.Colors.SwitchColor
+			TextLabel_2.TextColor3 = ProxyHub.Colors.SwitchColor
 			TextLabel_2.TextSize = 12.000
 			TextLabel_2.TextStrokeTransparency = 1
 			TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
 			TextLabel_2.TextTransparency = 1
 
-			table.insert(ProxySex.Elements.SwitchColor , {
+			table.insert(ProxyHub.Elements.SwitchColor , {
 				Element = TextLabel_2,
 				Property = 'TextColor3'
 			});
@@ -6931,10 +6939,10 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			Icon_2.ImageTransparency = 1
 			UIStroke_3.Transparency = 1
 
-			UIStroke_3.Color = ProxySex.Colors.StrokeColor
+			UIStroke_3.Color = ProxyHub.Colors.StrokeColor
 			UIStroke_3.Parent = ConfigBlock
 
-			table.insert(ProxySex.Elements.StrokeColor,{
+			table.insert(ProxyHub.Elements.StrokeColor,{
 				Element = UIStroke_3,
 				Property = "Color"
 			});
@@ -6954,18 +6962,18 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			AuthorText.Font = Enum.Font.GothamMedium
 			AuthorText.RichText = true;
 			AuthorText.Text = "Author: <font color=\"rgb(17, 238, 253)\">NoFi</font>"
-			AuthorText.TextColor3 = ProxySex.Colors.SwitchColor
+			AuthorText.TextColor3 = ProxyHub.Colors.SwitchColor
 			AuthorText.TextSize = 13.000
 			AuthorText.TextTransparency = 1
 			AuthorText.TextXAlignment = Enum.TextXAlignment.Left
 
-			table.insert(ProxySex.Elements.SwitchColor , {
+			table.insert(ProxyHub.Elements.SwitchColor , {
 				Element = TabNameLabel,
 				Property = 'TextColor3'
 			});
 
 			function ConfigButton:SetInfo(Author , ConfigName)
-				local R,G,B = tostring(math.floor(ProxySex.Colors.Highlight.R * 255)) , tostring(math.floor(ProxySex.Colors.Highlight.G * 255)) , tostring(math.floor(ProxySex.Colors.Highlight.B * 255));
+				local R,G,B = tostring(math.floor(ProxyHub.Colors.Highlight.R * 255)) , tostring(math.floor(ProxyHub.Colors.Highlight.G * 255)) , tostring(math.floor(ProxyHub.Colors.Highlight.B * 255));
 
 				AuthorText.Text = string.format("Author: <font color=\"rgb(%s, %s, %s)\">%s</font>" ,R,G,B , tostring(Author));
 				ConfigText.Text = ConfigName;
@@ -6977,106 +6985,106 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 			function ConfigButton:Toggle(v)
 				if v then
-					ProxySex:_Animation(ConfigBlock,Tween,{
+					ProxyHub:_Animation(ConfigBlock,Tween,{
 						BackgroundTransparency = 0
 					});
 
-					ProxySex:_Animation(LinkValues,Tween,{
+					ProxyHub:_Animation(LinkValues,Tween,{
 						Position = UDim2.new(1, -12, 0.5, 0)
 					});
 
-					ProxySex:_Animation(ConfigText,Tween,{
+					ProxyHub:_Animation(ConfigText,Tween,{
 						TextTransparency = 0.3,
 						Position = UDim2.new(0, 12, 0.5, 0)
 					});
 
-					ProxySex:_Animation(Frame,Tween,{
+					ProxyHub:_Animation(Frame,Tween,{
 						BackgroundTransparency = 0.100
 					});
 
-					ProxySex:_Animation(UIStroke,Tween,{
+					ProxyHub:_Animation(UIStroke,Tween,{
 						Transparency = 0
 					});
 
-					ProxySex:_Animation(AuthorText,Tween,{
+					ProxyHub:_Animation(AuthorText,Tween,{
 						TextTransparency = 0.5,
 						Position = UDim2.new(0,AuthorText:GetAttribute('SPC'), 0.5, 0)
 					});
 
-					ProxySex:_Animation(Icon_2,Tween,{
+					ProxyHub:_Animation(Icon_2,Tween,{
 						ImageTransparency = 0
 					});
 
-					ProxySex:_Animation(Icon,Tween,{
+					ProxyHub:_Animation(Icon,Tween,{
 						ImageTransparency = 0
 					});
 
-					ProxySex:_Animation(Frame_2,Tween,{
+					ProxyHub:_Animation(Frame_2,Tween,{
 						BackgroundTransparency = 0.100
 					});
 
-					ProxySex:_Animation(UIStroke_2,Tween,{
+					ProxyHub:_Animation(UIStroke_2,Tween,{
 						Transparency = 0
 					});
 
-					ProxySex:_Animation(TextLabel,Tween,{
+					ProxyHub:_Animation(TextLabel,Tween,{
 						TextStrokeTransparency = 0.900,
 						TextTransparency = 0
 					});
 
-					ProxySex:_Animation(TextLabel_2,Tween,{
+					ProxyHub:_Animation(TextLabel_2,Tween,{
 						TextStrokeTransparency = 0.900,
 						TextTransparency = 0
 					});
 				else
-					ProxySex:_Animation(AuthorText,Tween,{
+					ProxyHub:_Animation(AuthorText,Tween,{
 						TextTransparency = 1,
 						Position = UDim2.new(0.5, -65, 0.5, 15)
 					});
 
-					ProxySex:_Animation(Icon_2,Tween,{
+					ProxyHub:_Animation(Icon_2,Tween,{
 						ImageTransparency = 1
 					});
 
-					ProxySex:_Animation(Icon,Tween,{
+					ProxyHub:_Animation(Icon,Tween,{
 						ImageTransparency = 1
 					});
 
-					ProxySex:_Animation(LinkValues,Tween,{
+					ProxyHub:_Animation(LinkValues,Tween,{
 						Position = UDim2.new(1, -12, 0.5, 15)
 					});
 
-					ProxySex:_Animation(ConfigBlock,Tween,{
+					ProxyHub:_Animation(ConfigBlock,Tween,{
 						BackgroundTransparency = 1
 					});
 
-					ProxySex:_Animation(ConfigText,Tween,{
+					ProxyHub:_Animation(ConfigText,Tween,{
 						TextTransparency = 1,
 						Position = UDim2.new(0, 12, 0.5, 15)
 					});
 
-					ProxySex:_Animation(Frame,Tween,{
+					ProxyHub:_Animation(Frame,Tween,{
 						BackgroundTransparency = 1
 					});
 
-					ProxySex:_Animation(UIStroke,Tween,{
+					ProxyHub:_Animation(UIStroke,Tween,{
 						Transparency = 1
 					});
 
-					ProxySex:_Animation(Frame_2,Tween,{
+					ProxyHub:_Animation(Frame_2,Tween,{
 						BackgroundTransparency = 1
 					});
 
-					ProxySex:_Animation(UIStroke_2,Tween,{
+					ProxyHub:_Animation(UIStroke_2,Tween,{
 						Transparency = 1
 					});
 
-					ProxySex:_Animation(TextLabel,Tween,{
+					ProxyHub:_Animation(TextLabel,Tween,{
 						TextStrokeTransparency = 1,
 						TextTransparency = 1
 					});
 
-					ProxySex:_Animation(TextLabel_2,Tween,{
+					ProxyHub:_Animation(TextLabel_2,Tween,{
 						TextStrokeTransparency = 1,
 						TextTransparency = 1
 					});
@@ -7093,11 +7101,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 			ConfigButton:Update();
 
-			ProxySex:_Input(LoadButton,function()
+			ProxyHub:_Input(LoadButton,function()
 				task.spawn(ConfigButton.OnLoad);
 			end);
 
-			ProxySex:_Input(SaveButton,function()
+			ProxyHub:_Input(SaveButton,function()
 				task.spawn(ConfigButton.OnSave);
 			end);
 
@@ -7116,7 +7124,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			local __signals = {};
 			local Init = {};
 
-			ProxySex:_Input(Button,function()
+			ProxyHub:_Input(Button,function()
 				if TextBox.Text:byte() then
 					Configuration.Config:WriteConfig({
 						Name = TextBox.Text,
@@ -7191,13 +7199,13 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	end;
 
 	function WindowArgs:DrawTab(TabConfig : TabConfig , Internal)
-		TabConfig = ProxySex.__CONFIG(TabConfig,{
+		TabConfig = ProxyHub.__CONFIG(TabConfig,{
 			Name = "Tab",
 			Icon = "eye",
 			Type = "Double"
 		});
 
-		local TabOpenSignal = ProxySex.__SIGNAL(false);
+		local TabOpenSignal = ProxyHub.__SIGNAL(false);
 		local TabArgs = {};
 		local Upvalue = {};
 		local BASE_PADDING = 10;
@@ -7303,9 +7311,9 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			Upvalue.Left = Left;
 			Upvalue.Right = Right;
 
-			if ProxySex:_IsMobile() then
-				ProxySex:_AddDragBlacklist(Left);
-				ProxySex:_AddDragBlacklist(Right);
+			if ProxyHub:_IsMobile() then
+				ProxyHub:_AddDragBlacklist(Left);
+				ProxyHub:_AddDragBlacklist(Right);
 			end;
 
 			TabOpenSignal = Internal.Signal;
@@ -7335,17 +7343,17 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			Icon.Name = "Icon"
 			Icon.Parent = TabButton
 			Icon.AnchorPoint = Vector2.new(0, 0.5)
-			Icon.BackgroundColor3 = ProxySex.Colors.Highlight
+			Icon.BackgroundColor3 = ProxyHub.Colors.Highlight
 			Icon.BackgroundTransparency = 1.000
 			Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Icon.BorderSizePixel = 0
 			Icon.Position = UDim2.new(0, 15, 0.5, 0)
 			Icon.Size = UDim2.new(0, 22, 0, 22)
 			Icon.ZIndex = 3
-			Icon.Image = ProxySex:_GetIcon(TabConfig.Icon);
-			Icon.ImageColor3 = ProxySex.Colors.Highlight
+			Icon.Image = ProxyHub:_GetIcon(TabConfig.Icon);
+			Icon.ImageColor3 = ProxyHub.Colors.Highlight
 
-			table.insert(ProxySex.Elements.Highlight,{
+			table.insert(ProxyHub.Elements.Highlight,{
 				Element = Icon,
 				Property = "ImageColor3"
 			});
@@ -7361,11 +7369,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			TabNameLabel.ZIndex = 3
 			TabNameLabel.Font = Enum.Font.GothamMedium
 			TabNameLabel.Text = TabConfig.Name;
-			TabNameLabel.TextColor3 = ProxySex.Colors.SwitchColor
+			TabNameLabel.TextColor3 = ProxyHub.Colors.SwitchColor
 			TabNameLabel.TextSize = 15.000
 			TabNameLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-			table.insert(ProxySex.Elements.SwitchColor , {
+			table.insert(ProxyHub.Elements.SwitchColor , {
 				Element = TabNameLabel,
 				Property = 'TextColor3'
 			});
@@ -7465,9 +7473,9 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			WindowArgs:AddUnbind(UIListLayout_2 , Right);
 			WindowArgs:AddUnbind(UIListLayout , Left);
 
-			if ProxySex:_IsMobile() then
-				ProxySex:_AddDragBlacklist(Left);
-				ProxySex:_AddDragBlacklist(Right);
+			if ProxyHub:_IsMobile() then
+				ProxyHub:_AddDragBlacklist(Left);
+				ProxyHub:_AddDragBlacklist(Right);
 			end;
 
 			if TabConfig.Type == "Single" then
@@ -7491,27 +7499,27 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 					WindowArgs.SelectedTab = TabButton;
 
-					ProxySex:_Animation(Icon,Tween,{
+					ProxyHub:_Animation(Icon,Tween,{
 						ImageTransparency = 0,
 					});
 
-					ProxySex:_Animation(TabNameLabel,Tween,{
+					ProxyHub:_Animation(TabNameLabel,Tween,{
 						TextTransparency = 0
 					});
 
-					ProxySex:_Animation(Highlight,Tween,{
+					ProxyHub:_Animation(Highlight,Tween,{
 						BackgroundTransparency = 0.925
 					});
 				else
-					ProxySex:_Animation(Icon,Tween,{
+					ProxyHub:_Animation(Icon,Tween,{
 						ImageTransparency = 0.5
 					});
 
-					ProxySex:_Animation(TabNameLabel,Tween,{
+					ProxyHub:_Animation(TabNameLabel,Tween,{
 						TextTransparency = 0.5
 					});
 
-					ProxySex:_Animation(Highlight,Tween,{
+					ProxyHub:_Animation(Highlight,Tween,{
 						BackgroundTransparency = 1
 					});
 				end;
@@ -7529,23 +7537,23 @@ table.insert(ProxySex.Elements.BGDBColor,{
 				Remote = TabOpenSignal
 			});
 
-			ProxySex:_Hover(TabButton,function()
+			ProxyHub:_Hover(TabButton,function()
 				if WindowArgs.SelectedTab ~= TabButton then
-					ProxySex:_Animation(Icon,Tween,{
+					ProxyHub:_Animation(Icon,Tween,{
 						ImageTransparency = 0.1
 					});
 
-					ProxySex:_Animation(TabNameLabel,Tween,{
+					ProxyHub:_Animation(TabNameLabel,Tween,{
 						TextTransparency = 0.1
 					});
 				end;
 			end , function()
 				if WindowArgs.SelectedTab ~= TabButton then
-					ProxySex:_Animation(Icon,Tween,{
+					ProxyHub:_Animation(Icon,Tween,{
 						ImageTransparency = 0.5
 					});
 
-					ProxySex:_Animation(TabNameLabel,Tween,{
+					ProxyHub:_Animation(TabNameLabel,Tween,{
 						TextTransparency = 0.5
 					});
 				end;
@@ -7555,55 +7563,55 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 			TabHover:Connect(function(bool)
 				if bool then
-					ProxySex:_Animation(TabButton,Tween,{
+					ProxyHub:_Animation(TabButton,Tween,{
 						Size = UDim2.new(1, -10, 0, 32)
 					});
 
-					ProxySex:_Animation(Icon,Tween,{
+					ProxyHub:_Animation(Icon,Tween,{
 						Position = UDim2.new(0, 15, 0.5, 0),
 						Size = UDim2.new(0, 22, 0, 22),
 					});
 
-					ProxySex:_Animation(TabNameLabel,Tween,{
+					ProxyHub:_Animation(TabNameLabel,Tween,{
 						Size = UDim2.new(0, 200, 0, 25),
 						Position = UDim2.new(0, 43, 0.5, 0)
 					});
 
-					ProxySex:_Animation(UICorner,Tween,{
+					ProxyHub:_Animation(UICorner,Tween,{
 						CornerRadius = UDim.new(0, 4)
 					});
 
-					ProxySex:_Animation(Highlight,Tween,{
+					ProxyHub:_Animation(Highlight,Tween,{
 						Size = UDim2.new(1, -17, 1, 0),
 						Position = UDim2.new(0.5, 0, 0.5, 0)
 					});
 				else
-					ProxySex:_Animation(UICorner,Tween,{
+					ProxyHub:_Animation(UICorner,Tween,{
 						CornerRadius = UDim.new(0, 10)
 					});
 
-					ProxySex:_Animation(TabButton,Tween,{
+					ProxyHub:_Animation(TabButton,Tween,{
 						Size = UDim2.new(1, -10, 0, 32)
 					});
 
-					ProxySex:_Animation(Icon,Tween,{
+					ProxyHub:_Animation(Icon,Tween,{
 						Position = UDim2.new(0, 12, 0.5, 0),
 						Size = UDim2.new(0, 20, 0, 20),
 					});
 
-					ProxySex:_Animation(TabNameLabel,Tween,{
+					ProxyHub:_Animation(TabNameLabel,Tween,{
 						Size = UDim2.new(0, 200, 0, 25),
 						Position = UDim2.new(0, 80, 0.5, 0)
 					});
 
-					ProxySex:_Animation(Highlight,Tween,{
+					ProxyHub:_Animation(Highlight,Tween,{
 						Size = UDim2.new(1, -10,1, 5),
 						Position = UDim2.new(0.5, 0, 0.5, 0)
 					});
 				end;
 			end);
 
-			ProxySex:_Input(TabButton,function()
+			ProxyHub:_Input(TabButton,function()
 				for i,v in next, WindowArgs.Tabs do
 					if v.Root == TabButton then
 						v.Remote:Fire(true);
@@ -7692,7 +7700,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		TabArgs.RightThread();
 
 		function TabArgs:DrawSection(config: Section)
-			config = ProxySex.__CONFIG(config,{
+			config = ProxyHub.__CONFIG(config,{
 				Name = "Section",
 				Position = "left"
 			});
@@ -7717,15 +7725,15 @@ table.insert(ProxySex.Elements.BGDBColor,{
 				Section.Parent = Upvalue.Left;
 			end;
 
-			Section.BackgroundColor3 = ProxySex.Colors.BlockColor
+			Section.BackgroundColor3 = ProxyHub.Colors.BlockColor
 
-			table.insert(ProxySex.Elements.BlockColor , {
+			table.insert(ProxyHub.Elements.BlockColor , {
 				Element = Section,
 				Property = "BackgroundColor3"
 			});
 
-			if ProxySex:_IsMobile() then
-				ProxySex:_AddDragBlacklist(Section);
+			if ProxyHub:_IsMobile() then
+				ProxyHub:_AddDragBlacklist(Section);
 			end;
 			
 			Section.LayoutOrder = #Parent:GetChildren() + 3;
@@ -7738,10 +7746,10 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			UICorner.CornerRadius = UDim.new(0, 6)
 			UICorner.Parent = Section
 
-			UIStroke.Color = ProxySex.Colors.StrokeColor
+			UIStroke.Color = ProxyHub.Colors.StrokeColor
 			UIStroke.Parent = Section
 
-			table.insert(ProxySex.Elements.StrokeColor,{
+			table.insert(ProxyHub.Elements.StrokeColor,{
 				Element = UIStroke,
 				Property = "Color"
 			});
@@ -7771,12 +7779,12 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			SectionText.ZIndex = 10
 			SectionText.Font = Enum.Font.GothamMedium
 			SectionText.Text = config.Name;
-			SectionText.TextColor3 = ProxySex.Colors.SwitchColor
+			SectionText.TextColor3 = ProxyHub.Colors.SwitchColor
 			SectionText.TextSize = 14.000
 			SectionText.TextTransparency = 0.500
 			SectionText.TextXAlignment = Enum.TextXAlignment.Left
 
-			table.insert(ProxySex.Elements.SwitchColor , {
+			table.insert(ProxyHub.Elements.SwitchColor , {
 				Element = SectionText,
 				Property = 'TextColor3'
 			});
@@ -7818,16 +7826,16 @@ table.insert(ProxySex.Elements.BGDBColor,{
 						local Size = UDim2.new(1, 0, 0, (Parent:GetAttribute('LayoutStacks') or UIListLayout.AbsoluteContentSize.Y));
 			
 						if Dist >= 99 then
-							ProxySex:_Animation(Section,TweenInfo.new(0.2,Enum.EasingStyle.Quad),{
+							ProxyHub:_Animation(Section,TweenInfo.new(0.2,Enum.EasingStyle.Quad),{
 								Size = Size
 							});
 						else
-							ProxySex:_Animation(Section,TweenInfo.new(0.05),{
+							ProxyHub:_Animation(Section,TweenInfo.new(0.05),{
 								Size = Size
 							});
 						end;
 					else
-						ProxySex:_Animation(Section,TweenInfo.new(0.4,Enum.EasingStyle.Quint),{
+						ProxyHub:_Animation(Section,TweenInfo.new(0.4,Enum.EasingStyle.Quint),{
 							Size = UDim2.new(1, 0, 0, UIListLayout.AbsoluteContentSize.Y - 1)
 						});
 					end;
@@ -7836,7 +7844,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 				else
 					TabArgs.SectionClose[Parent][Section] = Section;
 					
-					ProxySex:_Animation(Section,TweenInfo.new(0.4,Enum.EasingStyle.Quint),{
+					ProxyHub:_Animation(Section,TweenInfo.new(0.4,Enum.EasingStyle.Quint),{
 						Size = UDim2.new(1, 0, 0, 35)
 					});
 				end;
@@ -7848,41 +7856,41 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 			TabOpenSignal:Connect(function(bool)
 				if bool then
-					ProxySex:_Animation(Section,TweenInfo.new(0.21),{
+					ProxyHub:_Animation(Section,TweenInfo.new(0.21),{
 						BackgroundTransparency = 0
 					})
 
-					ProxySex:_Animation(SectionText,TweenInfo.new(0.21),{
+					ProxyHub:_Animation(SectionText,TweenInfo.new(0.21),{
 						TextTransparency = 0.500
 					})
 
-					ProxySex:_Animation(SectionClose,TweenInfo.new(0.21),{
+					ProxyHub:_Animation(SectionClose,TweenInfo.new(0.21),{
 						ImageTransparency = 0.500
 					})
 				else
-					ProxySex:_Animation(Section,TweenInfo.new(0.21),{
+					ProxyHub:_Animation(Section,TweenInfo.new(0.21),{
 						BackgroundTransparency = 1
 					})
 
-					ProxySex:_Animation(SectionText,TweenInfo.new(0.21),{
+					ProxyHub:_Animation(SectionText,TweenInfo.new(0.21),{
 						TextTransparency = 1
 					})
 
-					ProxySex:_Animation(SectionClose,TweenInfo.new(0.21),{
+					ProxyHub:_Animation(SectionClose,TweenInfo.new(0.21),{
 						ImageTransparency = 1
 					})
 				end;
 			end);
 			
-			ProxySex:_Input(Header,function()
+			ProxyHub:_Input(Header,function()
 				IsOpen = not IsOpen;
 				
 				if IsOpen then
-					ProxySex:_Animation(SectionClose,TweenInfo.new(0.35),{
+					ProxyHub:_Animation(SectionClose,TweenInfo.new(0.35),{
 						Rotation = 0
 					});
 				else
-					ProxySex:_Animation(SectionClose,TweenInfo.new(0.35),{
+					ProxyHub:_Animation(SectionClose,TweenInfo.new(0.35),{
 						Rotation = -180
 					});
 				end;
@@ -7890,7 +7898,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 				refresh();
 			end);
 
-			return ProxySex:_LoadElement(Section , true , TabOpenSignal)
+			return ProxyHub:_LoadElement(Section , true , TabOpenSignal)
 		end;
 
 		return TabArgs;
@@ -7902,11 +7910,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		local ImageLabel = Instance.new("ImageLabel")
 
 		CloseWindow.Name = "CloseWindow"
-		CloseWindow.Parent = ProxySex
+		CloseWindow.Parent = ProxyHub
 		CloseWindow.AnchorPoint = Vector2.new(1, 0)
-		CloseWindow.BackgroundColor3 = ProxySex.Colors.BGDBColor
+		CloseWindow.BackgroundColor3 = ProxyHub.Colors.BGDBColor
 
-		table.insert(ProxySex.Elements.BGDBColor,{
+		table.insert(ProxyHub.Elements.BGDBColor,{
 			Element = CloseWindow,
 			Property = 'BackgroundColor3'
 		});
@@ -7941,23 +7949,23 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			if v then
 				ImageLabel.ClipsDescendants = true;
 
-				ProxySex:_Animation(CloseWindow,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(CloseWindow,TweenInfo.new(0.2),{
 					Size = UDim2.new(0, 45, 0, 23),
 					BackgroundTransparency = 0.025
 				})
 
-				ProxySex:_Animation(ImageLabel,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(ImageLabel,TweenInfo.new(0.2),{
 					ImageTransparency = (ImageLabel:GetAttribute('Hover') and 0.1) or 0.35
 				})
 			else
 				ImageLabel.ClipsDescendants = false;
 
-				ProxySex:_Animation(CloseWindow,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(CloseWindow,TweenInfo.new(0.2),{
 					Size = UDim2.new(0, 0, 0, 23),
 					BackgroundTransparency = 1
 				})
 
-				ProxySex:_Animation(ImageLabel,TweenInfo.new(0.2),{
+				ProxyHub:_Animation(ImageLabel,TweenInfo.new(0.2),{
 					ImageTransparency = 1
 				})
 			end;
@@ -7969,16 +7977,16 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			local Logo = Instance.new("Frame")
 			local UICorner_2 = Instance.new("UICorner")
 			local Frame = Instance.new("Frame")
-			local ProxySex = Instance.new("ImageLabel")
+			local CompLogo = Instance.new("ImageLabel")
 			local WaternarkList = Instance.new("Frame")
 			local UIListLayout = Instance.new("UIListLayout")
 
 			Watermark.Name = "Watermark"
-			Watermark.Parent = ProxySex
+			Watermark.Parent = ProxyHub
 			Watermark.AnchorPoint = Vector2.new(1, 0)
-			Watermark.BackgroundColor3 = ProxySex.Colors.BGDBColor
+			Watermark.BackgroundColor3 = ProxyHub.Colors.BGDBColor
 
-			table.insert(ProxySex.Elements.BGDBColor,{
+			table.insert(ProxyHub.Elements.BGDBColor,{
 				Element = Watermark,
 				Property = 'BackgroundColor3'
 			});
@@ -7992,11 +8000,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 			ImageLabel:GetPropertyChangedSignal('ClipsDescendants'):Connect(function()
 				if ImageLabel.ClipsDescendants then
-					ProxySex:_Animation(Watermark , TweenInfo.new(0.2),{
+					ProxyHub:_Animation(Watermark , TweenInfo.new(0.2),{
 						Position = UDim2.new(1, -60, 0, 10)
 					})
 				else
-					ProxySex:_Animation(Watermark , TweenInfo.new(0.2),{
+					ProxyHub:_Animation(Watermark , TweenInfo.new(0.2),{
 						Position = UDim2.new(1, -10, 0, 10)
 					})
 				end;
@@ -8008,9 +8016,9 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			Logo.Name = "Logo"
 			Logo.Parent = Watermark
 			Logo.AnchorPoint = Vector2.new(1, 0.5)
-			Logo.BackgroundColor3 = ProxySex.Colors.BGDBColor
+			Logo.BackgroundColor3 = ProxyHub.Colors.BGDBColor
 
-			table.insert(ProxySex.Elements.BGDBColor,{
+			table.insert(ProxyHub.Elements.BGDBColor,{
 				Element = Logo,
 				Property = 'BackgroundColor3'
 			});
@@ -8028,29 +8036,29 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 			Frame.Parent = Logo
 			Frame.AnchorPoint = Vector2.new(0, 0.5)
-			Frame.BackgroundColor3 = ProxySex.Colors.Highlight
+			Frame.BackgroundColor3 = ProxyHub.Colors.Highlight
 			Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			Frame.BorderSizePixel = 0
 			Frame.Position = UDim2.new(1, -5, 0.5, 0)
 			Frame.Size = UDim2.new(0, 2, 1, 0)
 			Frame.ZIndex = 151
 
-			table.insert(ProxySex.Elements.Highlight,{
+			table.insert(ProxyHub.Elements.Highlight,{
 				Element = Frame,
 				Property = "BackgroundColor3"
 			});
 
-			ProxySex.Name = "ProxySex"
-			ProxySex.Parent = Logo
-			ProxySex.AnchorPoint = Vector2.new(0.5, 0.5)
-			ProxySex.BackgroundTransparency = 1.000
-			ProxySex.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			ProxySex.BorderSizePixel = 0
-			ProxySex.Position = UDim2.new(0.5, -2, 0.5, 0)
-			ProxySex.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
-			ProxySex.SizeConstraint = Enum.SizeConstraint.RelativeYY
-			ProxySex.ZIndex = 159
-			ProxySex.Image = Config.Logo
+			CompLogo.Name = "CompLogo"
+			CompLogo.Parent = Logo
+			CompLogo.AnchorPoint = Vector2.new(0.5, 0.5)
+			CompLogo.BackgroundTransparency = 1.000
+			CompLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			CompLogo.BorderSizePixel = 0
+			CompLogo.Position = UDim2.new(0.5, -2, 0.5, 0)
+			CompLogo.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
+			CompLogo.SizeConstraint = Enum.SizeConstraint.RelativeYY
+			CompLogo.ZIndex = 159
+			CompLogo.Image = Config.Logo
 
 			WaternarkList.Name = "WaternarkList"
 			WaternarkList.Parent = Watermark
@@ -8080,10 +8088,10 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			BackFrame.Position = UDim2.new(1, 0, 0.5, 0)
 			BackFrame.Size = UDim2.new(1, 30, 1, 0)
 
-			ProxySex:_Blur(BackFrame,WindowOpen);
+			ProxyHub:_Blur(BackFrame,WindowOpen);
 
 			UIListLayout:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
-				ProxySex:_Animation(Watermark,TweenInfo.new(0.4),{
+				ProxyHub:_Animation(Watermark,TweenInfo.new(0.4),{
 					Size = UDim2.new(0, UIListLayout.AbsoluteContentSize.X + 8, 0, 23)
 				});
 			end)
@@ -8091,7 +8099,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			local Args = {};
 
 			function Args:AddText(Watermark : Watermark)
-				Watermark = ProxySex.__CONFIG(Watermark, {
+				Watermark = ProxyHub.__CONFIG(Watermark, {
 					Text = "Watermark",
 					Icon = "info"
 				});
@@ -8107,7 +8115,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 				Icon.Size = UDim2.fromOffset(15,15)
 				Icon.SizeConstraint = Enum.SizeConstraint.RelativeYY
 				Icon.ZIndex = 156
-				Icon.Image = ProxySex:_GetIcon(Watermark.Icon);
+				Icon.Image = ProxyHub:_GetIcon(Watermark.Icon);
 
 				TextLabel.Parent = WaternarkList
 				TextLabel.BackgroundTransparency = 1.000
@@ -8117,11 +8125,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 				TextLabel.ZIndex = 156
 				TextLabel.Font = Enum.Font.GothamMedium
 				TextLabel.Text = Watermark.Text
-				TextLabel.TextColor3 = ProxySex.Colors.SwitchColor
+				TextLabel.TextColor3 = ProxyHub.Colors.SwitchColor
 				TextLabel.TextSize = 10.000
 				TextLabel.TextXAlignment = Enum.TextXAlignment.Left
 
-				table.insert(ProxySex.Elements.SwitchColor , {
+				table.insert(ProxyHub.Elements.SwitchColor , {
 					Element = TextLabel,
 					Property = 'TextColor3'
 				});
@@ -8178,13 +8186,13 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			WindowArgs:Toggle(WindowArgs.IsOpen)
 		end;
 
-		local Button = ProxySex:_Input(CloseWindow,function()
+		local Button = ProxyHub:_Input(CloseWindow,function()
 			WindowArgs:_ToggleUI()
 		end)
 
-		if not ProxySex:_IsMobile() then
+		if not ProxyHub:_IsMobile() then
 
-			ProxySex:_Hover(Button,function()
+			ProxyHub:_Hover(Button,function()
 				ImageLabel:SetAttribute("Hover",true);
 			end , function()
 				ImageLabel:SetAttribute("Hover",false);
@@ -8193,11 +8201,11 @@ table.insert(ProxySex.Elements.BGDBColor,{
 
 		table.insert(WindowArgs.THREADS,task.spawn(function()
 			while true do task.wait(0.15)
-				if ProxySex:_IsMobile() then
+				if ProxyHub:_IsMobile() then
 					ToggleCloseUI(true);
 
 					if WindowArgs.IsOpen then
-						ProxySex:_Animation(ImageLabel,TweenInfo.new(0.2),{
+						ProxyHub:_Animation(ImageLabel,TweenInfo.new(0.2),{
 							ImageTransparency = 0.35
 						});
 
@@ -8205,7 +8213,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 					else
 						ImageLabel:GetAttribute("Hover",true);
 
-						ProxySex:_Animation(ImageLabel,TweenInfo.new(0.2),{
+						ProxyHub:_Animation(ImageLabel,TweenInfo.new(0.2),{
 							ImageTransparency = 0.1
 						});
 					end;
@@ -8235,7 +8243,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		config.UserProfile = config.UserProfile or string.format("rbxthumb://type=AvatarHeadShot&id=%s&w=150&h=150",tostring(LocalPlayer.UserId));
 
 		UserText.Text = config.Username;
-		ProxySex.Image = config.Logo;
+		CompLogo.Image = config.Logo;
 		ExpireText.Text = config.ExpireDate;
 		WindowLabel.Text = config.WindowName;
 		UserProfile.Image = config.UserProfile;
@@ -8264,7 +8272,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		BlurElement.ZIndex = -100
 		BlurElement.Active = true
 
-		ProxySex:_Blur(BlurElement , WindowOpen);
+		ProxyHub:_Blur(BlurElement , WindowOpen);
 
 		local MovementFrame = Instance.new("Frame")
 
@@ -8278,9 +8286,9 @@ table.insert(ProxySex.Elements.BGDBColor,{
 		MovementFrame.Size = UDim2.new(1, 0, 1, 0)
 		MovementFrame.ZIndex = 9
 
-		ProxySex:Drag(MovementFrame,MainFrame,0.1)
+		ProxyHub:Drag(MovementFrame,MainFrame,0.1)
 
-		table.insert(ProxySex.Elements.Highlight,{
+		table.insert(ProxyHub.Elements.Highlight,{
 			Element = SelectionFrame,
 			Property = "BackgroundColor3"
 		});
@@ -8289,32 +8297,32 @@ table.insert(ProxySex.Elements.BGDBColor,{
 			BlurElement.Size = UDim2.new(1, TabFrame.AbsoluteSize.X - 35, 1, 0);
 			MovementFrame.Size = UDim2.new(1, TabFrame.AbsoluteSize.X - 35, 1, 0);
 
-			SelectionFrame.BackgroundColor3 = ProxySex.Colors.Highlight;
+			SelectionFrame.BackgroundColor3 = ProxyHub.Colors.Highlight;
 
 			if WindowArgs.SelectedTab and WindowArgs.IsOpen then
 				local vili = -(TabButtons.AbsolutePosition.Y - WindowArgs.SelectedTab.AbsolutePosition.Y) + 2;
 				local distance = (SelectionFrame.Position.Y.Offset - vili);
 
 				if vili < 0 or vili > TabButtons.AbsoluteSize.Y then
-					ProxySex:_Animation(SelectionFrame , TweenInfo.new(0.1) , {
+					ProxyHub:_Animation(SelectionFrame , TweenInfo.new(0.1) , {
 						BackgroundTransparency = 1
 					});
 				else
 					if math.abs(distance) <= 10 then
-						ProxySex:_Animation(SelectionFrame , TweenInfo.new(0.1) , {
+						ProxyHub:_Animation(SelectionFrame , TweenInfo.new(0.1) , {
 							BackgroundTransparency = 0
 						});
 
 						SelectionFrame.Position = UDim2.new(1,5,0,math.ceil(vili));
 					else
-						ProxySex:_Animation(SelectionFrame , TweenInfo.new(0.15) , {
+						ProxyHub:_Animation(SelectionFrame , TweenInfo.new(0.15) , {
 							BackgroundTransparency = 0,
 							Position = UDim2.new(1,5,0,math.ceil(vili))
 						});
 					end;
 				end;
 			else
-				ProxySex:_Animation(SelectionFrame , TweenInfo.new(0.15) , {
+				ProxyHub:_Animation(SelectionFrame , TweenInfo.new(0.15) , {
 					BackgroundTransparency = 1
 				});
 			end;
@@ -8330,7 +8338,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	local OldDelayThread;
 	local DurationTime = tick();
 
-	ProxySex:_Hover(TabFrame , function()
+	ProxyHub:_Hover(TabFrame , function()
 		if OldDelayThread then
 			task.cancel(OldDelayThread);
 			OldDelayThread = nil;
@@ -8363,7 +8371,7 @@ table.insert(ProxySex.Elements.BGDBColor,{
 	return WindowArgs;
 end;
 
-function ProxySex:GetDate(Time)
+function ProxyHub:GetDate(Time)
 	Time = Time or tick();
 
 	local val = os.date('*t',Time);
@@ -8371,7 +8379,7 @@ function ProxySex:GetDate(Time)
 	return string.format("%s/%s/%s",val.day,val.month,val.year);
 end;
 
-function ProxySex:GetTimeNow(Time)
+function ProxyHub:GetTimeNow(Time)
 	Time = Time or tick();
 
 	local val = os.date('*t',Time);
@@ -8379,10 +8387,10 @@ function ProxySex:GetTimeNow(Time)
 	return string.format("%s:%s:%s",val.hour,val.min,val.sec);
 end;
 
-function ProxySex:GetConfig(Type: string)
+function ProxyHub:GetConfig(Type: string)
 	local ConfigFlags = {};
 
-	for i,v in next , ProxySex.Flags do
+	for i,v in next , ProxyHub.Flags do
 		local Value = v:GetValue();
 		local Suf = {};
 
@@ -8423,15 +8431,15 @@ function ProxySex:GetConfig(Type: string)
 	return ConfigFlags;
 end;
 
-function ProxySex:_Path(...)
+function ProxyHub:_Path(...)
 	local args = {...};
 
 	return table.concat(args, "/");
 end;
 
-function ProxySex:ConfigManager(ConfigManager: ConfigManager) : ConfigFunctions
-	ConfigManager = ProxySex.__CONFIG(ConfigManager , {
-		Directory = "ProxySex",
+function ProxyHub:ConfigManager(ConfigManager: ConfigManager) : ConfigFunctions
+	ConfigManager = ProxyHub.__CONFIG(ConfigManager , {
+		Directory = "ProxyHub",
 		Config = "Software"
 	});
 
@@ -8439,36 +8447,36 @@ function ProxySex:ConfigManager(ConfigManager: ConfigManager) : ConfigFunctions
 		makefolder(ConfigManager.Directory);
 	end;
 
-	if not isfolder(ProxySex:_Path(ConfigManager.Directory , ConfigManager.Config)) then
-		makefolder(ProxySex:_Path(ConfigManager.Directory , ConfigManager.Config));
+	if not isfolder(ProxyHub:_Path(ConfigManager.Directory , ConfigManager.Config)) then
+		makefolder(ProxyHub:_Path(ConfigManager.Directory , ConfigManager.Config));
 	end;
 
 	local Args = {
-		Directory = ProxySex:_Path(ConfigManager.Directory , ConfigManager.Config);	
+		Directory = ProxyHub:_Path(ConfigManager.Directory , ConfigManager.Config);	
 	};
 
 	function Args:WriteConfig(Config: WriteConfig)
-		Config = ProxySex.__CONFIG(Config , {
+		Config = ProxyHub.__CONFIG(Config , {
 			Name = "Config",
 			Author = LocalPlayer.Name,
 		});
 
-		local Flags = ProxySex:GetConfig("MK");
+		local Flags = ProxyHub:GetConfig("MK");
 
 		Flags["__INFORMATION"] = {
 			Type = "Information",
 			Author = Config.Author,
 			Name = Config.Name,
-			CreatedDate = ProxySex:GetDate()
+			CreatedDate = ProxyHub:GetDate()
 		};
 
-		writefile(ProxySex:_Path(Args.Directory , Config.Name) , HttpService:JSONEncode(Flags));
+		writefile(ProxyHub:_Path(Args.Directory , Config.Name) , HttpService:JSONEncode(Flags));
 	end;
 
 	function Args:LoadConfigFromString(str: string)
 		local decoded = HttpService:JSONDecode(str);
 
-		local Flags = ProxySex:GetConfig("KV");
+		local Flags = ProxyHub:GetConfig("KV");
 
 		for i,v in next , decoded do
 			if v and v.Flag then
@@ -8494,11 +8502,11 @@ function ProxySex:ConfigManager(ConfigManager: ConfigManager) : ConfigFunctions
 	end;
 
 	function Args:GetCurrentConfig()
-		return ProxySex:GetConfig("MK")
+		return ProxyHub:GetConfig("MK")
 	end;
 
 	function Args:ReadInfo(ConfigName: string)
-		local _path = ProxySex:_Path(Args.Directory , ConfigName);
+		local _path = ProxyHub:_Path(Args.Directory , ConfigName);
 
 		if isfile(_path) then
 			local info = readfile(_path);
@@ -8540,7 +8548,7 @@ function ProxySex:ConfigManager(ConfigManager: ConfigManager) : ConfigFunctions
 	end;
 
 	function Args:DeleteConfig(ConfigName)
-		local _path = ProxySex:_Path(Args.Directory,ConfigName);
+		local _path = ProxyHub:_Path(Args.Directory,ConfigName);
 
 		if isfile(_path) then
 			delfile(_path);
@@ -8552,14 +8560,14 @@ function ProxySex:ConfigManager(ConfigManager: ConfigManager) : ConfigFunctions
 	end;
 
 	function Args:LoadConfig(ConfigName: string)
-		local _path = ProxySex:_Path(Args.Directory,ConfigName);
+		local _path = ProxyHub:_Path(Args.Directory,ConfigName);
 
 		if isfile(_path) then
 			local info = readfile(_path);
 
 			local decoded = HttpService:JSONDecode(info);
 
-			local Flags = ProxySex:GetConfig("KV");
+			local Flags = ProxyHub:GetConfig("KV");
 
 			for i,v in next , decoded do
 				if v and v.Flag then
@@ -8588,25 +8596,33 @@ function ProxySex:ConfigManager(ConfigManager: ConfigManager) : ConfigFunctions
 	return Args;
 end;
 
+--!strict
+
+-- ProxySex:Loader is a Lua function that creates a loading screen effect with animated text and a vignette.
+-- It takes an optional `Duration` in seconds to control how long the loading screen is displayed before it fades out.
 function ProxySex:Loader(Duration: number?)
+    -- Create the main GUI screen
     local LoaderGui = Instance.new("ScreenGui")
-    LoaderGui.Name = "AuroraLoader"
+    LoaderGui.Name = "ProxyLoader"
     LoaderGui.Parent = game:GetService("CoreGui")
     LoaderGui.Enabled = true
     LoaderGui.ResetOnSpawn = false
     LoaderGui.IgnoreGuiInset = true
     LoaderGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
 
+    -- Create the main UI elements
     local Loader = Instance.new("Frame")
     local Vignette = Instance.new("ImageLabel")
     local TextContainer = Instance.new("Frame")
-    local LetterA = Instance.new("TextLabel")
-    local LetterU = Instance.new("TextLabel")
-    local LetterR1 = Instance.new("TextLabel")
-    local LetterO = Instance.new("TextLabel")
-    local LetterR2 = Instance.new("TextLabel")
-    local LetterA2 = Instance.new("TextLabel")
 
+    -- Define the TextLabel variables for the letters spelling "PROXY"
+    local LetterP = Instance.new("TextLabel")
+    local LetterR = Instance.new("TextLabel")
+    local LetterO = Instance.new("TextLabel")
+    local LetterX = Instance.new("TextLabel")
+    local LetterY = Instance.new("TextLabel")
+
+    -- Set properties for the main loader frame
     Loader.Name = "Loader"
     Loader.Parent = LoaderGui
     Loader.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -8617,6 +8633,7 @@ function ProxySex:Loader(Duration: number?)
     Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
     Loader.Size = UDim2.new(1, 0, 1, 0)
 
+    -- Set properties for the text container frame
     TextContainer.Name = "TextContainer"
     TextContainer.Parent = Loader
     TextContainer.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -8625,8 +8642,9 @@ function ProxySex:Loader(Duration: number?)
     TextContainer.Size = UDim2.new(0, 800, 0, 120) 
     TextContainer.ZIndex = 100
 
-    local textColor = Color3.fromRGB(255, 215, 0) 
+    local textColor = Color3.fromRGB(35, 71, 139) 
 
+    -- Helper function to set up the properties of a single letter
     local function setupLetter(letter: TextLabel, text: string, position: UDim2)
         letter.Parent = TextContainer
         letter.BackgroundTransparency = 1
@@ -8643,13 +8661,14 @@ function ProxySex:Loader(Duration: number?)
         letter.ZIndex = 100
     end
 
-    setupLetter(LetterA, "A", UDim2.new(0.1, 0, 0.5, 0))
-    setupLetter(LetterU, "U", UDim2.new(0.2, 0, 0.5, 0))
-    setupLetter(LetterR1, "R", UDim2.new(0.3, 0, 0.5, 0))
-    setupLetter(LetterO, "O", UDim2.new(0.4, 0, 0.5, 0))
-    setupLetter(LetterR2, "R", UDim2.new(0.5, 0, 0.5, 0))
-    setupLetter(LetterA2, "A", UDim2.new(0.6, 0, 0.5, 0))
+    -- Setup each letter with correct variables and text
+    setupLetter(LetterP, "P", UDim2.new(0.1, 0, 0.5, 0))
+    setupLetter(LetterR, "R", UDim2.new(0.2, 0, 0.5, 0))
+    setupLetter(LetterO, "O", UDim2.new(0.3, 0, 0.5, 0))
+    setupLetter(LetterX, "X", UDim2.new(0.4, 0, 0.5, 0))
+    setupLetter(LetterY, "Y", UDim2.new(0.5, 0, 0.5, 0))
 
+    -- Set properties for the vignette
     Vignette.Name = "Vignette"
     Vignette.Parent = Loader
     Vignette.BackgroundTransparency = 1.000
@@ -8662,27 +8681,30 @@ function ProxySex:Loader(Duration: number?)
     Vignette.AnchorPoint = Vector2.new(0.5,0.5)
     Vignette.Position = UDim2.fromScale(0.5,0.5)
 
+    -- Get TweenService and create a BindableEvent for yielding the function
     local TweenService = game:GetService("TweenService")
     local Event = Instance.new('BindableEvent')
 
+    -- Start the loader animation sequence
     TweenService:Create(Loader, TweenInfo.new(0.55, Enum.EasingStyle.Quint), { BackgroundTransparency = 0.5 }):Play()
-    task.delay(0.5,function()
-        TweenService:Create(LetterA, TweenInfo.new(0.75, Enum.EasingStyle.Quint), { TextTransparency = 0 }):Play()
-        local otherLetters = {LetterU, LetterR1, LetterO, LetterR2, LetterA2}
-        for _, letter in pairs(otherLetters) do
-            letter.Position = UDim2.new(0.1, 0, 0.5, 0)
-        end
-
-        task.delay(0.25,function()
+    task.delay(0.5, function()
+        -- Animate the first letter ("P") to appear
+        TweenService:Create(LetterP, TweenInfo.new(0.75, Enum.EasingStyle.Quint), { TextTransparency = 0 }):Play()
+        
+        -- Corrected list of letters to animate
+        local otherLetters = {LetterR, LetterO, LetterX, LetterY}
+        
+        -- Start the vignette fade-in animation
+        task.delay(0.25, function()
             TweenService:Create(Vignette, TweenInfo.new(5), { ImageTransparency = 0.2 }):Play()
             task.wait(4)
 
+            -- Animate the rest of the letters to their correct positions
             local letterPositions = {
-                {LetterU, UDim2.new(0.2, 0, 0.5, 0)},
-                {LetterR1, UDim2.new(0.3, 0, 0.5, 0)},
-                {LetterO, UDim2.new(0.4, 0, 0.5, 0)},
-                {LetterR2, UDim2.new(0.5, 0, 0.5, 0)},
-                {LetterA2, UDim2.new(0.6, 0, 0.5, 0)}
+                {LetterR, UDim2.new(0.2, 0, 0.5, 0)},
+                {LetterO, UDim2.new(0.3, 0, 0.5, 0)},
+                {LetterX, UDim2.new(0.4, 0, 0.5, 0)},
+                {LetterY, UDim2.new(0.5, 0, 0.5, 0)},
             }
 
             for i, letterData in pairs(letterPositions) do
@@ -8696,29 +8718,38 @@ function ProxySex:Loader(Duration: number?)
                 end)
             end
 
+            -- Wait for the specified duration or a default of 2.5 seconds
             task.wait(Duration or 2.5)
-            TweenService:Create(Vignette,TweenInfo.new(3,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{ Size = UDim2.new(2, 0, 2, 0) }):Play()
-            local allLetters = {LetterA, LetterU, LetterR1, LetterO, LetterR2, LetterA2}
+
+            -- Animate the fade-out sequence
+            TweenService:Create(Vignette, TweenInfo.new(3, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), { Size = UDim2.new(2, 0, 2, 0) }):Play()
+            local allLetters = {LetterP, LetterR, LetterO, LetterX, LetterY}
             for _, letter in pairs(allLetters) do
-                TweenService:Create(letter,TweenInfo.new(0.75,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{ TextTransparency = 1, }):Play()
+                TweenService:Create(letter, TweenInfo.new(0.75, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), { TextTransparency = 1, }):Play()
             end
-            TweenService:Create(Loader,TweenInfo.new(1.5,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{ BackgroundTransparency = 1 }):Play()
-            task.delay(0.1,function()
-                TweenService:Create(Vignette,TweenInfo.new(1,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{ ImageTransparency = 1 }):Play()
+            TweenService:Create(Loader, TweenInfo.new(1.5, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), { BackgroundTransparency = 1 }):Play()
+
+            -- Clean up the GUI after the animations
+            task.delay(0.1, function()
+                TweenService:Create(Vignette, TweenInfo.new(1, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), { ImageTransparency = 1 }):Play()
                 task.wait(0.2)
-                task.delay(3,function()
+                task.delay(3, function()
                     LoaderGui:Destroy()
                 end)
             end)
-            task.delay(0.6,function()
+            
+            
+            task.delay(0.6, function()
                 Event:Fire()
             end)
         end)
     end)
+    
+    
     return { yield = function() return Event.Event:Wait() end }
 end
 
-function ProxySex.newNotify()
+function ProxyHub.newNotify()
 	local Notification = Instance.new("ScreenGui")
 	local NotifyContainer = Instance.new("Frame")
 	local UIListLayout = Instance.new("UIListLayout")
@@ -8747,8 +8778,8 @@ function ProxySex.newNotify()
 
 	return {
 		new = function(Notify: Notify) : NotifyPayback
-			Notify = ProxySex.__CONFIG(Notify, {
-				Icon = ProxySex.Logo,
+			Notify = ProxyHub.__CONFIG(Notify, {
+				Icon = ProxyHub.Logo,
 				Title = "Notification",
 				Content = "Content",
 				Duration = 5,
@@ -8759,7 +8790,7 @@ function ProxySex.newNotify()
 			local BlockFrame = Instance.new("Frame")
 			local NotifyFrame = Instance.new("Frame")
 			local UICorner = Instance.new("UICorner")
-			local ProxySex = Instance.new("ImageLabel")
+			local CompLogo = Instance.new("ImageLabel")
 			local Header = Instance.new("TextLabel")
 			local Body = Instance.new("TextLabel")
 			local TimeLeftFrame = Instance.new("Frame")
@@ -8792,16 +8823,16 @@ function ProxySex.newNotify()
 			UICorner.CornerRadius = UDim.new(0, 4)
 			UICorner.Parent = NotifyFrame
 
-			ProxySex.Name = "ProxySex"
-			ProxySex.Parent = NotifyFrame
-			ProxySex.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			ProxySex.BackgroundTransparency = 1.000
-			ProxySex.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			ProxySex.BorderSizePixel = 0
-			ProxySex.Position = UDim2.new(0, 6, 0, 6)
-			ProxySex.Size = UDim2.new(0, 25, 0, 25)
-			ProxySex.ZIndex = 4
-			ProxySex.Image = ProxySex:_GetIcon(Notify.Icon);
+			CompLogo.Name = "CompLogo"
+			CompLogo.Parent = NotifyFrame
+			CompLogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			CompLogo.BackgroundTransparency = 1.000
+			CompLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			CompLogo.BorderSizePixel = 0
+			CompLogo.Position = UDim2.new(0, 6, 0, 6)
+			CompLogo.Size = UDim2.new(0, 25, 0, 25)
+			CompLogo.ZIndex = 4
+			CompLogo.Image = ProxyHub:_GetIcon(Notify.Icon);
 
 			Header.Name = "Header"
 			Header.Parent = NotifyFrame
@@ -8814,7 +8845,7 @@ function ProxySex.newNotify()
 			Header.ZIndex = 3
 			Header.Font = Enum.Font.GothamBold
 			Header.Text = Notify.Title
-			Header.TextColor3 = ProxySex.Colors.SwitchColor
+			Header.TextColor3 = ProxyHub.Colors.SwitchColor
 			Header.TextSize = 14.000
 			Header.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -8829,7 +8860,7 @@ function ProxySex.newNotify()
 			Body.ZIndex = 3
 			Body.Font = Enum.Font.GothamMedium
 			Body.Text = Notify.Content
-			Body.TextColor3 = ProxySex.Colors.SwitchColor
+			Body.TextColor3 = ProxyHub.Colors.SwitchColor
 			Body.TextSize = 12.000
 			Body.TextTransparency = 0.500
 			Body.TextXAlignment = Enum.TextXAlignment.Left
@@ -8851,7 +8882,7 @@ function ProxySex.newNotify()
 
 			TimeLeft.Name = "TimeLeft"
 			TimeLeft.Parent = TimeLeftFrame
-			TimeLeft.BackgroundColor3 = ProxySex.Colors.Highlight
+			TimeLeft.BackgroundColor3 = ProxyHub.Colors.Highlight
 			TimeLeft.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			TimeLeft.BorderSizePixel = 0
 			TimeLeft.Size = UDim2.new(0, 0, 1, 0)
@@ -8868,14 +8899,14 @@ function ProxySex.newNotify()
 				local MainY = TitleScale.Y + ((Body.Text:byte() and BodyScale.Y) or 1);
 
 				if BlockFrame:GetAttribute('Already') then
-					ProxySex:_Animation(BlockFrame,TweenInfo.new(0.3),{
+					ProxyHub:_Animation(BlockFrame,TweenInfo.new(0.3),{
 						Size = UDim2.new(0,MainX + 75,0,MainY + 35)
 					});
 				else
 					BlockFrame:SetAttribute('Already',true)
 					BlockFrame.Size = UDim2.new(0, MainX + 45, 0, 0);
 
-					ProxySex:_Animation(BlockFrame,TweenInfo.new(0.3),{
+					ProxyHub:_Animation(BlockFrame,TweenInfo.new(0.3),{
 						Size = UDim2.new(0,MainX + 75,0,MainY + 35)
 					});
 				end;
@@ -8884,13 +8915,13 @@ function ProxySex.newNotify()
 			UpdateText();
 
 			local Close = function()
-				ProxySex:_Animation(NotifyFrame,TweenInfo.new(0.65,Enum.EasingStyle.Quint),{
+				ProxyHub:_Animation(NotifyFrame,TweenInfo.new(0.65,Enum.EasingStyle.Quint),{
 					Position = UDim2.new(1,200,0,0)
 				});
 
 				task.wait(0.3);
 
-				ProxySex:_Animation(BlockFrame,TweenInfo.new(0.3),{
+				ProxyHub:_Animation(BlockFrame,TweenInfo.new(0.3),{
 					Size = UDim2.new(1,0,0,0)
 				});
 
@@ -8900,13 +8931,13 @@ function ProxySex.newNotify()
 			end;
 
 			local Show = function()
-				ProxySex:_Animation(NotifyFrame,TweenInfo.new(0.5,Enum.EasingStyle.Quint),{
+				ProxyHub:_Animation(NotifyFrame,TweenInfo.new(0.5,Enum.EasingStyle.Quint),{
 					Position = UDim2.new(0,0,0,0)
 				});
 			end;
 
 			if typeof(Notify.Duration) == 'number' and Notify.Duration ~= math.huge then
-				ProxySex:_Animation(TimeLeft,TweenInfo.new(Notify.Duration + 0.2,Enum.EasingStyle.Linear),{
+				ProxyHub:_Animation(TimeLeft,TweenInfo.new(Notify.Duration + 0.2,Enum.EasingStyle.Linear),{
 					Size = UDim2.new(1, 0, 1, 0)
 				});
 
@@ -8942,7 +8973,7 @@ function ProxySex.newNotify()
 						new = (new / 100);	
 					end;
 
-					ProxySex:_Animation(TimeLeft,TweenInfo.new(Time or 0.85,(Time and Enum.EasingStyle.Linear) or Enum.EasingStyle.Quint),{
+					ProxyHub:_Animation(TimeLeft,TweenInfo.new(Time or 0.85,(Time and Enum.EasingStyle.Linear) or Enum.EasingStyle.Quint),{
 						Size = UDim2.new(new, 0, 1, 0)
 					});
 
@@ -8955,4 +8986,4 @@ function ProxySex.newNotify()
 	};
 end;
 
-return ProxySex;
+return ProxyHub;
