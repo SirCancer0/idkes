@@ -8596,11 +8596,8 @@ function ProxyHub:ConfigManager(ConfigManager: ConfigManager) : ConfigFunctions
 	return Args;
 end;
 
---!strict
 
--- ProxySex:Loader is a Lua function that creates a loading screen effect with animated text and a vignette.
--- It takes an optional `Duration` in seconds to control how long the loading screen is displayed before it fades out.
-function ProxySex:Loader(Duration: number?)
+function ProxyHub:Loader(Duration)
     -- Create the main GUI screen
     local LoaderGui = Instance.new("ScreenGui")
     LoaderGui.Name = "Loader"
