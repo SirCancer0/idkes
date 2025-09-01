@@ -325,13 +325,13 @@ local RunService: RunService = cloneref(game:GetService('RunService'));
 local Players: Players = cloneref(game:GetService('Players'));
 local HttpService: HttpService = cloneref(game:GetService('HttpService'));
 local LocalPlayer: Player = Players.LocalPlayer;
-local CoreGui: PlayerGui = (gethui and gethui()) or cloneref(game:FindFirstChild('CoreGui')) or LocalPlayer.PlayerGui;
+local CoreGui = (gethui and gethui()) or cloneref(game:FindFirstChild('CoreGui')) or game:GetService("StarterGui")
 local Mouse = LocalPlayer:GetMouse();
 local CurrentCamera = workspace.CurrentCamera;
 
 local ProxyHub = {
     Version = '1.6',
-    Logo = "rbxassetid://120245531583106",
+    Logo = "rbxassetid://107490050204222",
     Windows = {},
     Scale = {
         Window = UDim2.new(0, 456,0, 499),
