@@ -598,8 +598,8 @@ ProxyHub.Lucide = {
 	["lucide-coins"] = "rbxassetid://10709811110",
 	["lucide-columns"] = "rbxassetid://10709811261",
 	["lucide-command"] = "rbxassetid://10709811365",
-	["lucide-compass"] = "rbxassetid://10709811445",
-	["lucide-component"] = "rbxassetid://10709811595",
+	["lucide-ProxyLogoass"] = "rbxassetid://10709811445",
+	["lucide-ProxyLogoonent"] = "rbxassetid://10709811595",
 	["lucide-concierge-bell"] = "rbxassetid://10709811706",
 	["lucide-connection"] = "rbxassetid://10747361219",
 	["lucide-contact"] = "rbxassetid://10709811834",
@@ -5101,13 +5101,13 @@ function ProxyHub.new(Config : Window)
 		WindowArgs.AlwayShowTab = true;
 	end;
 
-	local ProxyHub = Instance.new("ScreenGui")
+	local ScreenGuiInstance = Instance.new("ScreenGui")
 	local MainFrame = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
 	local TabFrame = Instance.new("Frame")
 	local UICorner_2 = Instance.new("UICorner")
 	local LineFrame1 = Instance.new("Frame")
-	local CompLogo = Instance.new("ImageLabel")
+	local ProxyLogo = Instance.new("ImageLabel")
 	local WindowLabel = Instance.new("TextLabel")
 	local TabButtons = Instance.new("Frame")
 	local SelectionFrame = Instance.new("Frame")
@@ -5125,17 +5125,20 @@ function ProxyHub.new(Config : Window)
 		TabButtonScrollingFrame.CanvasSize = UDim2.fromOffset(0,UIListLayout.AbsoluteContentSize.Y)
 	end);
 
-	ProxyHub.Name = "u?name=ProxyHub_"..ProxyHub:_RandomString();
-	ProxyHub.Parent = CoreGui;
-	ProxyHub.ResetOnSpawn = false
-	ProxyHub.IgnoreGuiInset = true;
-	ProxyHub.ZIndexBehavior = Enum.ZIndexBehavior.Global;
+	-- ### AND HERE ###
+	-- Calling the function on the library table (ProxyHub)
+	-- and setting the name of the new GUI instance (ScreenGuiInstance)
+	ScreenGuiInstance.Name = "u?name=ProxyHub_"..ProxyHub:_RandomString();
+	ScreenGuiInstance.Parent = CoreGui;
+	ScreenGuiInstance.ResetOnSpawn = false
+	ScreenGuiInstance.IgnoreGuiInset = true;
+	ScreenGuiInstance.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 
-	table.insert(ProxyHub.Windows , ProxyHub);
+	table.insert(ProxyHub.Windows , ScreenGuiInstance);
 
 	MainFrame.Active = true;
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = ProxyHub
+	MainFrame.Parent = ScreenGuiInstance -- ### FIX HERE ###
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = ProxyHub.Colors.BGDBColor
 
@@ -5201,14 +5204,14 @@ function ProxyHub.new(Config : Window)
 	LineFrame1.Position = UDim2.new(1, -5, 0, 0)
 	LineFrame1.Size = UDim2.new(0, 20, 1, 0)
 
-	CompLogo.Name = "CompLogo"
-	CompLogo.Parent = TabFrame
-	CompLogo.BackgroundTransparency = 1.000
-	CompLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	CompLogo.BorderSizePixel = 0
-	CompLogo.Position = UDim2.new(0, 9, 0, 7)
-	CompLogo.Size = UDim2.new(0, 45, 0, 45)
-	CompLogo.Image = Config.Logo
+	ProxyLogo.Name = "ProxyLogo"
+	ProxyLogo.Parent = TabFrame
+	ProxyLogo.BackgroundTransparency = 1.000
+	ProxyLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ProxyLogo.BorderSizePixel = 0
+	ProxyLogo.Position = UDim2.new(0, 9, 0, 7)
+	ProxyLogo.Size = UDim2.new(0, 45, 0, 45)
+	ProxyLogo.Image = Config.Logo
 
 	WindowLabel.Name = "WindowLabel"
 	WindowLabel.Parent = TabFrame
@@ -5362,7 +5365,7 @@ function ProxyHub.new(Config : Window)
 				Position = UDim2.new(0.5, 0, 0.5, 0)
 			})
 
-			ProxyHub:_Animation(CompLogo,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(ProxyLogo,TweenInfo.new(0.2),{
 				ImageTransparency = 0
 			})
 
@@ -5408,7 +5411,7 @@ function ProxyHub.new(Config : Window)
 				Size = UDim2.new(0, 1, 1, 0)
 			})
 
-			ProxyHub:_Animation(CompLogo,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(ProxyLogo,TweenInfo.new(0.2),{
 				ImageTransparency = 1
 			})
 
@@ -7977,7 +7980,7 @@ function ProxyHub.new(Config : Window)
 			local Logo = Instance.new("Frame")
 			local UICorner_2 = Instance.new("UICorner")
 			local Frame = Instance.new("Frame")
-			local CompLogo = Instance.new("ImageLabel")
+			local ProxyHub = Instance.new("ImageLabel")
 			local WaternarkList = Instance.new("Frame")
 			local UIListLayout = Instance.new("UIListLayout")
 
@@ -8048,17 +8051,17 @@ function ProxyHub.new(Config : Window)
 				Property = "BackgroundColor3"
 			});
 
-			CompLogo.Name = "CompLogo"
-			CompLogo.Parent = Logo
-			CompLogo.AnchorPoint = Vector2.new(0.5, 0.5)
-			CompLogo.BackgroundTransparency = 1.000
-			CompLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			CompLogo.BorderSizePixel = 0
-			CompLogo.Position = UDim2.new(0.5, -2, 0.5, 0)
-			CompLogo.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
-			CompLogo.SizeConstraint = Enum.SizeConstraint.RelativeYY
-			CompLogo.ZIndex = 159
-			CompLogo.Image = Config.Logo
+			ProxyHub.Name = "ProxyHub"
+			ProxyHub.Parent = Logo
+			ProxyHub.AnchorPoint = Vector2.new(0.5, 0.5)
+			ProxyHub.BackgroundTransparency = 1.000
+			ProxyHub.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			ProxyHub.BorderSizePixel = 0
+			ProxyHub.Position = UDim2.new(0.5, -2, 0.5, 0)
+			ProxyHub.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
+			ProxyHub.SizeConstraint = Enum.SizeConstraint.RelativeYY
+			ProxyHub.ZIndex = 159
+			ProxyHub.Image = Config.Logo
 
 			WaternarkList.Name = "WaternarkList"
 			WaternarkList.Parent = Watermark
@@ -8243,7 +8246,7 @@ function ProxyHub.new(Config : Window)
 		config.UserProfile = config.UserProfile or string.format("rbxthumb://type=AvatarHeadShot&id=%s&w=150&h=150",tostring(LocalPlayer.UserId));
 
 		UserText.Text = config.Username;
-		CompLogo.Image = config.Logo;
+		ProxyLogo.Image = config.Logo;
 		ExpireText.Text = config.ExpireDate;
 		WindowLabel.Text = config.WindowName;
 		UserProfile.Image = config.UserProfile;
@@ -8787,7 +8790,7 @@ function ProxyHub.newNotify()
 			local BlockFrame = Instance.new("Frame")
 			local NotifyFrame = Instance.new("Frame")
 			local UICorner = Instance.new("UICorner")
-			local CompLogo = Instance.new("ImageLabel")
+			local ProxyLogo = Instance.new("ImageLabel")
 			local Header = Instance.new("TextLabel")
 			local Body = Instance.new("TextLabel")
 			local TimeLeftFrame = Instance.new("Frame")
@@ -8820,16 +8823,16 @@ function ProxyHub.newNotify()
 			UICorner.CornerRadius = UDim.new(0, 4)
 			UICorner.Parent = NotifyFrame
 
-			CompLogo.Name = "CompLogo"
-			CompLogo.Parent = NotifyFrame
-			CompLogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			CompLogo.BackgroundTransparency = 1.000
-			CompLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			CompLogo.BorderSizePixel = 0
-			CompLogo.Position = UDim2.new(0, 6, 0, 6)
-			CompLogo.Size = UDim2.new(0, 25, 0, 25)
-			CompLogo.ZIndex = 4
-			CompLogo.Image = ProxyHub:_GetIcon(Notify.Icon);
+			ProxyLogo.Name = "ProxyLogo"
+			ProxyLogo.Parent = NotifyFrame
+			ProxyLogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ProxyLogo.BackgroundTransparency = 1.000
+			ProxyLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			ProxyLogo.BorderSizePixel = 0
+			ProxyLogo.Position = UDim2.new(0, 6, 0, 6)
+			ProxyLogo.Size = UDim2.new(0, 25, 0, 25)
+			ProxyLogo.ZIndex = 4
+			ProxyLogo.Image = ProxyHub:_GetIcon(Notify.Icon);
 
 			Header.Name = "Header"
 			Header.Parent = NotifyFrame
