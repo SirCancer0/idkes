@@ -1,12 +1,3 @@
---[[
-    		Fatality-Dark Interface
-
-    Author: 4lpaca
-    License: MIT
-    Github: https://github.com/4lpaca-pin/ProxyHub
---]]
-
---- Export Types ---
 
 export type cloneref = (target: Instance) -> Instance;
 
@@ -598,8 +589,8 @@ ProxyHub.Lucide = {
 	["lucide-coins"] = "rbxassetid://10709811110",
 	["lucide-columns"] = "rbxassetid://10709811261",
 	["lucide-command"] = "rbxassetid://10709811365",
-	["lucide-ProxyLogoass"] = "rbxassetid://10709811445",
-	["lucide-ProxyLogoonent"] = "rbxassetid://10709811595",
+	["lucide-compass"] = "rbxassetid://10709811445",
+	["lucide-component"] = "rbxassetid://10709811595",
 	["lucide-concierge-bell"] = "rbxassetid://10709811706",
 	["lucide-connection"] = "rbxassetid://10747361219",
 	["lucide-contact"] = "rbxassetid://10709811834",
@@ -4915,18 +4906,18 @@ function ProxyHub:SetTheme(name)
 		};
 	elseif name == "Default" then
 		ProxyHub.Colors = {
-			Highlight = Color3.fromRGB(17, 238, 253),
-			Toggle = Color3.fromRGB(14, 203, 213),
-			Risky = Color3.fromRGB(251, 255, 39),
-			BGDBColor = Color3.fromRGB(22, 24, 29),
-			BlockColor = Color3.fromRGB(28, 29, 34),
-			StrokeColor = Color3.fromRGB(37, 38, 43),
-			SwitchColor = Color3.fromRGB(255, 255, 255),
-			DropColor = Color3.fromRGB(33, 35, 39),
-			MouseEnter = Color3.fromRGB(55, 58, 65),
-			BlockBackground = Color3.fromRGB(39, 40, 47),
-			LineColor = Color3.fromRGB(65, 65, 65),
-			HighStrokeColor = Color3.fromRGB(55, 56, 63),
+    Highlight = Color3.fromRGB(85, 172, 238),
+    Toggle = Color3.fromRGB(68, 137, 201),
+    Risky = Color3.fromRGB(255, 105, 97),
+    BGDBColor = Color3.fromRGB(15, 23, 42),
+    BlockColor = Color3.fromRGB(20, 31, 56),
+    StrokeColor = Color3.fromRGB(30, 45, 78),
+    SwitchColor = Color3.fromRGB(220, 230, 240),
+    DropColor = Color3.fromRGB(25, 38, 65),
+    MouseEnter = Color3.fromRGB(40, 55, 90),
+    BlockBackground = Color3.fromRGB(35, 50, 85),
+    LineColor = Color3.fromRGB(50, 65, 100),
+    HighStrokeColor = Color3.fromRGB(45, 60, 95),
 		};
 	elseif name == "Dark Blue" then
 		ProxyHub.Colors = {
@@ -5101,7 +5092,7 @@ function ProxyHub.new(Config : Window)
 		WindowArgs.AlwayShowTab = true;
 	end;
 
-	local ScreenGuiInstance = Instance.new("ScreenGui")
+	local ProxyHub = Instance.new("ScreenGui")
 	local MainFrame = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
 	local TabFrame = Instance.new("Frame")
@@ -5125,20 +5116,17 @@ function ProxyHub.new(Config : Window)
 		TabButtonScrollingFrame.CanvasSize = UDim2.fromOffset(0,UIListLayout.AbsoluteContentSize.Y)
 	end);
 
-	-- ### AND HERE ###
-	-- Calling the function on the library table (ProxyHub)
-	-- and setting the name of the new GUI instance (ScreenGuiInstance)
-	ScreenGuiInstance.Name = "u?name=ProxyHub_"..ProxyHub:_RandomString();
-	ScreenGuiInstance.Parent = CoreGui;
-	ScreenGuiInstance.ResetOnSpawn = false
-	ScreenGuiInstance.IgnoreGuiInset = true;
-	ScreenGuiInstance.ZIndexBehavior = Enum.ZIndexBehavior.Global;
+	ProxyHub.Name = "u?name=ProxyHub_"..ProxyHub:_RandomString();
+	ProxyHub.Parent = CoreGui;
+	ProxyHub.ResetOnSpawn = false
+	ProxyHub.IgnoreGuiInset = true;
+	ProxyHub.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 
-	table.insert(ProxyHub.Windows , ScreenGuiInstance);
+	table.insert(ProxyHub.Windows , ProxyHub);
 
 	MainFrame.Active = true;
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = ScreenGuiInstance -- ### FIX HERE ###
+	MainFrame.Parent = ProxyHub
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = ProxyHub.Colors.BGDBColor
 
@@ -7980,7 +7968,7 @@ function ProxyHub.new(Config : Window)
 			local Logo = Instance.new("Frame")
 			local UICorner_2 = Instance.new("UICorner")
 			local Frame = Instance.new("Frame")
-			local ProxyHub = Instance.new("ImageLabel")
+			local ProxyLogo = Instance.new("ImageLabel")
 			local WaternarkList = Instance.new("Frame")
 			local UIListLayout = Instance.new("UIListLayout")
 
@@ -8051,17 +8039,17 @@ function ProxyHub.new(Config : Window)
 				Property = "BackgroundColor3"
 			});
 
-			ProxyHub.Name = "ProxyHub"
-			ProxyHub.Parent = Logo
-			ProxyHub.AnchorPoint = Vector2.new(0.5, 0.5)
-			ProxyHub.BackgroundTransparency = 1.000
-			ProxyHub.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			ProxyHub.BorderSizePixel = 0
-			ProxyHub.Position = UDim2.new(0.5, -2, 0.5, 0)
-			ProxyHub.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
-			ProxyHub.SizeConstraint = Enum.SizeConstraint.RelativeYY
-			ProxyHub.ZIndex = 159
-			ProxyHub.Image = Config.Logo
+			ProxyLogo.Name = "ProxyLogo"
+			ProxyLogo.Parent = Logo
+			ProxyLogo.AnchorPoint = Vector2.new(0.5, 0.5)
+			ProxyLogo.BackgroundTransparency = 1.000
+			ProxyLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			ProxyLogo.BorderSizePixel = 0
+			ProxyLogo.Position = UDim2.new(0.5, -2, 0.5, 0)
+			ProxyLogo.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
+			ProxyLogo.SizeConstraint = Enum.SizeConstraint.RelativeYY
+			ProxyLogo.ZIndex = 159
+			ProxyLogo.Image = Config.Logo
 
 			WaternarkList.Name = "WaternarkList"
 			WaternarkList.Parent = Watermark
@@ -8599,155 +8587,109 @@ function ProxyHub:ConfigManager(ConfigManager: ConfigManager) : ConfigFunctions
 	return Args;
 end;
 
+function ProxyHub:Loader(IconId,Duration)
+	local ProxyHub = Instance.new("ScreenGui")
 
-function ProxyHub:Loader(Duration)
-    -- Create the main GUI screen
-    local LoaderGui = Instance.new("ScreenGui")
-    LoaderGui.Name = "Loader"
-    LoaderGui.Parent = game:GetService("CoreGui")
-    LoaderGui.Enabled = true
-    LoaderGui.ResetOnSpawn = false
-    LoaderGui.IgnoreGuiInset = true
-    LoaderGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+	ProxyHub.Name = "Loader"
+	ProxyHub.Parent = CoreGui
+	ProxyHub.Enabled = true
+	ProxyHub.ResetOnSpawn = false
+	ProxyHub.IgnoreGuiInset = true
+	ProxyHub.ZIndexBehavior = Enum.ZIndexBehavior.Global
 
-    -- Create the main UI elements
-    local Loader = Instance.new("Frame")
-    local Vignette = Instance.new("ImageLabel")
-    local TextContainer = Instance.new("Frame")
+	local Loader = Instance.new("Frame")
+	local Icon = Instance.new("ImageLabel")
+	local Vignette = Instance.new("ImageLabel")
 
-    -- Define the TextLabel variables for the letters spelling "PROXY"
-    local LetterP = Instance.new("TextLabel")
-    local LetterR = Instance.new("TextLabel")
-    local LetterO = Instance.new("TextLabel")
-    local LetterX = Instance.new("TextLabel")
-    local LetterY = Instance.new("TextLabel")
+	Loader.Name = "Loader"
+	Loader.Parent = ProxyHub
+	Loader.AnchorPoint = Vector2.new(0.5, 0.5)
+	Loader.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	Loader.BackgroundTransparency = 1
+	Loader.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Loader.BorderSizePixel = 0
+	Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Loader.Size = UDim2.new(1, 0, 1, 0)
 
-    -- Set properties for the main loader frame
-    Loader.Name = "Loader"
-    Loader.Parent = LoaderGui
-    Loader.AnchorPoint = Vector2.new(0.5, 0.5)
-    Loader.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    Loader.BackgroundTransparency = 1
-    Loader.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Loader.BorderSizePixel = 0
-    Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
-    Loader.Size = UDim2.new(1, 0, 1, 0)
+	Icon.Name = "Icon"
+	Icon.Parent = Loader
+	Icon.AnchorPoint = Vector2.new(0.5, 0.5)
+	Icon.BackgroundTransparency = 1.000
+	Icon.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Icon.BorderSizePixel = 0
+	Icon.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Icon.Size = UDim2.new(0, 750, 0, 750)
+	Icon.ZIndex = 100
+	Icon.Image = IconId or "rbxassetid://120245531583106"
+	Icon.ImageTransparency = 1
 
-    -- Set properties for the text container frame
-    TextContainer.Name = "TextContainer"
-    TextContainer.Parent = Loader
-    TextContainer.AnchorPoint = Vector2.new(0.5, 0.5)
-    TextContainer.BackgroundTransparency = 1
-    TextContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
-    TextContainer.Size = UDim2.new(0, 800, 0, 120) 
-    TextContainer.ZIndex = 100
+	Vignette.Name = "Vignette"
+	Vignette.Parent = Loader
+	Vignette.BackgroundTransparency = 1.000
+	Vignette.BorderColor3 = Color3.fromRGB(27, 42, 53)
+	Vignette.BorderSizePixel = 0
+	Vignette.Size = UDim2.new(1, 0, 1, 0)
+	Vignette.Image = "rbxassetid://18720640102"
+	Vignette.ImageColor3 = ProxyHub.Colors.Highlight
+	Vignette.ImageTransparency = 1
+	Vignette.AnchorPoint = Vector2.new(0.5,0.5)
+	Vignette.Position = UDim2.fromScale(0.5,0.5)
 
-    local textColor = Color3.fromRGB(35, 71, 139) 
+	ProxyHub:_Animation(Loader,TweenInfo.new(0.55,Enum.EasingStyle.Quint),{
+		BackgroundTransparency = 0.5
+	});
 
-    -- Helper function to set up the properties of a single letter
-    local function setupLetter(letter: TextLabel, text: string, position: UDim2)
-        letter.Parent = TextContainer
-        letter.BackgroundTransparency = 1
-        letter.Text = text
-        letter.TextColor3 = textColor
-        letter.TextSize = 96
-        letter.Font = Enum.Font.GothamBold
-        letter.TextStrokeTransparency = 0
-        letter.TextStrokeColor3 = Color3.fromRGB(150, 120, 0)
-        letter.AnchorPoint = Vector2.new(0.5, 0.5)
-        letter.Size = UDim2.new(0, 80, 1, 0)
-        letter.Position = position
-        letter.TextTransparency = 1
-        letter.ZIndex = 100
-    end
+	local Event = Instance.new('BindableEvent');
 
-    -- Setup each letter with correct variables and text
-    setupLetter(LetterP, "P", UDim2.new(0.1, 0, 0.5, 0))
-    setupLetter(LetterR, "R", UDim2.new(0.2, 0, 0.5, 0))
-    setupLetter(LetterO, "O", UDim2.new(0.3, 0, 0.5, 0))
-    setupLetter(LetterX, "X", UDim2.new(0.4, 0, 0.5, 0))
-    setupLetter(LetterY, "Y", UDim2.new(0.5, 0, 0.5, 0))
+	task.delay(0.5,function()
+		ProxyHub:_Animation(Icon,TweenInfo.new(0.75,Enum.EasingStyle.Quint),{
+			ImageTransparency = 0.01,
+			Size = UDim2.new(0, 200, 0, 200)
+		});
 
-    -- Set properties for the vignette
-    Vignette.Name = "Vignette"
-    Vignette.Parent = Loader
-    Vignette.BackgroundTransparency = 1.000
-    Vignette.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Vignette.BorderSizePixel = 0
-    Vignette.Size = UDim2.new(1, 0, 1, 0)
-    Vignette.Image = "rbxassetid://18720640102"
-    Vignette.ImageColor3 = textColor
-    Vignette.ImageTransparency = 1
-    Vignette.AnchorPoint = Vector2.new(0.5,0.5)
-    Vignette.Position = UDim2.fromScale(0.5,0.5)
+		task.delay(0.25,function()
+			ProxyHub:_Animation(Vignette,TweenInfo.new(5),{
+				ImageTransparency = 0.2
+			});
 
-    -- Get TweenService and create a BindableEvent for yielding the function
-    local TweenService = game:GetService("TweenService")
-    local Event = Instance.new('BindableEvent')
+			task.wait(Duration or 4.5)
 
-    -- Start the loader animation sequence
-    TweenService:Create(Loader, TweenInfo.new(0.55, Enum.EasingStyle.Quint), { BackgroundTransparency = 0.5 }):Play()
-    task.delay(0.5, function()
-        -- Animate the first letter ("P") to appear
-        TweenService:Create(LetterP, TweenInfo.new(0.75, Enum.EasingStyle.Quint), { TextTransparency = 0 }):Play()
-        
-        -- Corrected list of letters to animate
-        local otherLetters = {LetterR, LetterO, LetterX, LetterY}
-        
-        -- Start the vignette fade-in animation
-        task.delay(0.25, function()
-            TweenService:Create(Vignette, TweenInfo.new(5), { ImageTransparency = 0.2 }):Play()
-            task.wait(4)
+			ProxyHub:_Animation(Vignette,TweenInfo.new(3,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{
+				Size = UDim2.new(2, 0, 2, 0)
+			});
 
-            -- Animate the rest of the letters to their correct positions
-            local letterPositions = {
-                {LetterR, UDim2.new(0.2, 0, 0.5, 0)},
-                {LetterO, UDim2.new(0.3, 0, 0.5, 0)},
-                {LetterX, UDim2.new(0.4, 0, 0.5, 0)},
-                {LetterY, UDim2.new(0.5, 0, 0.5, 0)},
-            }
+			ProxyHub:_Animation(Icon,TweenInfo.new(0.75,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{
+				ImageTransparency = 1,
+			});
 
-            for i, letterData in pairs(letterPositions) do
-                local letter = letterData[1]
-                local targetPos = letterData[2]
-                task.delay(i * 0.1, function()
-                    TweenService:Create(letter, TweenInfo.new(0.6, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-                        TextTransparency = 0,
-                        Position = targetPos
-                    }):Play()
-                end)
-            end
+			ProxyHub:_Animation(Loader,TweenInfo.new(1.5,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{
+				BackgroundTransparency = 1
+			});
 
-            -- Wait for the specified duration or a default of 2.5 seconds
-            task.wait(Duration or 2.5)
+			task.delay(0.1,function()
+				ProxyHub:_Animation(Vignette,TweenInfo.new(1,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{
+					ImageTransparency = 1
+				});
 
-            -- Animate the fade-out sequence
-            TweenService:Create(Vignette, TweenInfo.new(3, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), { Size = UDim2.new(2, 0, 2, 0) }):Play()
-            local allLetters = {LetterP, LetterR, LetterO, LetterX, LetterY}
-            for _, letter in pairs(allLetters) do
-                TweenService:Create(letter, TweenInfo.new(0.75, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), { TextTransparency = 1, }):Play()
-            end
-            TweenService:Create(Loader, TweenInfo.new(1.5, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), { BackgroundTransparency = 1 }):Play()
+				task.wait(0.2)
 
-            -- Clean up the GUI after the animations
-            task.delay(0.1, function()
-                TweenService:Create(Vignette, TweenInfo.new(1, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), { ImageTransparency = 1 }):Play()
-                task.wait(0.2)
-                task.delay(3, function()
-                    LoaderGui:Destroy()
-                end)
-            end)
-            
-            
-            task.delay(0.6, function()
-                Event:Fire()
-            end)
-        end)
-    end)
-    
-    
-    return { yield = function() return Event.Event:Wait() end }
-end
+				task.delay(3,function()
+					ProxyHub:Destroy();
+				end)
+			end)
+
+			task.delay(0.6,function()
+				Event:Fire();
+			end)
+		end)
+	end);
+
+	return {
+		yield = function()
+			return Event.Event:Wait();
+		end	
+	};
+end;
 
 function ProxyHub.newNotify()
 	local Notification = Instance.new("ScreenGui")
@@ -8790,7 +8732,7 @@ function ProxyHub.newNotify()
 			local BlockFrame = Instance.new("Frame")
 			local NotifyFrame = Instance.new("Frame")
 			local UICorner = Instance.new("UICorner")
-			local CompLogo = Instance.new("ImageLabel")
+			local ProxyLogo = Instance.new("ImageLabel")
 			local Header = Instance.new("TextLabel")
 			local Body = Instance.new("TextLabel")
 			local TimeLeftFrame = Instance.new("Frame")
@@ -8823,16 +8765,16 @@ function ProxyHub.newNotify()
 			UICorner.CornerRadius = UDim.new(0, 4)
 			UICorner.Parent = NotifyFrame
 
-			CompLogo.Name = "CompLogo"
-			CompLogo.Parent = NotifyFrame
-			CompLogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			CompLogo.BackgroundTransparency = 1.000
-			CompLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			CompLogo.BorderSizePixel = 0
-			CompLogo.Position = UDim2.new(0, 6, 0, 6)
-			CompLogo.Size = UDim2.new(0, 25, 0, 25)
-			CompLogo.ZIndex = 4
-			CompLogo.Image = ProxyHub:_GetIcon(Notify.Icon);
+			ProxyLogo.Name = "ProxyLogo"
+			ProxyLogo.Parent = NotifyFrame
+			ProxyLogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			ProxyLogo.BackgroundTransparency = 1.000
+			ProxyLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			ProxyLogo.BorderSizePixel = 0
+			ProxyLogo.Position = UDim2.new(0, 6, 0, 6)
+			ProxyLogo.Size = UDim2.new(0, 25, 0, 25)
+			ProxyLogo.ZIndex = 4
+			ProxyLogo.Image = ProxyHub:_GetIcon(Notify.Icon);
 
 			Header.Name = "Header"
 			Header.Parent = NotifyFrame
@@ -8911,10 +8853,9 @@ function ProxyHub.newNotify()
 					});
 				end;
 			end;
-			
-			-- ### START FIX ###
-			local payback = {} -- Create the table to return
-			
+
+			UpdateText();
+
 			local Close = function()
 				ProxyHub:_Animation(NotifyFrame,TweenInfo.new(0.65,Enum.EasingStyle.Quint),{
 					Position = UDim2.new(1,200,0,0)
@@ -8930,7 +8871,6 @@ function ProxyHub.newNotify()
 				BlockFrame:Destroy();
 
 			end;
-			payback.Close = Close
 
 			local Show = function()
 				ProxyHub:_Animation(NotifyFrame,TweenInfo.new(0.5,Enum.EasingStyle.Quint),{
@@ -8938,43 +8878,17 @@ function ProxyHub.newNotify()
 				});
 			end;
 
-			payback.Title = function(self , new)
-				Header.Text = new;
-				UpdateText();
-			end
-			payback.Content = function(self , new)
-				Body.Text = new;
-				UpdateText();
-			end
-			payback.SetProgress = function(self , new , Time)
-				if Time and Time <= 0 then
-					TimeLeft.Size = UDim2.new(new, 0, 1, 0);
-					UpdateText();
-					return;
-				end;
-				if new > 1 then
-					new = (new / 100);	
-				end;
-				ProxyHub:_Animation(TimeLeft,TweenInfo.new(Time or 0.85,(Time and Enum.EasingStyle.Linear) or Enum.EasingStyle.Quint),{
-					Size = UDim2.new(new, 0, 1, 0)
-				});
-				UpdateText();
-			end
-			
-			UpdateText();
-			Show();
-
 			if typeof(Notify.Duration) == 'number' and Notify.Duration ~= math.huge then
 				ProxyHub:_Animation(TimeLeft,TweenInfo.new(Notify.Duration + 0.2,Enum.EasingStyle.Linear),{
 					Size = UDim2.new(1, 0, 1, 0)
 				});
-				task.delay(Notify.Duration + 0.2, Close)
+
+				return task.delay(0.25,function()
+					Show();
+
+					task.delay(Notify.Duration + 0.2,Close)
+				end);
 			end;
-			
-			return payback 
-		end,
-	};
-end;
 
 			Show();
 
