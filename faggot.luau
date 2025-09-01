@@ -343,18 +343,18 @@ local ProxyHub = {
 };
 
 ProxyHub.Colors = {
-    Highlight = Color3.fromRGB(0, 192, 255),       -- Bright, electric light blue
-    Toggle = Color3.fromRGB(0, 192, 255),          -- Bright, electric light blue
-    Risky = Color3.fromRGB(0, 192, 255),           -- Bright, electric light blue
-    BGDBColor = Color3.fromRGB(2, 6, 15),          -- Extremely deep, almost black blue
-    BlockColor = Color3.fromRGB(6, 12, 24),        -- A distinct, darker blue for blocks
-    StrokeColor = Color3.fromRGB(10, 18, 30),      -- A slightly lighter dark blue for borders
-    SwitchColor = Color3.fromRGB(255, 255, 255),    -- White for a clean toggle
-    DropColor = Color3.fromRGB(2, 6, 15),          -- Extremely deep, almost black blue
-    MouseEnter = Color3.fromRGB(15, 25, 40),       -- A subtle dark blue for hover effects
-    BlockBackground = Color3.fromRGB(10, 18, 30),  -- A slightly lighter dark blue for block backgrounds
-    LineColor = Color3.fromRGB(20, 30, 50),        -- A darker, more noticeable line color
-    HighStrokeColor = Color3.fromRGB(10, 18, 30),  -- A slightly lighter dark blue for high strokes
+    Highlight = Color3.fromRGB(87, 187, 255), -- Light blue
+    Toggle = Color3.fromRGB(87, 187, 255), -- Light blue
+    Risky = Color3.fromRGB(87, 187, 255), -- Light blue
+    BGDBColor = Color3.fromRGB(15, 23, 42), -- Dark blue
+    BlockColor = Color3.fromRGB(20, 31, 56), -- Darker blue
+    StrokeColor = Color3.fromRGB(25, 40, 75), -- Slightly lighter dark blue
+    SwitchColor = Color3.fromRGB(255, 255, 255), -- White for contrast
+    DropColor = Color3.fromRGB(15, 23, 42), -- Dark blue
+    MouseEnter = Color3.fromRGB(30, 47, 85), -- Medium dark blue
+    BlockBackground = Color3.fromRGB(25, 40, 75), -- Slightly lighter dark blue
+    LineColor = Color3.fromRGB(40, 60, 110), -- A bit lighter blue
+    HighStrokeColor = Color3.fromRGB(35, 50, 95), -- Another shade of dark blue
 };
 
 ProxyHub.Elements = {
@@ -6961,7 +6961,7 @@ function ProxyHub.new(Config : Window)
 			AuthorText.ZIndex = 10
 			AuthorText.Font = Enum.Font.GothamMedium
 			AuthorText.RichText = true;
-			AuthorText.Text = "Author: <font color=\"rgba(2, 54, 131, 0.99)\">NoFi</font>"
+			AuthorText.Text = "Author: <font color=\"rgb(17, 238, 253)\">NoFi</font>"
 			AuthorText.TextColor3 = ProxyHub.Colors.SwitchColor
 			AuthorText.TextSize = 13.000
 			AuthorText.TextTransparency = 1
@@ -8238,7 +8238,7 @@ function ProxyHub.new(Config : Window)
 		config = config or {};
 		config.Logo = config.Logo or Config.Logo;
 		config.Username = config.Username or LocalPlayer.DisplayName;
-		config.ExpireDate = config.ExpireDate or "PROXY ON TOP1!1!1!1!1!1!";
+		config.ExpireDate = config.ExpireDate or "NEVER";
 		config.WindowName = config.WindowName or Config.Name;
 		config.UserProfile = config.UserProfile or string.format("rbxthumb://type=AvatarHeadShot&id=%s&w=150&h=150",tostring(LocalPlayer.UserId));
 
@@ -8610,15 +8610,15 @@ function ProxyHub:Loader(IconId,Duration)
 	local Icon = Instance.new("ImageLabel")
 	local Vignette = Instance.new("ImageLabel")
 
-Loader.Name = "Loader"
-Loader.Parent = ProxyHub
-Loader.AnchorPoint = Vector2.new(0.5, 0.5)
-Loader.BackgroundColor3 = Color3.fromRGB(1, 4, 10)  -- Extremely dark, almost black blue background
-Loader.BackgroundTransparency = 0                  -- Set to 0 to make the color visible
-Loader.BorderColor3 = Color3.fromRGB(3, 8, 16)     -- A very dark blue for the border
-Loader.BorderSizePixel = 0
-Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
-Loader.Size = UDim2.new(1, 0, 1, 0)
+	Loader.Name = "Loader"
+	Loader.Parent = ProxyHub
+	Loader.AnchorPoint = Vector2.new(0.5, 0.5)
+	Loader.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	Loader.BackgroundTransparency = 1
+	Loader.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Loader.BorderSizePixel = 0
+	Loader.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Loader.Size = UDim2.new(1, 0, 1, 0)
 
 	Icon.Name = "Icon"
 	Icon.Parent = Loader
@@ -8629,7 +8629,7 @@ Loader.Size = UDim2.new(1, 0, 1, 0)
 	Icon.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Icon.Size = UDim2.new(0, 750, 0, 750)
 	Icon.ZIndex = 100
-	Icon.Image = IconId or "rbxassetid://107490050204222"
+	Icon.Image = IconId or "rbxassetid://120245531583106"
 	Icon.ImageTransparency = 1
 
 	Vignette.Name = "Vignette"
