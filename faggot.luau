@@ -8790,7 +8790,7 @@ function ProxyHub.newNotify()
 			local BlockFrame = Instance.new("Frame")
 			local NotifyFrame = Instance.new("Frame")
 			local UICorner = Instance.new("UICorner")
-			local ProxyLogo = Instance.new("ImageLabel")
+			local CompLogo = Instance.new("ImageLabel")
 			local Header = Instance.new("TextLabel")
 			local Body = Instance.new("TextLabel")
 			local TimeLeftFrame = Instance.new("Frame")
@@ -8823,16 +8823,16 @@ function ProxyHub.newNotify()
 			UICorner.CornerRadius = UDim.new(0, 4)
 			UICorner.Parent = NotifyFrame
 
-			ProxyLogo.Name = "ProxyLogo"
-			ProxyLogo.Parent = NotifyFrame
-			ProxyLogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			ProxyLogo.BackgroundTransparency = 1.000
-			ProxyLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			ProxyLogo.BorderSizePixel = 0
-			ProxyLogo.Position = UDim2.new(0, 6, 0, 6)
-			ProxyLogo.Size = UDim2.new(0, 25, 0, 25)
-			ProxyLogo.ZIndex = 4
-			ProxyLogo.Image = ProxyHub:_GetIcon(Notify.Icon);
+			CompLogo.Name = "CompLogo"
+			CompLogo.Parent = NotifyFrame
+			CompLogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			CompLogo.BackgroundTransparency = 1.000
+			CompLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			CompLogo.BorderSizePixel = 0
+			CompLogo.Position = UDim2.new(0, 6, 0, 6)
+			CompLogo.Size = UDim2.new(0, 25, 0, 25)
+			CompLogo.ZIndex = 4
+			CompLogo.Image = ProxyHub:_GetIcon(Notify.Icon);
 
 			Header.Name = "Header"
 			Header.Parent = NotifyFrame
@@ -8911,9 +8911,10 @@ function ProxyHub.newNotify()
 					});
 				end;
 			end;
-
-			UpdateText();
-
+			
+			-- ### START FIX ###
+			local payback = {} -- Create the table to return
+			
 			local Close = function()
 				ProxyHub:_Animation(NotifyFrame,TweenInfo.new(0.65,Enum.EasingStyle.Quint),{
 					Position = UDim2.new(1,200,0,0)
@@ -8929,6 +8930,7 @@ function ProxyHub.newNotify()
 				BlockFrame:Destroy();
 
 			end;
+			payback.Close = Close
 
 			local Show = function()
 				ProxyHub:_Animation(NotifyFrame,TweenInfo.new(0.5,Enum.EasingStyle.Quint),{
@@ -8936,17 +8938,43 @@ function ProxyHub.newNotify()
 				});
 			end;
 
+			payback.Title = function(self , new)
+				Header.Text = new;
+				UpdateText();
+			end
+			payback.Content = function(self , new)
+				Body.Text = new;
+				UpdateText();
+			end
+			payback.SetProgress = function(self , new , Time)
+				if Time and Time <= 0 then
+					TimeLeft.Size = UDim2.new(new, 0, 1, 0);
+					UpdateText();
+					return;
+				end;
+				if new > 1 then
+					new = (new / 100);	
+				end;
+				ProxyHub:_Animation(TimeLeft,TweenInfo.new(Time or 0.85,(Time and Enum.EasingStyle.Linear) or Enum.EasingStyle.Quint),{
+					Size = UDim2.new(new, 0, 1, 0)
+				});
+				UpdateText();
+			end
+			
+			UpdateText();
+			Show();
+
 			if typeof(Notify.Duration) == 'number' and Notify.Duration ~= math.huge then
 				ProxyHub:_Animation(TimeLeft,TweenInfo.new(Notify.Duration + 0.2,Enum.EasingStyle.Linear),{
 					Size = UDim2.new(1, 0, 1, 0)
 				});
-
-				return task.delay(0.25,function()
-					Show();
-
-					task.delay(Notify.Duration + 0.2,Close)
-				end);
+				task.delay(Notify.Duration + 0.2, Close)
 			end;
+			
+			return payback 
+		end,
+	};
+end;
 
 			Show();
 
