@@ -325,36 +325,36 @@ local RunService: RunService = cloneref(game:GetService('RunService'));
 local Players: Players = cloneref(game:GetService('Players'));
 local HttpService: HttpService = cloneref(game:GetService('HttpService'));
 local LocalPlayer: Player = Players.LocalPlayer;
-local CoreGui = (gethui and gethui()) or cloneref(game:FindFirstChild('CoreGui')) or game:GetService("StarterGui")
+local CoreGui: PlayerGui = (gethui and gethui()) or cloneref(game:FindFirstChild('CoreGui')) or LocalPlayer.PlayerGui;
 local Mouse = LocalPlayer:GetMouse();
 local CurrentCamera = workspace.CurrentCamera;
 
 local ProxyHub = {
-    Version = '1.6',
-    Logo = "rbxassetid://107490050204222",
-    Windows = {},
-    Scale = {
-        Window = UDim2.new(0, 456,0, 499),
-        Mobile = UDim2.new(0.9, 0, 0.8, 0),
-        TabOpen = 185,
-        TabClose = 85,
-    },
-    ArcylicParent = workspace.CurrentCamera
+	Version = '1.6',
+	Logo = "rbxassetid://120245531583106",
+	Windows = {},
+	Scale = {
+		Window = UDim2.new(0, 456,0, 499),
+		Mobile = UDim2.new(0, 450,0, 375),
+		TabOpen = 185,
+		TabClose = 85,
+	},
+	ArcylicParent = workspace.CurrentCamera
 };
 
 ProxyHub.Colors = {
-  Highlight = Color3.fromRGB(85, 172, 238),
-  Toggle = Color3.fromRGB(68, 137, 201),
-  Risky = Color3.fromRGB(255, 105, 97),
-  BGDBColor = Color3.fromRGB(15, 23, 42),
-  BlockColor = Color3.fromRGB(20, 31, 56),
-  StrokeColor = Color3.fromRGB(30, 45, 78),
-  SwitchColor = Color3.fromRGB(220, 230, 240),
-  DropColor = Color3.fromRGB(25, 38, 65),
-  MouseEnter = Color3.fromRGB(40, 55, 90),
-  BlockBackground = Color3.fromRGB(35, 50, 85),
-  LineColor = Color3.fromRGB(50, 65, 100),
-  HighStrokeColor = Color3.fromRGB(45, 60, 95),
+	Highlight = Color3.fromRGB(17, 238, 253),
+	Toggle = Color3.fromRGB(14, 203, 213),
+	Risky = Color3.fromRGB(251, 255, 39),
+	BGDBColor = Color3.fromRGB(22, 24, 29),
+	BlockColor = Color3.fromRGB(28, 29, 34),
+	StrokeColor = Color3.fromRGB(37, 38, 43),
+	SwitchColor = Color3.fromRGB(255, 255, 255),
+	DropColor = Color3.fromRGB(33, 35, 39),
+	MouseEnter = Color3.fromRGB(55, 58, 65),
+	BlockBackground = Color3.fromRGB(39, 40, 47),
+	LineColor = Color3.fromRGB(65, 65, 65),
+	HighStrokeColor = Color3.fromRGB(55, 56, 63),
 };
 
 ProxyHub.Elements = {
@@ -4915,18 +4915,18 @@ function ProxyHub:SetTheme(name)
 		};
 	elseif name == "Default" then
 		ProxyHub.Colors = {
-    Highlight = Color3.fromRGB(85, 172, 238),
-    Toggle = Color3.fromRGB(68, 137, 201),
-    Risky = Color3.fromRGB(255, 105, 97),
-    BGDBColor = Color3.fromRGB(15, 23, 42),
-    BlockColor = Color3.fromRGB(20, 31, 56),
-    StrokeColor = Color3.fromRGB(30, 45, 78),
-    SwitchColor = Color3.fromRGB(220, 230, 240),
-    DropColor = Color3.fromRGB(25, 38, 65),
-    MouseEnter = Color3.fromRGB(40, 55, 90),
-    BlockBackground = Color3.fromRGB(35, 50, 85),
-    LineColor = Color3.fromRGB(50, 65, 100),
-    HighStrokeColor = Color3.fromRGB(45, 60, 95),
+			Highlight = Color3.fromRGB(17, 238, 253),
+			Toggle = Color3.fromRGB(14, 203, 213),
+			Risky = Color3.fromRGB(251, 255, 39),
+			BGDBColor = Color3.fromRGB(22, 24, 29),
+			BlockColor = Color3.fromRGB(28, 29, 34),
+			StrokeColor = Color3.fromRGB(37, 38, 43),
+			SwitchColor = Color3.fromRGB(255, 255, 255),
+			DropColor = Color3.fromRGB(33, 35, 39),
+			MouseEnter = Color3.fromRGB(55, 58, 65),
+			BlockBackground = Color3.fromRGB(39, 40, 47),
+			LineColor = Color3.fromRGB(65, 65, 65),
+			HighStrokeColor = Color3.fromRGB(55, 56, 63),
 		};
 	elseif name == "Dark Blue" then
 		ProxyHub.Colors = {
@@ -5107,7 +5107,7 @@ function ProxyHub.new(Config : Window)
 	local TabFrame = Instance.new("Frame")
 	local UICorner_2 = Instance.new("UICorner")
 	local LineFrame1 = Instance.new("Frame")
-	local ProxyLogo = Instance.new("ImageLabel")
+	local CompLogo = Instance.new("ImageLabel")
 	local WindowLabel = Instance.new("TextLabel")
 	local TabButtons = Instance.new("Frame")
 	local SelectionFrame = Instance.new("Frame")
@@ -5201,14 +5201,14 @@ function ProxyHub.new(Config : Window)
 	LineFrame1.Position = UDim2.new(1, -5, 0, 0)
 	LineFrame1.Size = UDim2.new(0, 20, 1, 0)
 
-	ProxyLogo.Name = "ProxyLogo"
-	ProxyLogo.Parent = TabFrame
-	ProxyLogo.BackgroundTransparency = 1.000
-	ProxyLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	ProxyLogo.BorderSizePixel = 0
-	ProxyLogo.Position = UDim2.new(0, 9, 0, 7)
-	ProxyLogo.Size = UDim2.new(0, 45, 0, 45)
-	ProxyLogo.Image = Config.Logo
+	CompLogo.Name = "CompLogo"
+	CompLogo.Parent = TabFrame
+	CompLogo.BackgroundTransparency = 1.000
+	CompLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	CompLogo.BorderSizePixel = 0
+	CompLogo.Position = UDim2.new(0, 9, 0, 7)
+	CompLogo.Size = UDim2.new(0, 45, 0, 45)
+	CompLogo.Image = Config.Logo
 
 	WindowLabel.Name = "WindowLabel"
 	WindowLabel.Parent = TabFrame
@@ -5362,7 +5362,7 @@ function ProxyHub.new(Config : Window)
 				Position = UDim2.new(0.5, 0, 0.5, 0)
 			})
 
-			ProxyHub:_Animation(ProxyLogo,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(CompLogo,TweenInfo.new(0.2),{
 				ImageTransparency = 0
 			})
 
@@ -5408,7 +5408,7 @@ function ProxyHub.new(Config : Window)
 				Size = UDim2.new(0, 1, 1, 0)
 			})
 
-			ProxyHub:_Animation(ProxyLogo,TweenInfo.new(0.2),{
+			ProxyHub:_Animation(CompLogo,TweenInfo.new(0.2),{
 				ImageTransparency = 1
 			})
 
@@ -7977,7 +7977,7 @@ function ProxyHub.new(Config : Window)
 			local Logo = Instance.new("Frame")
 			local UICorner_2 = Instance.new("UICorner")
 			local Frame = Instance.new("Frame")
-			local ProxyLogo = Instance.new("ImageLabel")
+			local CompLogo = Instance.new("ImageLabel")
 			local WaternarkList = Instance.new("Frame")
 			local UIListLayout = Instance.new("UIListLayout")
 
@@ -8048,17 +8048,17 @@ function ProxyHub.new(Config : Window)
 				Property = "BackgroundColor3"
 			});
 
-			ProxyLogo.Name = "ProxyLogo"
-			ProxyLogo.Parent = Logo
-			ProxyLogo.AnchorPoint = Vector2.new(0.5, 0.5)
-			ProxyLogo.BackgroundTransparency = 1.000
-			ProxyLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			ProxyLogo.BorderSizePixel = 0
-			ProxyLogo.Position = UDim2.new(0.5, -2, 0.5, 0)
-			ProxyLogo.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
-			ProxyLogo.SizeConstraint = Enum.SizeConstraint.RelativeYY
-			ProxyLogo.ZIndex = 159
-			ProxyLogo.Image = Config.Logo
+			CompLogo.Name = "CompLogo"
+			CompLogo.Parent = Logo
+			CompLogo.AnchorPoint = Vector2.new(0.5, 0.5)
+			CompLogo.BackgroundTransparency = 1.000
+			CompLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			CompLogo.BorderSizePixel = 0
+			CompLogo.Position = UDim2.new(0.5, -2, 0.5, 0)
+			CompLogo.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
+			CompLogo.SizeConstraint = Enum.SizeConstraint.RelativeYY
+			CompLogo.ZIndex = 159
+			CompLogo.Image = Config.Logo
 
 			WaternarkList.Name = "WaternarkList"
 			WaternarkList.Parent = Watermark
@@ -8201,7 +8201,7 @@ function ProxyHub.new(Config : Window)
 
 		table.insert(WindowArgs.THREADS,task.spawn(function()
 			while true do task.wait(0.15)
-				if ProxyHub:_() then
+				if ProxyHub:_IsMobile() then
 					ToggleCloseUI(true);
 
 					if WindowArgs.IsOpen then
@@ -8243,7 +8243,7 @@ function ProxyHub.new(Config : Window)
 		config.UserProfile = config.UserProfile or string.format("rbxthumb://type=AvatarHeadShot&id=%s&w=150&h=150",tostring(LocalPlayer.UserId));
 
 		UserText.Text = config.Username;
-		ProxyLogo.Image = config.Logo;
+		CompLogo.Image = config.Logo;
 		ExpireText.Text = config.ExpireDate;
 		WindowLabel.Text = config.WindowName;
 		UserProfile.Image = config.UserProfile;
@@ -8741,7 +8741,7 @@ function ProxyHub.newNotify()
 			local BlockFrame = Instance.new("Frame")
 			local NotifyFrame = Instance.new("Frame")
 			local UICorner = Instance.new("UICorner")
-			local ProxyLogo = Instance.new("ImageLabel")
+			local CompLogo = Instance.new("ImageLabel")
 			local Header = Instance.new("TextLabel")
 			local Body = Instance.new("TextLabel")
 			local TimeLeftFrame = Instance.new("Frame")
@@ -8774,16 +8774,16 @@ function ProxyHub.newNotify()
 			UICorner.CornerRadius = UDim.new(0, 4)
 			UICorner.Parent = NotifyFrame
 
-			ProxyLogo.Name = "ProxyLogo"
-			ProxyLogo.Parent = NotifyFrame
-			ProxyLogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-			ProxyLogo.BackgroundTransparency = 1.000
-			ProxyLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			ProxyLogo.BorderSizePixel = 0
-			ProxyLogo.Position = UDim2.new(0, 6, 0, 6)
-			ProxyLogo.Size = UDim2.new(0, 25, 0, 25)
-			ProxyLogo.ZIndex = 4
-			ProxyLogo.Image = ProxyHub:_GetIcon(Notify.Icon);
+			CompLogo.Name = "CompLogo"
+			CompLogo.Parent = NotifyFrame
+			CompLogo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			CompLogo.BackgroundTransparency = 1.000
+			CompLogo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			CompLogo.BorderSizePixel = 0
+			CompLogo.Position = UDim2.new(0, 6, 0, 6)
+			CompLogo.Size = UDim2.new(0, 25, 0, 25)
+			CompLogo.ZIndex = 4
+			CompLogo.Image = ProxyHub:_GetIcon(Notify.Icon);
 
 			Header.Name = "Header"
 			Header.Parent = NotifyFrame
