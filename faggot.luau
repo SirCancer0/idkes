@@ -1,3 +1,12 @@
+--[[
+    		Fatality-Dark Interface
+
+    Author: 4lpaca
+    License: MIT
+    Github: https://github.com/4lpaca-pin/ProxyHub
+--]]
+
+--- Export Types ---
 
 export type cloneref = (target: Instance) -> Instance;
 
@@ -321,31 +330,31 @@ local Mouse = LocalPlayer:GetMouse();
 local CurrentCamera = workspace.CurrentCamera;
 
 local ProxyHub = {
-	Version = '1.6',
-	Logo = "rbxassetid://120245531583106",
-	Windows = {},
-	Scale = {
-		Window = UDim2.new(0, 456,0, 499),
-		Mobile = UDim2.new(0, 450,0, 375),
-		TabOpen = 185,
-		TabClose = 85,
-	},
-	ArcylicParent = workspace.CurrentCamera
+    Version = '1.6',
+    Logo = "rbxassetid://120245531583106",
+    Windows = {},
+    Scale = {
+        Window = UDim2.new(0, 456,0, 499),
+        Mobile = UDim2.new(0.9, 0, 0.8, 0),
+        TabOpen = 185,
+        TabClose = 85,
+    },
+    ArcylicParent = workspace.CurrentCamera
 };
 
 ProxyHub.Colors = {
-	Highlight = Color3.fromRGB(17, 238, 253),
-	Toggle = Color3.fromRGB(14, 203, 213),
-	Risky = Color3.fromRGB(251, 255, 39),
-	BGDBColor = Color3.fromRGB(22, 24, 29),
-	BlockColor = Color3.fromRGB(28, 29, 34),
-	StrokeColor = Color3.fromRGB(37, 38, 43),
-	SwitchColor = Color3.fromRGB(255, 255, 255),
-	DropColor = Color3.fromRGB(33, 35, 39),
-	MouseEnter = Color3.fromRGB(55, 58, 65),
-	BlockBackground = Color3.fromRGB(39, 40, 47),
-	LineColor = Color3.fromRGB(65, 65, 65),
-	HighStrokeColor = Color3.fromRGB(55, 56, 63),
+  Highlight = Color3.fromRGB(85, 172, 238),
+  Toggle = Color3.fromRGB(68, 137, 201),
+  Risky = Color3.fromRGB(255, 105, 97),
+  BGDBColor = Color3.fromRGB(15, 23, 42),
+  BlockColor = Color3.fromRGB(20, 31, 56),
+  StrokeColor = Color3.fromRGB(30, 45, 78),
+  SwitchColor = Color3.fromRGB(220, 230, 240),
+  DropColor = Color3.fromRGB(25, 38, 65),
+  MouseEnter = Color3.fromRGB(40, 55, 90),
+  BlockBackground = Color3.fromRGB(35, 50, 85),
+  LineColor = Color3.fromRGB(50, 65, 100),
+  HighStrokeColor = Color3.fromRGB(45, 60, 95),
 };
 
 ProxyHub.Elements = {
@@ -8192,7 +8201,7 @@ function ProxyHub.new(Config : Window)
 
 		table.insert(WindowArgs.THREADS,task.spawn(function()
 			while true do task.wait(0.15)
-				if ProxyHub:_IsMobile() then
+				if ProxyHub:_() then
 					ToggleCloseUI(true);
 
 					if WindowArgs.IsOpen then
