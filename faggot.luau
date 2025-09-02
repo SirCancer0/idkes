@@ -5092,7 +5092,7 @@ function ProxyHub.new(Config : Window)
 		WindowArgs.AlwayShowTab = true;
 	end;
 
-	local ProxyHub = Instance.new("ScreenGui")
+	local ProxyHubGui = Instance.new("ScreenGui")
 	local MainFrame = Instance.new("Frame")
 	local UICorner = Instance.new("UICorner")
 	local TabFrame = Instance.new("Frame")
@@ -5116,13 +5116,14 @@ function ProxyHub.new(Config : Window)
 		TabButtonScrollingFrame.CanvasSize = UDim2.fromOffset(0,UIListLayout.AbsoluteContentSize.Y)
 	end);
 
-	ProxyHub.Name = "u?name=ProxyHub_"..ProxyHub:_RandomString();
-	ProxyHub.Parent = CoreGui;
-	ProxyHub.ResetOnSpawn = false
-	ProxyHub.IgnoreGuiInset = true;
-	ProxyHub.ZIndexBehavior = Enum.ZIndexBehavior.Global;
+   local ProxyHubGui = Instance.new("ScreenGui")
+   ProxyHubGui.Name = "u?name=ProxyHub_"..ProxyHub:_RandomString();
+   ProxyHubGui.Parent = CoreGui;
+   ProxyHubGui.ResetOnSpawn = false
+   ProxyHubGui.IgnoreGuiInset = true;
+   ProxyHubGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 
-	table.insert(ProxyHub.Windows , ProxyHub);
+   table.insert(ProxyHub.Windows , ProxyHubGui);
 
 	MainFrame.Active = true;
 	MainFrame.Name = "MainFrame"
@@ -8588,7 +8589,7 @@ function ProxyHub:ConfigManager(ConfigManager: ConfigManager) : ConfigFunctions
 end;
 
 function ProxyHub:Loader(IconId,Duration)
-	local ProxyHub = Instance.new("ScreenGui")
+	local ProxyHubGui = Instance.new("ScreenGui")
 
 	ProxyHub.Name = "Loader"
 	ProxyHub.Parent = CoreGui
