@@ -5127,7 +5127,7 @@ function ProxyHub.new(Config : Window)
 
 	MainFrame.Active = true;
 	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = ProxyHub
+	MainFrame.Parent = ProxyHubGui
 	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 	MainFrame.BackgroundColor3 = ProxyHub.Colors.BGDBColor
 
