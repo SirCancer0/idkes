@@ -1,12 +1,3 @@
---[[
-    		Fatality-Dark Interface
-
-    Author: 4lpaca
-    License: MIT
-    Github: https://github.com/4lpaca-pin/CompKiller
---]]
-
---- Export Types ---
 
 export type cloneref = (target: Instance) -> Instance;
 
@@ -331,7 +322,7 @@ local CurrentCamera = workspace.CurrentCamera;
 
 local Compkiller = {
 	Version = '1.6',
-	Logo = "rbxassetid://120245531583106",
+	Logo = "rbxassetid://107490050204222",
 	Windows = {},
 	Scale = {
 		Window = UDim2.new(0, 456,0, 499),
@@ -8238,7 +8229,7 @@ function Compkiller.new(Config : Window)
 		config = config or {};
 		config.Logo = config.Logo or Config.Logo;
 		config.Username = config.Username or LocalPlayer.DisplayName;
-		config.ExpireDate = config.ExpireDate or "NEVER";
+		config.ExpireDate = config.ExpireDate or "PROXY UD1!1!!1!1!1!1";
 		config.WindowName = config.WindowName or Config.Name;
 		config.UserProfile = config.UserProfile or string.format("rbxthumb://type=AvatarHeadShot&id=%s&w=150&h=150",tostring(LocalPlayer.UserId));
 
@@ -8629,7 +8620,7 @@ function Compkiller:Loader(IconId,Duration)
 	Icon.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Icon.Size = UDim2.new(0, 750, 0, 750)
 	Icon.ZIndex = 100
-	Icon.Image = IconId or "rbxassetid://120245531583106"
+	Icon.Image = IconId or "rbxassetid://107490050204222"
 	Icon.ImageTransparency = 1
 
 	Vignette.Name = "Vignette"
