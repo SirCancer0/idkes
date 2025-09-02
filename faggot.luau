@@ -7445,7 +7445,7 @@ MainFrame.ZIndex = 4
 			Right.BottomImage = ""
 			Right.ScrollBarThickness = 0
 			Right.TopImage = ""
-			--Right.AutomaticCanvasSize = Enum.AutomaticSize.Y;
+			
 			Right.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 			Upvalue.Left = Left;
@@ -7487,480 +7487,79 @@ MainFrame.ZIndex = 4
 				end;
 			end)
 
-			local TabOpen = function(bool)
-				if bool then
+			local Tween = TweenInfo.new(0.3, Enum.EasingStyle.Quad)
+local ProxyHubGui = Instance.new("ScreenGui")
+local WindowArgs = {}
+local TabOpenSignal = Instance.new("BindableEvent")
+local TabButton = Instance.new("Frame")
+local Icon = Instance.new("ImageLabel")
+local TabNameLabel = Instance.new("TextLabel")
+local Highlight = Instance.new("Frame")
+local TabHover = Instance.new("BindableEvent")
+local TabArgs = {}
+local Upvalue = {
+	Left = Instance.new("ScrollingFrame"),
+	LeftLayout = Instance.new("UIListLayout"),
+	Right = Instance.new("ScrollingFrame"),
+	RightLayout = Instance.new("UIListLayout")
+}
+local TabConfig = {
+	Type = "Double"
+}
 
-					WindowArgs.SelectedTab = TabButton;
+ProxyHubGui.Name = "ProxyHub"
+ProxyHubGui.Parent = CoreGui;
+ProxyHubGui.ResetOnSpawn = false
+ProxyHubGui.IgnoreGuiInset = true;
+ProxyHubGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 
-					ProxyHub:_Animation(Icon,Tween,{
-						ImageTransparency = 0,
-					});
+table.insert(ProxyHub.Windows, ProxyHubGui);
 
-					ProxyHub:_Animation(TabNameLabel,Tween,{
-						TextTransparency = 0
-					});
-
-					ProxyHub:_Animation(Highlight,Tween,{
-						BackgroundTransparency = 0.925
-					});
-				else
-					ProxyHub:_Animation(Icon,Tween,{
-						ImageTransparency = 0.5
-					});
-
-					ProxyHub:_Animation(TabNameLabel,Tween,{
-						TextTransparency = 0.5
-					});
-
-					ProxyHub:_Animation(Highlight,Tween,{
-						BackgroundTransparency = 1
-					});
-				end;
-			end;
-
-			if not WindowArgs.Tabs[1] then
-				TabOpenSignal:Fire(true);
-				TabOpen(true);
-			else
-				TabOpen(false);
-			end;
-
-			table.insert(WindowArgs.Tabs , {
-				Root = TabButton,
-				Remote = TabOpenSignal
-			});
-
-			ProxyHub:_Hover(TabButton,function()
-				if WindowArgs.SelectedTab ~= TabButton then
-					ProxyHub:_Animation(Icon,Tween,{
-						ImageTransparency = 0.1
-					});
-
-					ProxyHub:_Animation(TabNameLabel,Tween,{
-						TextTransparency = 0.1
-					});
-				end;
-			end , function()
-				if WindowArgs.SelectedTab ~= TabButton then
-					ProxyHub:_Animation(Icon,Tween,{
-						ImageTransparency = 0.5
-					});
-
-					ProxyHub:_Animation(TabNameLabel,Tween,{
-						TextTransparency = 0.5
-					});
-				end;
-			end)
-
-			TabOpenSignal:Connect(TabOpen);
-
-			TabHover:Connect(function(bool)
-				if bool then
-					ProxyHub:_Animation(TabButton,Tween,{
-						Size = UDim2.new(1, -10, 0, 32)
-					});
-
-					ProxyHub:_Animation(Icon,Tween,{
-						Position = UDim2.new(0, 15, 0.5, 0),
-						Size = UDim2.new(0, 22, 0, 22),
-					});
-
-					ProxyHub:_Animation(TabNameLabel,Tween,{
-						Size = UDim2.new(0, 200, 0, 25),
-						Position = UDim2.new(0, 43, 0.5, 0)
-					});
-
-					ProxyHub:_Animation(UICorner,Tween,{
-						CornerRadius = UDim.new(0, 4)
-					});
-
-					ProxyHub:_Animation(Highlight,Tween,{
-						Size = UDim2.new(1, -17, 1, 0),
-						Position = UDim2.new(0.5, 0, 0.5, 0)
-					});
-				else
-					ProxyHub:_Animation(UICorner,Tween,{
-						CornerRadius = UDim.new(0, 10)
-					});
-
-					ProxyHub:_Animation(TabButton,Tween,{
-						Size = UDim2.new(1, -10, 0, 32)
-					});
-
-					ProxyHub:_Animation(Icon,Tween,{
-						Position = UDim2.new(0, 12, 0.5, 0),
-						Size = UDim2.new(0, 20, 0, 20),
-					});
-
-					ProxyHub:_Animation(TabNameLabel,Tween,{
-						Size = UDim2.new(0, 200, 0, 25),
-						Position = UDim2.new(0, 80, 0.5, 0)
-					});
-
-					ProxyHub:_Animation(Highlight,Tween,{
-						Size = UDim2.new(1, -10,1, 5),
-						Position = UDim2.new(0.5, 0, 0.5, 0)
-					});
-				end;
-			end);
-
-			ProxyHub:_Input(TabButton,function()
-				for i,v in next, WindowArgs.Tabs do
-					if v.Root == TabButton then
-						v.Remote:Fire(true);
-					else
-						v.Remote:Fire(false);
-					end;
-				end;
-			end);
-		end;
-		
-		function TabArgs:_UpdateScrolling(Frame: ScrollingFrame , ListLayout: UIListLayout)
-			local frame;
-			
-			local last = 0;
-			local scale = 0;
-			
-			local Offset = ListLayout.Padding.Offset;
-			local Childrens = Frame:GetChildren();
-			
-			for i,v in next ,Childrens do task.wait();
-				if v:IsA('Frame') then
-					if v.LayoutOrder > last then
-						scale += v.AbsoluteSize.Y + Offset;
-						
-						last = v.LayoutOrder;
-						frame = v;
-					end;
-				end;
-			end;
-			
-			task.wait();
-			
-			if frame then
-				local originalScale = frame:GetAttribute('OrigninalScale');
-				
-				if originalScale then
-					task.wait();
-
-					local Maximum = Frame.AbsoluteSize.Y;
-
-					local remainingHeight = Maximum - ((scale) - (frame.AbsoluteSize.Y));
-
-					if originalScale >= Frame.AbsoluteSize.Y then
-						Frame:SetAttribute('LayoutStacks',originalScale + 5);
-					else
-						Frame:SetAttribute('LayoutStacks',((remainingHeight) + 5));
-					end
-
-					task.wait();
-
-					local caller = WindowArgs.THREADS[frame];
-
-					if caller then
-						caller(true);
-					end;
-				end;
-			end;
-
-			task.wait();
-		end;
-		
-		TabArgs.SectionInfo = {};
-		
-		TabArgs.SectionClose = {
-			[Upvalue.Left] = {},
-			[Upvalue.Right] = {},
-		};
-		
-		TabArgs.LeftThread = coroutine.wrap(function()
-			task.wait();
-
-			while true do task.wait(0.01)
-				TabArgs:_UpdateScrolling(Upvalue.Left , Upvalue.LeftLayout);
-			end;
-		end);
-		
-		TabArgs.RightThread = coroutine.wrap(function()
-			task.wait(0.1);
-			
-			while true do task.wait(0.01)
-				TabArgs:_UpdateScrolling(Upvalue.Right , Upvalue.RightLayout);
-			end;
-		end);
-		
-		TabArgs.LeftThread();
-		TabArgs.RightThread();
-
-		function TabArgs:DrawSection(config: Section)
-			config = ProxyHub.__CONFIG(config,{
-				Name = "Section",
-				Position = "left"
-			});
-			
-			local Parent = (TabConfig.Type == "Double" and ((string.lower(config.Position) == "left" and Upvalue.Left) or Upvalue.Right)) or Upvalue.Left;
-			local ParentLayout = (TabConfig.Type == "Double" and ((string.lower(config.Position) == "left" and Upvalue.LeftLayout) or Upvalue.RightLayout)) or Upvalue.LeftLayout;
-			
-			local IsOpen = true;
-			
-			local Section = Instance.new("Frame")
-			local UICorner = Instance.new("UICorner")
-			local UIStroke = Instance.new("UIStroke")
-			local UIListLayout = Instance.new("UIListLayout")
-			local Header = Instance.new("Frame")
-			local SectionText = Instance.new("TextLabel")
-			local SectionClose = Instance.new("ImageLabel")
-
-			Section.Name = "Section"
-			Section.Parent = Parent;
-
-			if TabConfig.Type == "Single" then
-				Section.Parent = Upvalue.Left;
-			end;
-
-			Section.BackgroundColor3 = ProxyHub.Colors.BlockColor
-
-			table.insert(ProxyHub.Elements.BlockColor , {
-				Element = Section,
-				Property = "BackgroundColor3"
-			});
-
-			if ProxyHub:_IsMobile() then
-				ProxyHub:_AddDragBlacklist(Section);
-			end;
-			
-			Section.LayoutOrder = #Parent:GetChildren() + 3;
-			Section.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Section.BorderSizePixel = 0
-			Section.Size = UDim2.new(1, 0, 0, 0)
-			Section.ZIndex = 9
-			Section.ClipsDescendants = true;
-
-			UICorner.CornerRadius = UDim.new(0, 6)
-			UICorner.Parent = Section
-
-			UIStroke.Color = ProxyHub.Colors.StrokeColor
-			UIStroke.Parent = Section
-
-			table.insert(ProxyHub.Elements.StrokeColor,{
-				Element = UIStroke,
-				Property = "Color"
-			});
-
-			UIListLayout.Parent = Section
-			UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-			UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-			UIListLayout.Padding = UDim.new(0, 5)
-
-			Header.Name = "Header"
-			Header.Parent = Section
-			Header.BackgroundTransparency = 1.000
-			Header.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			Header.BorderSizePixel = 0
-			Header.LayoutOrder = -100
-			Header.Size = UDim2.new(1, 0, 0, 35)
-			Header.ZIndex = 9
-
-			SectionText.Name = "SectionText"
-			SectionText.Parent = Header
-			SectionText.AnchorPoint = Vector2.new(0, 0.5)
-			SectionText.BackgroundTransparency = 1.000
-			SectionText.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			SectionText.BorderSizePixel = 0
-			SectionText.Position = UDim2.new(0, 12, 0.5, 0)
-			SectionText.Size = UDim2.new(0, 200, 0, 25)
-			SectionText.ZIndex = 10
-			SectionText.Font = Enum.Font.GothamMedium
-			SectionText.Text = config.Name;
-			SectionText.TextColor3 = ProxyHub.Colors.SwitchColor
-			SectionText.TextSize = 14.000
-			SectionText.TextTransparency = 0.500
-			SectionText.TextXAlignment = Enum.TextXAlignment.Left
-
-			table.insert(ProxyHub.Elements.SwitchColor , {
-				Element = SectionText,
-				Property = 'TextColor3'
-			});
-
-			SectionClose.Name = "SectionClose"
-			SectionClose.Parent = Header
-			SectionClose.AnchorPoint = Vector2.new(1, 0.5)
-			SectionClose.BackgroundTransparency = 1.000
-			SectionClose.BorderColor3 = Color3.fromRGB(0, 0, 0)
-			SectionClose.BorderSizePixel = 0
-			SectionClose.Position = UDim2.new(1, -12, 0.5, 0)
-			SectionClose.Size = UDim2.new(0, 17, 0, 17)
-			SectionClose.ZIndex = 10
-			SectionClose.Image = "rbxassetid://10709790948"
-			SectionClose.ImageTransparency = 0.500
-
-			if not SectionText.Text:byte() then
-				Header.Visible = false;
-			else
-				Header.Visible = true;
-			end;
-			
-			TabArgs.SectionInfo[Section] = {
-				UIListLayout = UIListLayout,
-			};
-
-			local refresh = function(Upvalue)
-				if not SectionText.Text:byte() then
-					Header.Visible = false;
-				else
-					Header.Visible = true;
-				end;
-				
-				Section:SetAttribute('OrigninalScale',UIListLayout.AbsoluteContentSize.Y);
-				
-				if IsOpen then
-					if Upvalue == true then
-						local Dist = math.abs(Parent:GetAttribute('LayoutStacks') - Section.AbsoluteSize.Y);
-						local Size = UDim2.new(1, 0, 0, (Parent:GetAttribute('LayoutStacks') or UIListLayout.AbsoluteContentSize.Y));
-			
-						if Dist >= 99 then
-							ProxyHub:_Animation(Section,TweenInfo.new(0.2,Enum.EasingStyle.Quad),{
-								Size = Size
-							});
-						else
-							ProxyHub:_Animation(Section,TweenInfo.new(0.05),{
-								Size = Size
-							});
-						end;
-					else
-						ProxyHub:_Animation(Section,TweenInfo.new(0.4,Enum.EasingStyle.Quint),{
-							Size = UDim2.new(1, 0, 0, UIListLayout.AbsoluteContentSize.Y - 1)
-						});
-					end;
-					
-					TabArgs.SectionClose[Parent][Section] = nil;
-				else
-					TabArgs.SectionClose[Parent][Section] = Section;
-					
-					ProxyHub:_Animation(Section,TweenInfo.new(0.4,Enum.EasingStyle.Quint),{
-						Size = UDim2.new(1, 0, 0, 35)
-					});
-				end;
-			end;
-			
-			WindowArgs.THREADS[Section] = refresh;
-			
-			UIListLayout:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(refresh);
-
-			TabOpenSignal:Connect(function(bool)
-				if bool then
-					ProxyHub:_Animation(Section,TweenInfo.new(0.21),{
-						BackgroundTransparency = 0
-					})
-
-					ProxyHub:_Animation(SectionText,TweenInfo.new(0.21),{
-						TextTransparency = 0.500
-					})
-
-					ProxyHub:_Animation(SectionClose,TweenInfo.new(0.21),{
-						ImageTransparency = 0.500
-					})
-				else
-					ProxyHub:_Animation(Section,TweenInfo.new(0.21),{
-						BackgroundTransparency = 1
-					})
-
-					ProxyHub:_Animation(SectionText,TweenInfo.new(0.21),{
-						TextTransparency = 1
-					})
-
-					ProxyHub:_Animation(SectionClose,TweenInfo.new(0.21),{
-						ImageTransparency = 1
-					})
-				end;
-			end);
-			
-			ProxyHub:_Input(Header,function()
-				IsOpen = not IsOpen;
-				
-				if IsOpen then
-					ProxyHub:_Animation(SectionClose,TweenInfo.new(0.35),{
-						Rotation = 0
-					});
-				else
-					ProxyHub:_Animation(SectionClose,TweenInfo.new(0.35),{
-						Rotation = -180
-					});
-				end;
-				
-				refresh();
-			end);
-
-			return ProxyHub:_LoadElement(Section , true , TabOpenSignal)
-		end;
-
-		return TabArgs;
-	end;
-
-	do
-local CloseWindow = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-
-CloseWindow.Name = "CloseWindow"
-CloseWindow.Parent = ProxyHub
-CloseWindow.AnchorPoint = Vector2.new(1, 0)
-CloseWindow.BackgroundColor3 = ProxyHub.Colors.BGDBColor
+local MainFrame = Instance.new("Frame")
+MainFrame.Active = true;
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ProxyHubGui
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = ProxyHub.Colors.BGDBColor
 
 table.insert(ProxyHub.Elements.BGDBColor, {
-	Element = CloseWindow,
+	Element = MainFrame,
 	Property = 'BackgroundColor3'
 });
 
-CloseWindow.BackgroundTransparency = 1
-CloseWindow.BorderColor3 = Color3.fromRGB(0, 0, 0)
-CloseWindow.BorderSizePixel = 0
-CloseWindow.Position = UDim2.new(1, -10, 0, 10)
-CloseWindow.Size = UDim2.new(0, 0, 0, 23)
-CloseWindow.ZIndex = 150
-CloseWindow.ClipsDescendants = true;
+MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.fromScale(0.5, 0.5);
+MainFrame.Size = ProxyHub.Scale.Window
+MainFrame.ZIndex = 4
 
-UICorner.CornerRadius = UDim.new(0, 3)
-UICorner.Parent = CloseWindow
+local TabOpen = function(bool)
+	if bool then
+		WindowArgs.SelectedTab = TabButton;
 
-local ImageLabel = Instance.new("ImageLabel")
-ImageLabel.Parent = CloseWindow
-ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
-ImageLabel.BackgroundTransparency = 1.000
-ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-ImageLabel.BorderSizePixel = 0
-ImageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
-ImageLabel.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
-ImageLabel.SizeConstraint = Enum.SizeConstraint.RelativeYY
-ImageLabel.ZIndex = 151
-ImageLabel.Image = "rbxassetid://107490050204222"
-ImageLabel.ImageTransparency = 1
-ImageLabel.ClipsDescendants = false;
+		ProxyHub:_Animation(Icon,Tween,{
+			ImageTransparency = 0,
+		});
 
-local ToggleCloseUI = function(v)
-	ImageLabel.Image = "rbxassetid://107490050204222";
+		ProxyHub:_Animation(TabNameLabel,Tween,{
+			TextTransparency = 0
+		});
 
-	if v then
-		ImageLabel.ClipsDescendants = true;
-
-		ProxyHub:_Animation(CloseWindow, TweenInfo.new(0.2), {
-			Size = UDim2.new(0, 45, 0, 23),
-			BackgroundTransparency = 0.025
-		})
-
-		ProxyHub:_Animation(ImageLabel, TweenInfo.new(0.2), {
-			ImageTransparency = (ImageLabel:GetAttribute('Hover') and 0.1) or 0.35
-		})
+		ProxyHub:_Animation(Highlight,Tween,{
+			BackgroundTransparency = 0.925
+		});
 	else
-		ImageLabel.ClipsDescendants = false;
+		ProxyHub:_Animation(Icon,Tween,{
+			ImageTransparency = 0.5
+		});
 
-		ProxyHub:_Animation(CloseWindow, TweenInfo.new(0.2), {
-			Size = UDim2.new(0, 0, 0, 23),
+		ProxyHub:_Animation(TabNameLabel,Tween,{
+			TextTransparency = 0.5
+		});
+
+		ProxyHub:_Animation(Highlight,Tween,{
 			BackgroundTransparency = 1
-		})
-
-		ProxyHub:_Animation(ImageLabel, TweenInfo.new(0.2), {
-			ImageTransparency = 1
-		})
+		});
 	end;
 end;
 
