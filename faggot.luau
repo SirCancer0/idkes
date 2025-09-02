@@ -5117,30 +5117,31 @@ function ProxyHub.new(Config : Window)
 	end);
 
    local ProxyHubGui = Instance.new("ScreenGui")
-   ProxyHubGui.Name = "u?name=ProxyHub_"..ProxyHub:_RandomString();
-   ProxyHubGui.Parent = CoreGui;
-   ProxyHubGui.ResetOnSpawn = false
-   ProxyHubGui.IgnoreGuiInset = true;
-   ProxyHubGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
+ProxyHubGui.Name = "u?name=ProxyHub_"..ProxyHub:_RandomString();
+ProxyHubGui.Parent = CoreGui;
+ProxyHubGui.ResetOnSpawn = false
+ProxyHubGui.IgnoreGuiInset = true;
+ProxyHubGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 
-   table.insert(ProxyHub.Windows , ProxyHubGui);
+table.insert(ProxyHub.Windows, ProxyHubGui);
 
-	MainFrame.Active = true;
-	MainFrame.Name = "MainFrame"
-	MainFrame.Parent = ProxyHubGui
-	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-	MainFrame.BackgroundColor3 = ProxyHub.Colors.BGDBColor
+local MainFrame = Instance.new("Frame")
+MainFrame.Active = true;
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ProxyHubGui
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = ProxyHub.Colors.BGDBColor
 
-	table.insert(ProxyHub.Elements.BGDBColor,{
-		Element = MainFrame,
-		Property = 'BackgroundColor3'
-	});
+table.insert(ProxyHub.Elements.BGDBColor, {
+	Element = MainFrame,
+	Property = 'BackgroundColor3'
+});
 
-	MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	MainFrame.BorderSizePixel = 0
-	MainFrame.Position = UDim2.fromScale(0.5,0.5);
-	MainFrame.Size = ProxyHub.Scale.Window
-	MainFrame.ZIndex = 4
+MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.fromScale(0.5, 0.5);
+MainFrame.Size = ProxyHub.Scale.Window
+MainFrame.ZIndex = 4
 
 	MainFrame:GetPropertyChangedSignal('BackgroundTransparency'):Connect(function()
 		if MainFrame.BackgroundTransparency > 0.9 then
