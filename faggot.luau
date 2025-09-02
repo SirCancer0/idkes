@@ -7898,9 +7898,8 @@ MainFrame.ZIndex = 4
 	end;
 
 	do
-		local CloseWindow = Instance.new("Frame")
+local CloseWindow = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
-local ImageLabel = Instance.new("ImageLabel")
 
 CloseWindow.Name = "CloseWindow"
 CloseWindow.Parent = ProxyHub
@@ -7923,6 +7922,7 @@ CloseWindow.ClipsDescendants = true;
 UICorner.CornerRadius = UDim.new(0, 3)
 UICorner.Parent = CloseWindow
 
+local ImageLabel = Instance.new("ImageLabel")
 ImageLabel.Parent = CloseWindow
 ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
 ImageLabel.BackgroundTransparency = 1.000
