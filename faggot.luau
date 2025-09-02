@@ -8603,7 +8603,7 @@ function ProxyHub:Loader(IconId,Duration)
 	local Vignette = Instance.new("ImageLabel")
 
 	Loader.Name = "Loader"
-	Loader.Parent = ProxyHub
+	Loader.Parent = ProxyHubGui
 	Loader.AnchorPoint = Vector2.new(0.5, 0.5)
 	Loader.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	Loader.BackgroundTransparency = 1
