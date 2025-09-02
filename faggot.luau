@@ -8588,22 +8588,23 @@ function ProxyHub:ConfigManager(ConfigManager: ConfigManager) : ConfigFunctions
 	return Args;
 end;
 
-function ProxyHub:Loader(IconId,Duration)
-	local ProxyHubGui = Instance.new("ScreenGui")
+function ProxyHub:Loader(IconId, Duration)
+	local CoreGui = game:GetService("CoreGui")
 
-	ProxyHub.Name = "Loader"
-	ProxyHub.Parent = CoreGui
-	ProxyHub.Enabled = true
-	ProxyHub.ResetOnSpawn = false
-	ProxyHub.IgnoreGuiInset = true
-	ProxyHub.ZIndexBehavior = Enum.ZIndexBehavior.Global
+	local ProxyHubGui = Instance.new("ScreenGui")
+	ProxyHubGui.Name = "Loader"
+	ProxyHubGui.Parent = CoreGui
+	ProxyHubGui.Enabled = true
+	ProxyHubGui.ResetOnSpawn = false
+	ProxyHubGui.IgnoreGuiInset = true
+	ProxyHubGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
 
 	local Loader = Instance.new("Frame")
 	local Icon = Instance.new("ImageLabel")
 	local Vignette = Instance.new("ImageLabel")
 
 	Loader.Name = "Loader"
-	Loader.Parent = CoreGui
+	Loader.Parent = ProxyHubGui
 	Loader.AnchorPoint = Vector2.new(0.5, 0.5)
 	Loader.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	Loader.BackgroundTransparency = 1
@@ -8633,64 +8634,60 @@ function ProxyHub:Loader(IconId,Duration)
 	Vignette.Image = "rbxassetid://18720640102"
 	Vignette.ImageColor3 = ProxyHub.Colors.Highlight
 	Vignette.ImageTransparency = 1
-	Vignette.AnchorPoint = Vector2.new(0.5,0.5)
-	Vignette.Position = UDim2.fromScale(0.5,0.5)
+	Vignette.AnchorPoint = Vector2.new(0.5, 0.5)
+	Vignette.Position = UDim2.fromScale(0.5, 0.5)
 
-	ProxyHub:_Animation(Loader,TweenInfo.new(0.55,Enum.EasingStyle.Quint),{
+	ProxyHub:_Animation(Loader, TweenInfo.new(0.55, Enum.EasingStyle.Quint), {
 		BackgroundTransparency = 0.5
 	});
 
 	local Event = Instance.new('BindableEvent');
 
-	task.delay(0.5,function()
-		ProxyHub:_Animation(Icon,TweenInfo.new(0.75,Enum.EasingStyle.Quint),{
+	task.delay(0.5, function()
+		ProxyHub:_Animation(Icon, TweenInfo.new(0.75, Enum.EasingStyle.Quint), {
 			ImageTransparency = 0.01,
 			Size = UDim2.new(0, 200, 0, 200)
 		});
 
-		task.delay(0.25,function()
-			ProxyHub:_Animation(Vignette,TweenInfo.new(5),{
+		task.delay(0.25, function()
+			ProxyHub:_Animation(Vignette, TweenInfo.new(5), {
 				ImageTransparency = 0.2
 			});
 
 			task.wait(Duration or 4.5)
 
-			ProxyHub:_Animation(Vignette,TweenInfo.new(3,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{
+			ProxyHub:_Animation(Vignette, TweenInfo.new(3, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
 				Size = UDim2.new(2, 0, 2, 0)
 			});
 
-			ProxyHub:_Animation(Icon,TweenInfo.new(0.75,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{
+			ProxyHub:_Animation(Icon, TweenInfo.new(0.75, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
 				ImageTransparency = 1,
 			});
 
-			ProxyHub:_Animation(Loader,TweenInfo.new(1.5,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{
+			ProxyHub:_Animation(Loader, TweenInfo.new(1.5, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
 				BackgroundTransparency = 1
 			});
 
-			task.delay(0.1,function()
-				ProxyHub:_Animation(Vignette,TweenInfo.new(1,Enum.EasingStyle.Quint,Enum.EasingDirection.InOut),{
+			task.delay(0.1, function()
+				ProxyHub:_Animation(Vignette, TweenInfo.new(1, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {
 					ImageTransparency = 1
 				});
-
 				task.wait(0.2)
-
-				task.delay(3,function()
-					ProxyHub:Destroy();
-				end)
+				ProxyHubGui:Destroy()
 			end)
 
-			task.delay(0.6,function()
-				Event:Fire();
+			task.delay(0.6, function()
+				Event:Fire()
 			end)
 		end)
 	end);
 
 	return {
 		yield = function()
-			return Event.Event:Wait();
-		end	
+			return Event.Event:Wait()
+		end
 	};
-end;
+end
 
 function ProxyHub.newNotify()
 	local Notification = Instance.new("ScreenGui")
