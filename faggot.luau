@@ -5116,7 +5116,7 @@ function ProxyHub.new(Config : Window)
 		TabButtonScrollingFrame.CanvasSize = UDim2.fromOffset(0,UIListLayout.AbsoluteContentSize.Y)
 	end);
 
-   local ProxyHubGui = Instance.new("ScreenGui")
+local ProxyHubGui = Instance.new("ScreenGui")
 ProxyHubGui.Name = "u?name=ProxyHub_"..ProxyHub:_RandomString();
 ProxyHubGui.Parent = CoreGui;
 ProxyHubGui.ResetOnSpawn = false
