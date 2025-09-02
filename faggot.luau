@@ -7936,33 +7936,33 @@ ImageLabel.Image = Config.Logo
 ImageLabel.ImageTransparency = 1
 ImageLabel.ClipsDescendants = false;
 
-		local ToggleCloseUI = function(v)
-			ImageLabel.Image = Config.Logo;
+local ToggleCloseUI = function(v)
+	ImageLabel.Image = Config.Logo;
 
-			if v then
-				ImageLabel.ClipsDescendants = true;
+	if v then
+		ImageLabel.ClipsDescendants = true;
 
-				ProxyHub:_Animation(CloseWindow,TweenInfo.new(0.2),{
-					Size = UDim2.new(0, 45, 0, 23),
-					BackgroundTransparency = 0.025
-				})
+		ProxyHub:_Animation(CloseWindow, TweenInfo.new(0.2), {
+			Size = UDim2.new(0, 45, 0, 23),
+			BackgroundTransparency = 0.025
+		})
 
-				ProxyHub:_Animation(ImageLabel,TweenInfo.new(0.2),{
-					ImageTransparency = (ImageLabel:GetAttribute('Hover') and 0.1) or 0.35
-				})
-			else
-				ImageLabel.ClipsDescendants = false;
+		ProxyHub:_Animation(ImageLabel, TweenInfo.new(0.2), {
+			ImageTransparency = (ImageLabel:GetAttribute('Hover') and 0.1) or 0.35
+		})
+	else
+		ImageLabel.ClipsDescendants = false;
 
-				ProxyHub:_Animation(CloseWindow,TweenInfo.new(0.2),{
-					Size = UDim2.new(0, 0, 0, 23),
-					BackgroundTransparency = 1
-				})
+		ProxyHub:_Animation(CloseWindow, TweenInfo.new(0.2), {
+			Size = UDim2.new(0, 0, 0, 23),
+			BackgroundTransparency = 1
+		})
 
-				ProxyHub:_Animation(ImageLabel,TweenInfo.new(0.2),{
-					ImageTransparency = 1
-				})
-			end;
-		end;
+		ProxyHub:_Animation(ImageLabel, TweenInfo.new(0.2), {
+			ImageTransparency = 1
+		})
+	end;
+end;
 
 		function WindowArgs:Watermark()
 			local Watermark = Instance.new("Frame")
