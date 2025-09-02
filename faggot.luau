@@ -1,10 +1,3 @@
---[[
-    		Fatality-Dark Interface
-
-    Author: 4lpaca
-    License: MIT
-    Github: https://github.com/4lpaca-pin/ProxyHub
---]]
 
 --- Export Types ---
 
