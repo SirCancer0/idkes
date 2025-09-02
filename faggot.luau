@@ -7899,42 +7899,42 @@ MainFrame.ZIndex = 4
 
 	do
 		local CloseWindow = Instance.new("Frame")
-		local UICorner = Instance.new("UICorner")
-		local ImageLabel = Instance.new("ImageLabel")
+local UICorner = Instance.new("UICorner")
+local ImageLabel = Instance.new("ImageLabel")
 
-		CloseWindow.Name = "CloseWindow"
-		CloseWindow.Parent = ProxyHub
-		CloseWindow.AnchorPoint = Vector2.new(1, 0)
-		CloseWindow.BackgroundColor3 = ProxyHub.Colors.BGDBColor
+CloseWindow.Name = "CloseWindow"
+CloseWindow.Parent = ProxyHub
+CloseWindow.AnchorPoint = Vector2.new(1, 0)
+CloseWindow.BackgroundColor3 = ProxyHub.Colors.BGDBColor
 
-		table.insert(ProxyHub.Elements.BGDBColor,{
-			Element = CloseWindow,
-			Property = 'BackgroundColor3'
-		});
+table.insert(ProxyHub.Elements.BGDBColor, {
+	Element = CloseWindow,
+	Property = 'BackgroundColor3'
+});
 
-		CloseWindow.BackgroundTransparency = 1
-		CloseWindow.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		CloseWindow.BorderSizePixel = 0
-		CloseWindow.Position = UDim2.new(1, -10, 0, 10)
-		CloseWindow.Size = UDim2.new(0, 0, 0, 23)
-		CloseWindow.ZIndex = 150
-		CloseWindow.ClipsDescendants = true;
+CloseWindow.BackgroundTransparency = 1
+CloseWindow.BorderColor3 = Color3.fromRGB(0, 0, 0)
+CloseWindow.BorderSizePixel = 0
+CloseWindow.Position = UDim2.new(1, -10, 0, 10)
+CloseWindow.Size = UDim2.new(0, 0, 0, 23)
+CloseWindow.ZIndex = 150
+CloseWindow.ClipsDescendants = true;
 
-		UICorner.CornerRadius = UDim.new(0, 3)
-		UICorner.Parent = CloseWindow
+UICorner.CornerRadius = UDim.new(0, 3)
+UICorner.Parent = CloseWindow
 
-		ImageLabel.Parent = CloseWindow
-		ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
-		ImageLabel.BackgroundTransparency = 1.000
-		ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-		ImageLabel.BorderSizePixel = 0
-		ImageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
-		ImageLabel.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
-		ImageLabel.SizeConstraint = Enum.SizeConstraint.RelativeYY
-		ImageLabel.ZIndex = 151
-		ImageLabel.Image = Config.Logo
-		ImageLabel.ImageTransparency = 1
-		ImageLabel.ClipsDescendants = false;
+ImageLabel.Parent = CloseWindow
+ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel.BorderSizePixel = 0
+ImageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
+ImageLabel.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
+ImageLabel.SizeConstraint = Enum.SizeConstraint.RelativeYY
+ImageLabel.ZIndex = 151
+ImageLabel.Image = Config.Logo
+ImageLabel.ImageTransparency = 1
+ImageLabel.ClipsDescendants = false;
 
 		local ToggleCloseUI = function(v)
 			ImageLabel.Image = Config.Logo;
