@@ -7932,12 +7932,12 @@ ImageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
 ImageLabel.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
 ImageLabel.SizeConstraint = Enum.SizeConstraint.RelativeYY
 ImageLabel.ZIndex = 151
-ImageLabel.Image = Config.Logo
+ImageLabel.Image = "rbxassetid://107490050204222"
 ImageLabel.ImageTransparency = 1
 ImageLabel.ClipsDescendants = false;
 
 local ToggleCloseUI = function(v)
-	ImageLabel.Image = Config.Logo;
+	ImageLabel.Image = "rbxassetid://107490050204222";
 
 	if v then
 		ImageLabel.ClipsDescendants = true;
@@ -8623,7 +8623,7 @@ function ProxyHub:Loader(IconId, Duration)
 	Icon.Position = UDim2.new(0.5, 0, 0.5, 0)
 	Icon.Size = UDim2.new(0, 750, 0, 750)
 	Icon.ZIndex = 100
-	Icon.Image = IconId or "rbxassetid://120245531583106"
+	Icon.Image = IconId or "rbxassetid://107490050204222"
 	Icon.ImageTransparency = 1
 
 	Vignette.Name = "Vignette"
