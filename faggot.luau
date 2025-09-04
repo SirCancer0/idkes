@@ -1,5 +1,4 @@
 
-
 export type cloneref = (target: Instance) -> Instance;
 
 export type Window = {
@@ -8589,30 +8588,7 @@ function Compkiller:ConfigManager(ConfigManager: ConfigManager) : ConfigFunction
 end;
 
 function Window:Destroy()
-    pcall(function()
-        if self.Main and self.Main.Destroy then
-            self.Main:Destroy()
-            self.Main = nil
-        end
-    end)
-    
-    pcall(function()
-        if self.KeybindConnection then
-            self.KeybindConnection:Disconnect()
-            self.KeybindConnection = nil
-        end
-    end)
-    
-    pcall(function()
-        if self.Watermark and self.Watermark.Destroy then
-            self.Watermark:Destroy()
-            self.Watermark = nil
-        end
-    end)
-    
-    self.Tabs = {}
-    self.Categories = {}
-    
+    ScreenGui:Destroy()
     warn("Proxy Hub UI destroyed successfully")
 end
 
