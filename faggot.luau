@@ -8587,6 +8587,64 @@ function Compkiller:ConfigManager(ConfigManager: ConfigManager) : ConfigFunction
 	return Args;
 end;
 
+function Window:Destroy()
+    -- Destroy main frame
+    if self.Main then
+        self.Main:Destroy()
+        self.Main = nil
+    end
+    
+    -- Disconnect keybind events
+    if self.KeybindConnection then
+        self.KeybindConnection:Disconnect()
+        self.KeybindConnection = nil
+    end
+    
+    -- Destroy watermark
+    if self.Watermark then
+        if self.Watermark.Main then
+            self.Watermark.Main:Destroy()
+        end
+        self.Watermark = nil
+    end
+    
+    -- Destroy all tabs
+    if self.Tabs then
+        for _, tab in pairs(self.Tabs) do
+            if tab and tab.Main then
+                tab.Main:Destroy()
+            end
+        end
+        self.Tabs = {}
+    end
+    
+    -- Destroy all categories
+    if self.Categories then
+        for _, category in pairs(self.Categories) do
+            if category and category.Main then
+                category.Main:Destroy()
+            end
+        end
+        self.Categories = {}
+    end
+    
+    
+    if getgenv().CompKiller_Windows then
+        for i, win in pairs(getgenv().CompKiller_Windows) do
+            if win == self then
+                table.remove(getgenv().CompKiller_Windows, i)
+                break
+            end
+        end
+    end
+    
+    
+    self.Visible = false
+    self.Destroyed = true
+    
+    warn("Proxy Hub UI destroyed successfully")
+end
+
 function Compkiller:Loader(IconId,Duration)
 	local CompKiller = Instance.new("ScreenGui")
 
