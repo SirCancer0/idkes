@@ -8587,11 +8587,16 @@ function Compkiller:ConfigManager(ConfigManager: ConfigManager) : ConfigFunction
 	return Args;
 end;
 
-function Window:Destroy()
-    ScreenGui:Destroy()
-    warn("Proxy Hub UI destroyed successfully")
+function WindowArgs:Destroy()
+    CompKiller:Destroy()
+    
+    -- Cleans up your ass cuz yes :joooooooooooooooooooooooooooooooooy:
+    for i, thread in ipairs(WindowArgs.THREADS) do
+        if type(thread) == "thread" then
+            task.cancel(thread)
+        end
+    end
 end
-
 
 function Compkiller:Loader(IconId,Duration)
 	local CompKiller = Instance.new("ScreenGui")
