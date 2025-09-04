@@ -5112,6 +5112,16 @@ function Compkiller.new(Config : Window)
 	local ExpireText = Instance.new("TextLabel")
 	local TabMainFrame = Instance.new("Frame")
 
+	function WindowArgs:Destroy()
+		local guidestroysuc, guidestroyerr = pcall(function() CompKiller:Destroy() end)
+		
+		for i, thread in ipairs(WindowArgs.THREADS) do
+			if type(thread) == "thread" then
+				task.cancel(thread)
+			end
+		end
+	end
+
 	UIListLayout:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
 		TabButtonScrollingFrame.CanvasSize = UDim2.fromOffset(0,UIListLayout.AbsoluteContentSize.Y)
 	end);
@@ -8587,16 +8597,6 @@ function Compkiller:ConfigManager(ConfigManager: ConfigManager) : ConfigFunction
 	return Args;
 end;
 
-function WindowArgs:Destroy()
-    CompKiller:Destroy()
-    
-    -- Cleans up your ass cuz yes :joooooooooooooooooooooooooooooooooy:
-    for i, thread in ipairs(WindowArgs.THREADS) do
-        if type(thread) == "thread" then
-            task.cancel(thread)
-        end
-    end
-end
 
 function Compkiller:Loader(IconId,Duration)
 	local CompKiller = Instance.new("ScreenGui")
